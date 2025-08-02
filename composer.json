@@ -1,0 +1,16 @@
+{
+    "description": "Sistema Zema",
+    "authors": [
+        {
+            "name": "Lucas Vinicius",
+            "email": "lucasvini269@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sts\\": "app/sts",
+            "Core\\": "core"
+        }
+    },
+    "require": {}
+}

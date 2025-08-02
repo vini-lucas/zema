@@ -1,0 +1,26 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# "RewriteRule ^(.+)$" pega todo o conteúdo da URL, a partir de onde está o ".htaccess", exemplo:
+# "localhost/celke/blog", pega somente o "blog" pois o ".htaccess" está na raíz do "celke".
+# Todo o conteúdo da URL é enviado para a variável "url".
+# [QSA,L] -> Captura quaisquer demais instruções da URL e armazena, exemplo:
+# "celke.com/user=lucas&senha=1234&email=lucas@gmail" armazena todos os valores das variáveis user, senha e email.
+
+# ^(.+)$ → Captura qualquer coisa após a raiz do site, ou seja, qualquer coisa após o arquivo ".htaccess".
+# index.php?url=$1 → Redireciona para index.php, passando a parte capturada como valor de url. Exemplo:
+# site.com/produtos/123 → vira index.php?url=produtos/123
+
+# "RewriteEngine On" -> Ativa a Reescrita da URL.
+# "RewriteCond %{REQUEST_FILENAME} !-d" -> Se a URL requisitada NÃO for um diretório existente, então continua com a reescrita.
+# "RewriteCond %{REQUEST_FILENAME} !-f" -> Se a URL requisitada NÃO for um arquivo existente, também continua. 
+# "RewriteCond %{REQUEST_FILENAME} !-l" -> Se a URL requisitada NÃO for um link simbólico, ainda continua. 
+
+# Exemplo de como fica a URL:
+# Usuário digita -> "http://localhost/zema/blog/lucas/index?user=lucas&email=lucas@gmail&senha=1234".
+# Variável URL captura até o interrogação -> blog, lucas e index.
+# O restante pode ser recuperado utilizando o GET.
