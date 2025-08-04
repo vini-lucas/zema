@@ -8,3 +8,5 @@
 
         <input type="submit" name="SendLogin">
     </form>
+<?php
+var_dump($this->data);

@@ -13,6 +13,7 @@ abstract class Conn
     {
         try {
             $this->connect = new PDO("mysql:port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+            echo "Conexão bem-estabelecida!";
         } catch (PDOException $err) {
             echo "Erro: ==> " . $err->getMessage();
         }
