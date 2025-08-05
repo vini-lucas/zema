@@ -1,1 +1,2 @@
 Erro 404 -> Erro ao carregar a VIEW.
+Erro 333 -> Erro de conexão com o banco de dados.

@@ -1,11 +1,9 @@
 <?php
 
 namespace Sts\Models;
+use Sts\Models\helper\Read;
 
-use Sts\Models\helper\Conn;
-use PDO;
-
-class StsLogin extends Conn
+class StsLogin
 {
     private bool $result; // Retorna o resultado do "getResult()".
     private array|null $resultDb; // Retorna o resultado do "getResultDb()".

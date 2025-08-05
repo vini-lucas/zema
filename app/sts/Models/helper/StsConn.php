@@ -5,7 +5,7 @@ namespace Sts\Models\helper;
 use PDO;
 use PDOException;
 
-abstract class Conn
+abstract class StsConn
 {
     public object $connect; // -> Recebe o objeto da conexão com o banco de dados.
 
@@ -14,7 +14,7 @@ abstract class Conn
         try {
             $this->connect = new PDO("mysql:port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
         } catch (PDOException $err) {
-            echo "Erro: ==> " . $err->getMessage();
+            die('Erro 333: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
         }
         return $this->connect;
     }

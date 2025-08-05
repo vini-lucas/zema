@@ -4,7 +4,7 @@ if (isset($this->data)) {
 }
 ?>
 <h2>Conecte-se!</h2>
-<form>
+<form method="POST" action="">
     <label>CPF:</label>
     <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
 
@@ -13,8 +13,21 @@ if (isset($this->data)) {
 
     <input type="submit" name="SendLogin">
 </form>
+<?php
+    $query = "SELECT id, name FROM users";
+    $terms = "WHERE name=:name AND id=:id";
+    $parceString = "name=lucas&id=1";
 
-<h2>Cadastre-se!</h2>
+    echo "QUERY ANTIGA:    " . $query . $terms . $parceString;
+
+    parse_str($parceString, $newParseStr);
+    foreach($newParseStr AS $link => $value){
+        extract($newParseStr);
+        $query->bindParam()
+    }
+    
+?>
+<!--<h2>Cadastre-se!</h2>
 <form>
     <label>CPF:</label>
     <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
@@ -41,4 +54,4 @@ if (isset($this->data)) {
     <input type="password" placeholder="**************" required>
 
     <input type="submit" name="SendLogin">
-</form>
+</form>-->
