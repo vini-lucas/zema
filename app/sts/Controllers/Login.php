@@ -2,10 +2,6 @@
 
 namespace Sts\Controllers;
 
-use Core\ConfigView;
-use Sts\Models\helper\StsRead;
-use Sts\Models\StsLogin;
-
 class Login
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
@@ -22,9 +18,9 @@ class Login
 
     public function loadView()
     {
-        $teste = new StsRead();
+        $teste = new \Sts\Models\helper\StsRead();
         $this->data = $teste->exeRead("SELECT id, name FROM users", "WHERE id=:id AND name=:name", "id=1&name=lucas");
-        $loadView = new ConfigView();
-        $loadView->loadView("app/sts/Views/login", $this->data);
+        $loadView = new \Core\ConfigView();
+        $loadView->loadView("app/sts/Views/login/login", $this->data);
     }
 }
