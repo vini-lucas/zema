@@ -13,20 +13,6 @@ if (isset($this->data)) {
 
     <input type="submit" name="SendLogin">
 </form>
-<?php
-    $query = "SELECT id, name FROM users";
-    $terms = "WHERE name=:name AND id=:id";
-    $parceString = "name=lucas&id=1";
-
-    echo "QUERY ANTIGA:    " . $query . $terms . $parceString;
-
-    parse_str($parceString, $newParseStr);
-    foreach($newParseStr AS $link => $value){
-        extract($newParseStr);
-        $query->bindParam()
-    }
-    
-?>
 <!--<h2>Cadastre-se!</h2>
 <form>
     <label>CPF:</label>

@@ -3,6 +3,7 @@
 namespace Sts\Controllers;
 
 use Core\ConfigView;
+use Sts\Models\helper\StsRead;
 use Sts\Models\StsLogin;
 
 class Login
@@ -14,15 +15,15 @@ class Login
     {
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
-           
         } else {
-            $this->data = [];
             $this->loadView();
         }
     }
 
     public function loadView()
     {
+        $teste = new StsRead();
+        $this->data = $teste->exeRead("SELECT id, name FROM users", "WHERE id=:id AND name=:name", "id=1&name=lucas");
         $loadView = new ConfigView();
         $loadView->loadView("app/sts/Views/login", $this->data);
     }
