@@ -31,3 +31,8 @@
  - No "index" do projeto, adicionar o arquivo "autoload" e instanciar a "ConfigController".
  - Na raíz do projeto, adicionar o ".htaccess" para tornar a URL amigável.
 */
+
+// Adicionar o "define" no arquivo index para segurança do projeto.
+// Criar um usuário no banco de dados apenas com as permissões do CRUD para aumentar segurança.
+// Criar head e footer padrão e adicioná-los na ConfigView.
+// Criar arquivo Config com as configurações do projeto.

@@ -18,6 +18,8 @@ class Login
     {
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
+            $this->loadView();
+            $this->data = [];
         } else {
             $this->data = [];
             $this->loadView();

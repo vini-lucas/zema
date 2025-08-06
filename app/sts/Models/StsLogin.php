@@ -14,6 +14,7 @@ class StsLogin
 {
     private bool $result; // Retorna o resultado do "getResult()".
     private array|null $resultDb; // Retorna o resultado do "getResultDb()".
+    public string|array|null $data; // -> Recebe os dados que serão enviados para a controller.
 
     public function getResult(): bool
     {

@@ -1,0 +1,3 @@
+CREATE USER 'zema'@'localhost' IDENTIFIED BY 'L4bar3tTA!';
+GRANT SELECT, INSERT, UPDATE, DELETE ON zema.* TO 'zema'@'localhost';
+FLUSH PRIVILEGES;
