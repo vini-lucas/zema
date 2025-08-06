@@ -3,6 +3,14 @@
 namespace Core;
 
 /**
+ * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
+ */
+if (!defined('L4bar3tTA!')) {
+    header("Location: /");
+}
+
+
+/**
  * Classes abstratas não podem ser instanciadas, somente herdadas.
  */
 abstract class Config 

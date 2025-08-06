@@ -1,7 +1,14 @@
 <?php
 
 namespace Sts\Models;
-use Sts\Models\helper\Read;
+
+/**
+ * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
+ */
+if (!defined('L4bar3tTA!')) {
+    header("Location: /");
+}
+
 
 class StsLogin
 {

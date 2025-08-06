@@ -2,6 +2,14 @@
 
 namespace Core;
 
+/**
+ * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
+ */
+if (!defined('L4bar3tTA!')) {
+    header("Location: /");
+}
+
+
 class ConfigView
 {
     private string $nameView; // -> Recebe o caminho da view;

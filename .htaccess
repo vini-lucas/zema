@@ -5,6 +5,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+Options -Indexes
 # "RewriteRule ^(.+)$" pega todo o conteúdo da URL, a partir de onde está o ".htaccess", exemplo:
 # "localhost/celke/blog", pega somente o "blog" pois o ".htaccess" está na raíz do "celke".
 # Todo o conteúdo da URL é enviado para a variável "url".
@@ -24,3 +26,7 @@ RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 # Usuário digita -> "http://localhost/zema/blog/lucas/index?user=lucas&email=lucas@gmail&senha=1234".
 # Variável URL captura até o interrogação -> blog, lucas e index.
 # O restante pode ser recuperado utilizando o GET.
+
+# "Options -Index" não permite a listagem de arquivos caso o usuário tente acessar manualmente o sts.
+
+# Documentação ensinando sobre o htaccess: https://httpd.apache.org/docs/2.4/rewrite/flags.html.
