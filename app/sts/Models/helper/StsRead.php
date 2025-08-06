@@ -18,6 +18,7 @@ if (!defined('L4bar3tTA!')) {
 class StsRead extends StsConn
 {
     private array|null $result = []; // -> Recebe o resultado da busca da QUERY.
+    private array|null $values = null; // -> Recebe a parse string em formato de array.
     private string $select; // -> Recebe a QUERY select com a tabela informada pelo uusário.
     private object $conn; // -> Recebe o objeto que possui a conexão com o banco de dados.
     private object $query; // -> Recebe a QUERY preparada.
@@ -31,9 +32,40 @@ class StsRead extends StsConn
         return $this->result;
     }
 
-    public function exeRead(string $table, string|null $terms = null, string|null $parseString = null)
+    /**
+     * Retorna todos as colunas da tabela informada pelo usuário.
+     * @param string $table
+     * @param string|null|null $terms
+     * @param string|null|null $parseString
+     * @return void
+     */
+    public function exeRead(string $table, string|null $terms = null, string|null $parseString = null): void
     {
+        if (!empty($parseString)) {
+
+            /* Exemplo do que "parse_str()" faz:
+             * 'id=1&name=lucas' fica '['id' => 1, 'name' => lucas]'. */
+            parse_str($parseString, $this->values);
+        }
         $this->select = "SELECT * FROM {$table}";
+        $this->exeInstruction();
+    }
+
+    /**
+     * Retorna somente as colunas informadas pelo usuário.
+     * @param string $query
+     * @param string|null|null $parseString
+     * @return void
+     */
+    public function fullRead(string $query, string|null $parseString = null): void
+    {
+        $this->select = $query;
+        if (!empty($parseString)) {
+
+            /* Exemplo do que "parse_str()" faz:
+             * 'id=1&name=lucas' fica '['id' => 1, 'name' => lucas]'. */
+            parse_str($parseString, $this->values);
+        }
         $this->exeInstruction();
     }
 
@@ -55,9 +87,22 @@ class StsRead extends StsConn
     private function connection(): void
     {
         $this->conn = $this->conection();
+        $this->exeParameter();
         $this->query = $this->conn->prepare($this->select);
 
         /* "setFetchMode(PDO::FETCH_ASSOC)" retorna um array associativo. */
         $this->query->setFetchMode(PDO::FETCH_ASSOC);
+    }
+
+    private function exeParameter()
+    {
+        if ($this->values) {
+            foreach ($this->values as $link => $value) {
+                if (($link == 'limit') || ($link == 'offset') || ($link == 'id')) {
+                    $value = (int)$value;
+                }
+                $this->query->bindParam(":{$link}", $value, (is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR));
+            }
+        }
     }
 }
