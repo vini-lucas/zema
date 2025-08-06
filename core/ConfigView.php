@@ -15,7 +15,7 @@ class ConfigView
     private string $nameView; // -> Recebe o caminho da view;
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
 
-    public function loadView(string $nameView, array|null $data)
+    public function loadView(string $nameView, array|null|string $data)
     {
         $this->nameView = $nameView;
         $this->data = $data;
