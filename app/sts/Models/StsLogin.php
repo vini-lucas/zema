@@ -18,6 +18,7 @@ class StsLogin
 {
     private array|null $data; // -> Recebe os dados que que a controller enviou.
     private array|bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
+    private $valPass;
 
     public function getResult(): array|bool
     {
@@ -30,17 +31,21 @@ class StsLogin
         $valLogin = new \Sts\Models\helper\StsRead();
         $valLogin->fullRead("SELECT id, name, email, password, image FROM sts_users WHERE cpf=:cpf", "cpf={$this->data['cpf']}");
         if ($valLogin->getResult()){
-            $this->valPassword($valLogin->getResult());
+            $this->valPass = $valLogin->getResult();
+            $this->valPassword();
         } else {
             $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";
             $this->result = false;
         }
     }
 
-    private function valPassword($pass)
+    private function valPassword()
     {
-        if (password_verify($this->data['password'], $pass[0]['password'])) {
 
+        if (password_verify($this->data['password'], $this->valPass[0]['password'])) {
+            echo "deu certo";
+        } else {
+            echo "nao deu certo";
         }
     }
 }
