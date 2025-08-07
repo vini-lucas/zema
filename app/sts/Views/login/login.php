@@ -10,6 +10,11 @@ if (!defined('L4bar3tTA!')) {
 if (isset($this->data)) {
     extract($this->data);
 }
+
+if (isset($_SESSION['msg'])) {
+    echo $_SESSION['msg'];
+    unset ($_SESSION['msg']);
+}
 ?>
 <h2>Conecte-se!</h2>
 <form method="POST" action="">

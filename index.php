@@ -1,4 +1,8 @@
 <?php
+/**
+ * Iniciando a sessão para utilizar as variáveis globais em qualquer local do projeto.
+ */
+session_start();
 
 /**
  * Constante que define que o usuário está acessando o projeto pelo arquivo index.

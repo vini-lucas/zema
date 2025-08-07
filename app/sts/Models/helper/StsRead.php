@@ -77,6 +77,7 @@ class StsRead extends StsConn
             $this->result = $this->query->fetchAll();
         } catch (PDOException $err) {
             $this->result = null;
+            echo $err -> getMessage();
         }
     }
 

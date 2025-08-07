@@ -18,8 +18,11 @@ class Login
     {
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
-            $this->loadView();
+            unset($this->dataForm['SendLogin']);
+            $verifyLogin = new \Sts\Models\StsLogin();
+            $verifyLogin->login($this->dataForm);
             $this->data = [];
+            $this->loadView();
         } else {
             $this->data = [];
             $this->loadView();
