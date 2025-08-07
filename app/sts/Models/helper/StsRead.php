@@ -87,8 +87,8 @@ class StsRead extends StsConn
     private function connection(): void
     {
         $this->conn = $this->conection();
-        $this->exeParameter();
         $this->query = $this->conn->prepare($this->select);
+        $this->exeParameter();
 
         /* "setFetchMode(PDO::FETCH_ASSOC)" retorna um array associativo. */
         $this->query->setFetchMode(PDO::FETCH_ASSOC);
