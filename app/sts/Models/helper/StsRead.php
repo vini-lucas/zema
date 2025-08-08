@@ -17,19 +17,19 @@ if (!defined('L4bar3tTA!')) {
  */
 class StsRead extends StsConn
 {
-    private array|null $result = []; // -> Recebe o resultado da busca da QUERY.
+    private array|null $resultDb = []; // -> Recebe o resultado da busca da QUERY.
     private array|null $values = null; // -> Recebe a parse string em formato de array.
     private string $select; // -> Recebe a QUERY select com a tabela informada pelo uusário.
     private object $conn; // -> Recebe o objeto que possui a conexão com o banco de dados.
     private object $query; // -> Recebe a QUERY preparada.
 
     /**
-     * Retorna o valor do atributo result.
+     * Retorna o valor do atributo resultDb.
      * @return array|null
      */
-    public function getResult(): array|null
+    public function getResultDb(): array|null
     {
-        return $this->result;
+        return $this->resultDb;
     }
 
     /**
@@ -74,9 +74,10 @@ class StsRead extends StsConn
         $this->connection();
         try {
             $this->query->execute();
-            $this->result = $this->query->fetchAll();
+            $this->resultDb = $this->query->fetchAll();
         } catch (PDOException $err) {
-            $this->result = null;
+            $this->resultDb = null;
+            echo $err -> getMessage();
         }
     }
 

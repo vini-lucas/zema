@@ -22,9 +22,9 @@ if (isset($_SESSION['msg'])) {
     <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
 
     <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" required>
+    <input type="password" name="password" placeholder="**************" required><br><br>
 
-    <input type="submit" name="SendLogin">
+    <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
 </form>
 <!--<h2>Cadastre-se!</h2>
 <form>

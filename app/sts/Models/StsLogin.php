@@ -2,8 +2,6 @@
 
 namespace Sts\Models;
 
-use Sts\Models\helper\StsConn;
-
 /**
  * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
  */
@@ -16,7 +14,7 @@ if (!defined('L4bar3tTA!')) {
  */
 class StsLogin
 {
-    private array|null $data; // -> Recebe os dados que que a controller enviou.
+    private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
     private array|bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
     private $valPass;
 
@@ -25,12 +23,12 @@ class StsLogin
         return $this->result;
     }
 
-    public function login(array|null $data = null)
+    public function login(array|null $dataForm = null)
     {
-        $this->data = $data;
+        $this->dataForm = $dataForm;
         $valLogin = new \Sts\Models\helper\StsRead();
         $valLogin->fullRead("SELECT id, name, email, password, image FROM sts_users WHERE cpf=:cpf", "cpf={$this->data['cpf']}");
-        if ($valLogin->getResult()){
+        if ($valLogin->getResult()) {
             $this->valPass = $valLogin->getResult();
             $this->valPassword();
         } else {
@@ -41,11 +39,8 @@ class StsLogin
 
     private function valPassword()
     {
-
-        if (password_verify($this->data['password'], $this->valPass[0]['password'])) {
-            echo "deu certo";
+        if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
         } else {
-            echo "nao deu certo";
         }
     }
 }
