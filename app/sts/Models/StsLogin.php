@@ -27,9 +27,8 @@ class StsLogin
     {
         $this->dataForm = $dataForm;
         $valLogin = new \Sts\Models\helper\StsRead();
-        $valLogin->fullRead("SELECT id, name, email, password, image FROM sts_users WHERE cpf=:cpf", "cpf={$this->data['cpf']}");
-        if ($valLogin->getResult()) {
-            $this->valPass = $valLogin->getResult();
+        $valLogin->fullRead("SELECT id, cpf, name, email, password, image FROM sts_users WHERE cpf=:cpf", "cpf={$this->dataForm['cpf']}");
+        if ($valLogin->getResultDb()) {
             $this->valPassword();
         } else {
             $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";
@@ -40,6 +39,7 @@ class StsLogin
     private function valPassword()
     {
         if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
+
         } else {
         }
     }

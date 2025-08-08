@@ -19,7 +19,8 @@ class Register
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($this->dataForm['SendRegister'])) {
             unset($this->dataForm['SendRegister']); // -> Destrói a posição do botão do array.
-            $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao banco de dados.
+            $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
+            $this->dataForm['created'] = date('Y-m-d H:i:s');
             $valCpf = new \Sts\Models\StsRegister();
             $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
             if ($valCpf->getResult()) {

@@ -32,6 +32,8 @@ if (isset($_SESSION['msg'])) {
         <option value="no_info">Não Informar</option>
     </select><br><br>
 
+    <input type="hidden" name="created">
+
     <label>Nascimento:</label>
     <input type="date" name="date_birth" value="" required><br><br>
 
@@ -47,5 +49,5 @@ if (isset($_SESSION['msg'])) {
     <label>Confirme:</label>
     <input type="password" value="" placeholder="********" required><br><br>
 
-    <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL;?>/login/index">Possui ACESSO?</a>
+    <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL;?>login/index">Possui ACESSO?</a>
 </form>
