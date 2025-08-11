@@ -17,3 +17,6 @@ if (isset($_SESSION['msg'])) {
 }
 ?>
 <h2>Página Dashboard</h2>
+<?php
+echo "Olá, {$_SESSION['user_name']}!";
+

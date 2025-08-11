@@ -21,8 +21,11 @@ class Login
             unset($this->dataForm['SendLogin']);
             $verifyLogin = new \Sts\Models\StsLogin();
             $verifyLogin->login($this->dataForm);
-            $this->data = [];
-            $this->loadView();
+            if ($verifyLogin->getResult()) {
+                header("Location: " . URL . "dashboard/index");
+            } else {
+                $this->data['form'] = $this->dataForm;
+            }
         } else {
             $this->data = [];
             $this->loadView();

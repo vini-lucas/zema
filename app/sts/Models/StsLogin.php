@@ -16,7 +16,7 @@ class StsLogin
 {
     private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
     private array|bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
-    private $valPass;
+    public $valPass; // -> Recebe o resultado da busca da QUERY.
 
     public function getResult(): array|bool
     {
@@ -40,11 +40,14 @@ class StsLogin
     private function valPassword()
     {
         if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
-            echo "senha é igual";
+            $_SESSION['user_id'] = $this->valPass[0]['id'];
+            $_SESSION['user_cpf'] = $this->valPass[0]['cpf'];
+            $_SESSION['user_name'] = $this->valPass[0]['name'];
+            $_SESSION['user_image'] = $this->valPass[0]['image'];
+            $this->result = true;
         } else {
-            echo "senha não é igual";
-            var_dump($this->dataForm['password']);
-            var_dump($this->valPass[0]['password']);
+            $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";
+            $this->result = false;
         }
     }
 }

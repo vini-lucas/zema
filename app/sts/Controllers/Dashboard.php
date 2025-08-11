@@ -15,6 +15,7 @@ class Dashboard
 
     public function index()
     {
+      
         $this->loadView();
     }
 
