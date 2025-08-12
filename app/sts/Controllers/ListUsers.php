@@ -9,24 +9,26 @@ if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
 
-class Dashboard
+class ListUsers
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
 
     public function index()
     {
-        if (isset($_SESSION['user_cpf']) and (isset($_SESSION['user_name']))) {
-            $this->loadView();
+        $listUsers = new \Sts\Models\StsListUsers();
+        $listUsers->usersDatabase();
+        if ($listUsers->getResult()) {
+            $this->data['form'] = $listUsers->getResultDb();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Realize o login para obter acesso à página!</p>";
-            header("Location: " . URL . "login/index");
+            $_SESSION['msg'] = "<p style='color: red;'>Nenhum registro encontrado!<br></p>"; 
+            $this->data = [];
         }
+        $this->loadView();
     }
 
     public function loadView()
     {
-        $this->data = [];
         $loadView = new \Core\ConfigView();
-        $loadView->loadView("app/sts/Views/dashboard/dashboard", $this->data);
+        $loadView->loadView("app/sts/Views/users/list-users", $this->data);
     }
 }

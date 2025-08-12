@@ -18,5 +18,7 @@ if (isset($_SESSION['msg'])) {
 ?>
 <h2>Página Dashboard</h2>
 <?php
-echo "Olá, {$_SESSION['user_name']}!";
+echo "Olá, {$_SESSION['user_name']}!<br>";
+echo "<a href='" . URL . "list-users/index'>Usuários</a> - <a href='". URL ."logout/index'>Sair</a>";
+
 

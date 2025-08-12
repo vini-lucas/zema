@@ -3,6 +3,7 @@
 /**
  * Utilizar o "namespace" para o Composer conseguir carregar esta clase.
  */
+
 namespace Core;
 
 /**
@@ -16,11 +17,13 @@ if (!defined('L4bar3tTA!')) {
 class ConfigController extends Config
 {
     private string $url; // -> Recebe a URL informada pelo usuário.
-    private string $urlController; // -> Recebe a URL da controller informada.
+    private string $urlController; // -> Recebe a URL da CONTROLLER informada.
     private string $urlMethod; // -> Recebe a URL do método informado.
     private array $urlArray; // -> Recebe o array da URL.
-    private string $urlSlugController;
+    private string $urlSlugController; // -> Recebe a URL da CONTROLLER limpa.
     private array $format;
+    private array $listPgPublic; // -> Recebe um array com todas as páginas públicas do projeto.
+    private array $listPgPrivate; // -> Recebe um array com todas as páginas privadas do projeto.
 
     public function __construct()
     {
@@ -37,11 +40,11 @@ class ConfigController extends Config
                 $this->urlController = $this->slugController($this->urlArray[0]); // -> O atributo "urlController" recebe a controller já limpa pelo método "slugController()".
                 $this->urlMethod = $this->urlArray[1]; // -> O atributo "urlMethod" recebe o método.
             } else { // -> Se não houver a controller e/ou o método informado, então:
-                $this->urlController = "Home"; // -> A controller recebe a página Home.
+                $this->urlController = "Login"; // -> A controller recebe a página Home.
                 $this->urlMethod = "index"; // -> O método recebe o index.
             }
         } else { // -> Se não existir nada na URL, então:
-            $this->urlController = "Home"; // -> A controller recebe a página Home.
+            $this->urlController = "Login"; // -> A controller recebe a página Home.
             $this->urlMethod = "index"; // -> O método recebe o index.
         }
     }
@@ -106,9 +109,57 @@ class ConfigController extends Config
         /**
          * "ucwords() altera a primeira letra da variável para maiúscula".
          */
-        $urlController = ucwords($this->urlController);
-        $classLoad = "\\Sts\Controllers\\" . $urlController; // -> "$classLoad" recebe o endereço completo da controller que o usuário digitou.
-        $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
-        $classPage->index(); // -> Depois, chama o método index desta classe/controller.
+        $this->urlController = ucwords($this->urlController);
+        $classLoad = "\\Sts\Controllers\\" . $this->urlController; // -> "$classLoad" recebe o endereço completo da controller que o usuário digitou.
+        $this->pagePublic();
+        if (class_exists($classLoad)) { // -> Se a classe existir então:
+            if (method_exists($classLoad, $this->urlMethod)) { // -> Verifica se o método existe.
+                $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
+                $classPage->index(); // -> Depois, chama o método index desta classe/controller.
+            } else { // -> Se não existar, retorna este die:
+                die('Erro 639: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+            }
+        } else { // -> Se não existar, retorna este die:
+            die('Erro 527: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+        }
+    }
+
+    /**
+     * Método para verificar se a página é ou não pública.
+     */
+    private function pagePublic()
+    {
+        $this->listPgPublic = ["Login", "Register"];
+
+        /**
+         * Se no array do primeiro argumento existir a string do segundo argumento então acessa o if.
+         */
+        if (in_array($this->urlController, $this->listPgPublic)) {
+            $classLoad = "\\Sts\Controllers\\" . $this->urlController;
+        } else {
+            $this->pagePrivate();
+        }
+    }
+
+    private function pagePrivate()
+    {
+        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers"];
+
+        if (in_array($this->urlController, $this->listPgPrivate)) {
+            $this->verifyLogin();
+        } else {
+            $_SESSION['msg'] = "<p style='color: red;'>Página não encontrada!<br></p>";
+            header("Location: " . URL . "login/index");
+        }
+    }
+
+    private function verifyLogin()
+    {
+        if ((isset($_SESSION['user_cpf'])) and ($_SESSION['user_id'])) {
+            $classLoad = "\\Sts\Controllers\\" . $this->urlController;
+        } else {
+            $_SESSION['msg'] = "<p style='color: red;'>Realize o login para obter acesso à página!</p>";
+            header("Location: " . URL . "login/index");
+        }
     }
 }

@@ -13,16 +13,22 @@ if (isset($this->data)) {
 
 if (isset($_SESSION['msg'])) {
     echo $_SESSION['msg'];
-    unset ($_SESSION['msg']);
+    unset($_SESSION['msg']);
 }
 ?>
 <h2>Conecte-se!</h2>
 <form method="POST" action="">
+    <?php
+    $cpf = "";
+    if (isset($this->data['form']['cpf'])) {
+        $cpf = $this->data['form']['cpf'];
+    }
+    ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" autocomplete="off" required>
+    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" value="<?php echo $cpf; ?>" autocomplete="off" required>
 
     <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" autocomplete="off" required><br><br>
+    <input type="password" name="password" placeholder="**************" value="" autocomplete="off" required><br><br>
 
     <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
 </form>

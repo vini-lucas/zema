@@ -14,6 +14,12 @@ class Logout
 {
     public function index()
     {
-        echo "<h2> Página Logout </h2>";
+        unset(
+            $_SESSION['user_id'],
+            $_SESSION['user_cpf'],
+            $_SESSION['user_name'],
+            $_SESSION['user_image']
+        );
+        header("Location: " . URL . "login/index");
     }
 }

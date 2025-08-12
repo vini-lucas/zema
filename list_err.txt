@@ -1,2 +1,4 @@
 Erro 404 -> Erro ao carregar a VIEW.
-Erro 333 -> Erro de conexão com o banco de dados.
+Erro 333 -> Erro de conexão com o Banco de Dados.
+Erro 527 -> Erro ao carregar a CONTROLLER.
+Erro 639 -> Erro ao carregar o MÉTODO.

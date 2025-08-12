@@ -25,6 +25,7 @@ class Login
                 header("Location: " . URL . "dashboard/index");
             } else {
                 $this->data['form'] = $this->dataForm;
+                $this->loadView();
             }
         } else {
             $this->data = [];
