@@ -12,6 +12,7 @@ if (!defined('L4bar3tTA!')) {
 class ListUsers
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
+    private array|null $dataForm; // -> Recebe os dados que o usuário informou no formulário.
 
     public function index()
     {
@@ -20,8 +21,8 @@ class ListUsers
         if ($listUsers->getResult()) {
             $this->data['form'] = $listUsers->getResultDb();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Nenhum registro encontrado!<br></p>"; 
-            $this->data = [];
+            $_SESSION['msg'] = "<p style='color: red;'>Nenhum registro encontrado!<br></p>";
+            $this->data['form'] = $this->dataForm;
         }
         $this->loadView();
     }
@@ -29,6 +30,6 @@ class ListUsers
     public function loadView()
     {
         $loadView = new \Core\ConfigView();
-        $loadView->loadView("app/sts/Views/users/list-users", $this->data);
+        $loadView->loadView("app/sts/Views/users/listUsers", $this->data);
     }
 }

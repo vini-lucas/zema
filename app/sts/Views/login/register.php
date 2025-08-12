@@ -33,6 +33,7 @@ if (isset($_SESSION['msg'])) {
     </select><br><br>
 
     <input type="hidden" name="created">
+    <input type="hidden" name="access_level_id">
 
     <label>Nascimento:</label>
     <input type="date" name="date_birth" value="" autocomplete="off" required><br><br>

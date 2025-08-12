@@ -19,6 +19,7 @@ class ConfigController extends Config
     private string $url; // -> Recebe a URL informada pelo usuário.
     private string $urlController; // -> Recebe a URL da CONTROLLER informada.
     private string $urlMethod; // -> Recebe a URL do método informado.
+    private string $urlParameter; // -> Recebe a URL do parâmetro do método.
     private array $urlArray; // -> Recebe o array da URL.
     private string $urlSlugController; // -> Recebe a URL da CONTROLLER limpa.
     private array $format;
@@ -39,13 +40,20 @@ class ConfigController extends Config
             if (isset($this->urlArray[0]) and (isset($this->urlArray[1]))) { // -> Se houver a controller e o método informado na URL, então:
                 $this->urlController = $this->slugController($this->urlArray[0]); // -> O atributo "urlController" recebe a controller já limpa pelo método "slugController()".
                 $this->urlMethod = $this->urlArray[1]; // -> O atributo "urlMethod" recebe o método.
+                if (isset($this->urlArray[2])) { // Se o parâmetro existir, então:
+                    $this->urlParameter = $this->urlArray[2]; // -> O atributo "urlParameter" recebe o parâmetro.
+                } else { // -> Se não existir, então:
+                    $this->urlParameter = ""; // -> O parâmetro não recebe nada.
+                }
             } else { // -> Se não houver a controller e/ou o método informado, então:
                 $this->urlController = "Login"; // -> A controller recebe a página Home.
                 $this->urlMethod = "index"; // -> O método recebe o index.
+                $this->urlParameter = ""; // -> O parâmetro não recebe nada.
             }
         } else { // -> Se não existir nada na URL, então:
             $this->urlController = "Login"; // -> A controller recebe a página Home.
             $this->urlMethod = "index"; // -> O método recebe o index.
+            $this->urlParameter = ""; // -> O parâmetro não recebe nada.
         }
     }
 
@@ -115,7 +123,7 @@ class ConfigController extends Config
         if (class_exists($classLoad)) { // -> Se a classe existir então:
             if (method_exists($classLoad, $this->urlMethod)) { // -> Verifica se o método existe.
                 $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
-                $classPage->index(); // -> Depois, chama o método index desta classe/controller.
+                $classPage->{$this->urlMethod}($this->urlParameter); // -> Depois, chama o método desta classe/controller junto do parâmetro.
             } else { // -> Se não existar, retorna este die:
                 die('Erro 639: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
             }
@@ -143,7 +151,7 @@ class ConfigController extends Config
 
     private function pagePrivate()
     {
-        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers"];
+        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser"];
 
         if (in_array($this->urlController, $this->listPgPrivate)) {
             $this->verifyLogin();

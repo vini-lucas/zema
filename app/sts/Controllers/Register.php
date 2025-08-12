@@ -21,6 +21,7 @@ class Register
             unset($this->dataForm['SendRegister']); // -> Destrói a posição do botão do array.
             $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
             $this->dataForm['created'] = date('Y-m-d H:i:s');
+            $this->dataForm['access_level_id'] = 4;
             $valCpf = new \Sts\Models\StsRegister();
             $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
             if ($valCpf->getResult()) {
