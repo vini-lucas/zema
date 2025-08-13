@@ -6,14 +6,12 @@
 if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
-
-if (isset($this->data['form'][0])) {
-    extract($this->data['form'][0]);
-}
-
 if (isset($_SESSION['msg'])) {
     echo $_SESSION['msg'];
     unset($_SESSION['msg']);
+}
+if (isset($this->data['form'][0])) {
+    extract($this->data['form'][0]);
 }
 ?>
 
@@ -21,6 +19,7 @@ if (isset($_SESSION['msg'])) {
 
 <form method="POST" action="">
     <input type="hidden" name="id" value="<?php echo $this->data['form'][0]['id']; ?>">
+    <input type="hidden" name="modified" value="<?php echo $this->data['form'][0]['modified']; ?>">
 
     <?php
     $value_name = "";

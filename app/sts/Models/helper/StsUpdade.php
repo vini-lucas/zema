@@ -46,7 +46,7 @@ class StsUpdade extends StsConn
             $values[] = $link . "=:" . $link;
         }
         $values = implode(', ', $values);
-        $this->query = "UPDATE {$this->table} SET ($values) {$this->terms}";
+        $this->query = "UPDATE {$this->table} SET $values {$this->terms}";
         $this->exeInstruction();
     }
 
@@ -55,11 +55,9 @@ class StsUpdade extends StsConn
         try {
             $this->update = $this->conection()->prepare($this->query);
             $this->update->execute(array_merge($this->data, $this->values));
-            var_dump($this->update->execute(array_merge($this->data, $this->values)));
             $this->result = true;
         } catch (PDOException $err) {
             $this->result = false;
-            echo $err->getMessage();
         }
     }
 }

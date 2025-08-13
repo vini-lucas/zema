@@ -25,13 +25,12 @@ class EditUser
             $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> "$this->dataForm" recebe os dados que o usuário informou no formulário.
             if (!empty($this->dataForm['SendEditUser'])) { // -> Se o usuário clicar no botão "Editar" então:
                 unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão. 
-                $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->data['form'][0]);
+                $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->dataForm);
                 if ($editUser->getResult()) {
-                    $_SESSION['msg'] = "<p style='color: green;'>Usuário editado com sucesso!</p>";
-                    //header("Location: " . URL . "list-users/index");
+                    header("Location: " . URL . "list-users/index");
                 } else {
-                    $_SESSION['msg'] = "<p style='color: red;'>Usuário não editado com sucesso!</p>";
-                    //header("Location: " . URL . "list-users/index");
+                    $this->data['form'] = $this->dataForm;
                 }
             }
         } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:
