@@ -21,18 +21,18 @@ class EditUser
         $editUser = new \Sts\Models\StsEditUser(); // -> Instancia a classe para recuperar todos os dados do usuário que serão editados.
         $editUser->searchUser($this->id); // -> Instancia e função passando o ID como parâmetro.
         if ($editUser->getResult()) { // -> Se encontrar algum usuário com o ID do parâmetro então:
-            $this->data['form'] = $editUser->getResultDb(); // -> "$this->data['form']"(dados que serão enviados para a VIEW) recebe os dados.
+            $this->data['form'] = $editUser->getResultDb();
             $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> "$this->dataForm" recebe os dados que o usuário informou no formulário.
             if (!empty($this->dataForm['SendEditUser'])) { // -> Se o usuário clicar no botão "Editar" então:
                 unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão. 
-                echo "Dados vindo do Banco de Dados:";
-                var_dump($this->data['form']);
-                echo "<hr>";
-                echo "Dados informados no formulário:";
-                var_dump($this->dataForm);
-                echo "<hr>";
-                $userEdit = new \Sts\Models\helper\StsUpdade();
-                $userEdit->exeUpdate("sts_users", $this->data['form'], $this->dataForm, "id=:id", "id={$this->dataForm['id']}");
+                $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->data['form'][0]);
+                if ($editUser->getResult()) {
+                    $_SESSION['msg'] = "<p style='color: green;'>Usuário editado com sucesso!</p>";
+                    //header("Location: " . URL . "list-users/index");
+                } else {
+                    $_SESSION['msg'] = "<p style='color: red;'>Usuário não editado com sucesso!</p>";
+                    //header("Location: " . URL . "list-users/index");
+                }
             }
         } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:
             $_SESSION['msg'] = "<p style='color: red;'>Usuário não encontrado!</p>"; // -> Aparece esta mensagem.

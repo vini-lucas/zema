@@ -39,4 +39,16 @@ class StsEditUser
             $this->result = false;
         }
     }
+
+    public function exeUpdateUser(int $id, array $dataForm)
+    {
+        $this->dataForm = $dataForm;
+        $userEdit = new \Sts\Models\helper\StsUpdade(); // -> Instancia o helper para editar registros no Banco de Dados.
+        $userEdit->exeUpdate("sts_users", $this->dataForm, "WHERE id=:id", "id={$id}"); // -> Passa os parâmetros que irão construir a QUERY.
+        if ($userEdit->getResult()) {
+            $this->result = true;
+        } else {
+            $this->result = false;
+        }
+    }
 }
