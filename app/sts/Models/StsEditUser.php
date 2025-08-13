@@ -31,7 +31,7 @@ class StsEditUser
     public function searchUser(int $id)
     {
         $searchUser = new \Sts\Models\helper\StsRead();
-        $searchUser->fullRead("SELECT id, name, cpf, gender, date_birth, telephone, email FROM sts_users WHERE id=:id", "id={$id}");
+        $searchUser->fullRead("SELECT id, name, gender, date_birth, telephone, email, modified FROM sts_users WHERE id=:id", "id={$id}");
         if ($searchUser->getResultDb()) {
             $this->result = true;
             $this->resultDb = $searchUser->getResultDb();

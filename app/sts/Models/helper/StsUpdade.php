@@ -20,20 +20,14 @@ class StsUpdade extends StsConn
     private string $table; // -> Recebe a tabela do registro que será editado.
     private array $primeValues; // -> Recebe um array com os valores que serão editados.
     private array $fullValues; // -> Recebe um array com os valores que substituirão os antigos.
+    private string|null $terms; // -> Recebe um array com os termos da QUERY.
+    private string|null $parseString; // -> Recebe um array com a parse string da QUERY.
 
-    public function exeUpdate(string $table, array $primeValues, array $fullValues)
+    public function exeUpdate(string $table, array $primeValues, array $fullValues, string|null $terms = null, string|null $parseString = null)
     {
         $this->table = $table;
-        $this->primeValues = $primeValues;
-        $this->fullValues = $fullValues;
-        var_dump($this->table);
-        var_dump($this->primeValues);
-        var_dump($this->fullValues);
         $this->exeInstruction();
     }
 
-    private function exeInstruction()
-    {
-        
-    }
+    private function exeInstruction() {}
 }

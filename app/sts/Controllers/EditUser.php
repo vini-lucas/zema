@@ -17,23 +17,26 @@ class EditUser
 
     public function index(int $id)
     {
-        $this->id = $id;
-        $editUser = new \Sts\Models\StsEditUser();
-        $editUser->searchUser($this->id);
-        if ($editUser->getResult()) {
-            $this->data['form'] = $editUser->getResultDb();
-            unset($this->data['form'][0]['id']);
-            $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-            if (!empty($this->dataForm['SendEditUser'])) {
-                unset($this->dataForm['SendEditUser'], $this->dataForm['created'], $this->dataForm['created']);
+        $this->id = $id; // -> Recebe o ID do usuário.
+        $editUser = new \Sts\Models\StsEditUser(); // -> Instancia a classe para recuperar todos os dados do usuário que serão editados.
+        $editUser->searchUser($this->id); // -> Instancia e função passando o ID como parâmetro.
+        if ($editUser->getResult()) { // -> Se encontrar algum usuário com o ID do parâmetro então:
+            $this->data['form'] = $editUser->getResultDb(); // -> "$this->data['form']"(dados que serão enviados para a VIEW) recebe os dados.
+            $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> "$this->dataForm" recebe os dados que o usuário informou no formulário.
+            if (!empty($this->dataForm['SendEditUser'])) { // -> Se o usuário clicar no botão "Editar" então:
+                unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão. 
+                echo "Dados vindo do Banco de Dados:";
+                var_dump($this->data['form']);
+                echo "<hr>";
+                echo "Dados informados no formulário:";
+                var_dump($this->dataForm);
+                echo "<hr>";
                 $userEdit = new \Sts\Models\helper\StsUpdade();
-                $userEdit->exeUpdate("sts_users", $this->data['form'], $this->dataForm);
-                //var_dump($this->dataForm);
+                $userEdit->exeUpdate("sts_users", $this->data['form'], $this->dataForm, "id=:id", "id={$this->dataForm['id']}");
             }
-        } else {
-            $this->data['form'] = $this->dataForm;
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não encontrado!</p>";
-            header("Location: " . URL . "list-users/index");
+        } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:
+            $_SESSION['msg'] = "<p style='color: red;'>Usuário não encontrado!</p>"; // -> Aparece esta mensagem.
+            header("Location: " . URL . "list-users/index"); // -> Direciona para a página de listar usuários.
         }
         $this->loadView();
     }

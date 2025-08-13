@@ -20,46 +20,36 @@ if (isset($_SESSION['msg'])) {
 <h2>Editar Usuário</h2>
 
 <form method="POST" action="">
+    <input type="hidden" name="id" value="<?php echo $this->data['form'][0]['id']; ?>">
+
     <?php
     $value_name = "";
-    if ($this->data['form'][0]) {
+    if ($this->data['form'][0]['name']) {
         $value_name = $this->data['form'][0]['name'];
     }
     ?>
     <label>Nome:</label>
     <input type="text" name="name" value="<?php echo $value_name; ?>" placeholder="Ex.: Lucas Vinicius" autocomplete="off" required><br><br>
 
-    <?php
-    $value_cpf = "";
-    if ($this->data['form'][0]['cpf']) {
-        $value_cpf = $this->data['form'][0]['cpf'];
-    }
-    ?>
-    <label>CPF:</label>
-    <input type="text" name="cpf" value="<?php echo $value_cpf; ?>" placeholder="XXX.XXX.XXX-XX" autocomplete="off" required><br><br>
-
     <label>Gênero:</label>
     <select name="gender">
         <option selected>Selecione:</option>
         <?php
-            if ($this->data['form'][0]['gender'] == 'masculine') {
-                echo '<option selected value="masculine">Masculino</option>';
-                echo '<option value="feminine">Feminino</option>';
-                echo '<option value="no_info">Não Informar</option>';
-            } else if ($this->data['form'][0]['gender'] == 'feminine') {
-                echo '<option selected value="feminine">Feminino</option>';
-                echo '<option value="no_info">Não Informar</option>';
-                echo '<option value="masculine">Masculino</option>';
-            } else if ($this->data['form'][0]['gender'] == 'no_info') {
-                echo '<option selected value="no_info">Não Informar</option>';
-                echo '<option value="masculine">Masculino</option>';
-                echo '<option value="feminine">Feminino</option>';
-            }
-        ?>        
+        if ($this->data['form'][0]['gender'] == 'masculine') {
+            echo '<option selected value="masculine">Masculino</option>';
+            echo '<option value="feminine">Feminino</option>';
+            echo '<option value="no_info">Não Informar</option>';
+        } else if ($this->data['form'][0]['gender'] == 'feminine') {
+            echo '<option selected value="feminine">Feminino</option>';
+            echo '<option value="no_info">Não Informar</option>';
+            echo '<option value="masculine">Masculino</option>';
+        } else if ($this->data['form'][0]['gender'] == 'no_info') {
+            echo '<option selected value="no_info">Não Informar</option>';
+            echo '<option value="masculine">Masculino</option>';
+            echo '<option value="feminine">Feminino</option>';
+        }
+        ?>
     </select><br><br>
-
-    <input type="hidden" name="modified">
-    <input type="hidden" name="access_level_id">
 
     <?php
     $value_birth = "";
@@ -90,4 +80,3 @@ if (isset($_SESSION['msg'])) {
 
     <input type="submit" name="SendEditUser" value="Editar"> <a href="#">Editar Senha</a> - <a href="<?php echo URL; ?>list-users/index">Usuários</a>
 </form>
-
