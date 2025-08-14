@@ -19,12 +19,15 @@ if (isset($_SESSION['msg'])) {
 <h2>Página Dashboard</h2>
 <?php
 if (is_array($_SESSION['user_name'])) {
+    $_SESSION['user_name'][0] = ucwords($_SESSION['user_name'][0]);
     echo "Olá, {$_SESSION['user_name'][0]}!<br>";
 } else {
     if ((strpos($_SESSION['user_name'], ' ') == true)) {
         $_SESSION['user_name'] = explode(' ', $_SESSION['user_name']);
+        $_SESSION['user_name'][0] = ucwords($_SESSION['user_name'][0]);
         echo "Olá, {$_SESSION['user_name'][0]}!<br>";
     } else {
+        $_SESSION['user_name'] = ucwords($_SESSION['user_name']);
         echo "Olá, {$_SESSION['user_name']}!<br>";
     }
 }
