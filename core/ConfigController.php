@@ -151,7 +151,7 @@ class ConfigController extends Config
 
     private function pagePrivate()
     {
-        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser"];
+        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword"];
 
         if (in_array($this->urlController, $this->listPgPrivate)) {
             $this->verifyLogin();

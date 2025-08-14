@@ -26,9 +26,10 @@ class Register
             $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
             if ($valCpf->getResult()) {
                 header("Location: " . URL . "login/index");
+                exit;
             } else {
-                $this->data = [];
-                $this->loadView();
+                header("Location: " . URL . "login/index");
+                exit;
             }
         } else {
             $this->data = [];

@@ -29,6 +29,7 @@ class EditUser
                 $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->dataForm);
                 if ($editUser->getResult()) {
                     header("Location: " . URL . "list-users/index");
+                    exit;
                 } else {
                     $this->data['form'] = $this->dataForm;
                 }

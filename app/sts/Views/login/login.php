@@ -17,7 +17,7 @@ if (isset($_SESSION['msg'])) {
 }
 ?>
 <h2>Conecte-se!</h2>
-<form method="POST" action="">
+<form method="POST" action="" autocomplete="off">
     <?php
     $cpf = "";
     if (isset($this->data['form']['cpf'])) {

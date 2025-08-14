@@ -17,7 +17,7 @@ if (isset($_SESSION['msg'])) {
 }
 ?>
 <h2>Cadastre-se!</h2>
-<form method="POST" action="">
+<form method="POST" action="" autocomplete="off">
     <label>Nome:</label>
     <input type="text" name="name" value="" placeholder="Ex.: Lucas Vinicius" autocomplete="off" required><br><br>
 

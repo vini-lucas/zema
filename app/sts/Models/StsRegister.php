@@ -15,9 +15,9 @@ if (!defined('L4bar3tTA!')) {
 class StsRegister
 {
     private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
-    private array|bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
+    private bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
 
-    public function getResult(): array|bool
+    public function getResult(): bool
     {
         return $this->result;
     }
@@ -30,7 +30,8 @@ class StsRegister
         if ($valCpf->getResultDb() == null){
             $this->createUser();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro!</p>";
+            $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro, realize o login!</p>";
+            $this->result = false;
         }
     }
 
