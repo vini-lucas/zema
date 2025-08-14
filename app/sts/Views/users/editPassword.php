@@ -16,14 +16,15 @@ if (isset($this->data['form'])) {
 ?>
 
 <h2>Editar Senha</h2>
+<span id="msg"></span>
 
-<form method="POST" action="" autocomplete="off">
+<form method="POST" action="" autocomplete="off" id="form-rec-pass">
 
     <label>Informe a nova SENHA:</label>
-    <input type="password" name="password" placeholder="********" required><br><br>
+    <input type="password" name="password" id="pass" placeholder="********" required><br><br>
 
     <label>Confirme-a</label>
-    <input type="password" placeholder="********" required><br><br>
+    <input type="password" id="conf-pass" placeholder="********" required><br><br>
 
     <input type="submit" name="SendEditPass" value="Editar"> - <a href="<?php echo URL . "edit-user/index/" . $id?>">Voltar</a>
 </form>

@@ -31,4 +31,5 @@ if (is_array($_SESSION['user_name'])) {
         echo "Olá, {$_SESSION['user_name']}!<br>";
     }
 }
-echo "<a href='" . URL . "list-users/index'>Usuários</a> - <a href='" . URL . "logout/index'>Sair</a>";
+echo "<a href='" . URL . "list-users/index'>Usuários</a><br><br>";
+echo "<a href='" . URL . "logout/index'>Sair</a>";

@@ -19,7 +19,7 @@ if (isset($_SESSION['msg'])) {
 
 <h2>Usuários</h2>
 
-<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a>
+<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a><br><br>
 <table>
     <thead>
         <tr>
@@ -60,7 +60,13 @@ if (isset($_SESSION['msg'])) {
                 }
                 ?>
                 <td><?php echo $gender; ?></td>
-                <td><?php echo $image; ?></td>
+                <?php
+                $value_image = "Sem Foto";
+                if (!empty($image)) {
+                    $value_image = $image;
+                }
+                ?>
+                <td><?php echo $value_image; ?></td>
                 <td><?php echo $name_access; ?></td>
                 <td><a href="<?php echo URL; ?>edit-user/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-user/index<?php echo "/$id"; ?>" onclick="return confirm('Deseja realmente apagar este usuário?')">Apagar</a></td>
             </tr>

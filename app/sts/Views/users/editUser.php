@@ -17,6 +17,8 @@ if (isset($this->data['form'][0])) {
 
 <h2>Editar Usuário</h2>
 
+<a href="<?php echo URL; ?>list-users/index">Usuários</a><br><br>
+
 <form method="POST" action="" autocomplete="off">
     <input type="hidden" name="id" value="<?php echo $this->data['form'][0]['id']; ?>">
     <input type="hidden" name="modified" value="<?php echo $this->data['form'][0]['modified']; ?>">
@@ -77,5 +79,5 @@ if (isset($this->data['form'][0])) {
     <label>E-mail:</label>
     <input type="email" name="email" value="<?php echo $value_email; ?>" placeholder="seu_nome@dominio.com" autocomplete="off" required><br><br>
 
-    <input type="submit" name="SendEditUser" value="Editar"> <a href="<?php echo URL . "edit-password/index/{$this->data['form'][0]['id']}"; ?>">Editar Senha</a> - <a href="<?php echo URL; ?>list-users/index">Usuários</a>
+    <input type="submit" name="SendEditUser" value="Editar"> <a href="<?php echo URL . "edit-password/index/{$this->data['form'][0]['id']}"; ?>">Editar Senha</a>
 </form>

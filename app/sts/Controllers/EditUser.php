@@ -27,7 +27,10 @@ class EditUser
                 unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão. 
                 $this->dataForm['modified'] = date("Y-m-d H:i:s");
                 $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->dataForm);
+    
                 if ($editUser->getResult()) {
+                    $_SESSION['user_name'] = $this->dataForm['name'];
+                    $_SESSION['user_image'] = $this->dataForm['image'];
                     header("Location: " . URL . "list-users/index");
                     exit;
                 } else {
