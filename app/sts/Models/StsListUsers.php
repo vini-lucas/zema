@@ -30,7 +30,10 @@ class StsListUsers
     public function usersDatabase()
     {
         $users = new \Sts\Models\helper\StsRead();
-        $users->fullRead("SELECT id, name, cpf, date_birth, telephone, email, gender, image, access_level_id FROM sts_users LIMIT :limit", "limit=40");
+        $users->fullRead("SELECT users.id, users.name AS name_user, users.cpf, users.date_birth, users.telephone, users.email, users.gender, users.image, users.access_level_id, nivel_acesso.name AS name_access
+                          FROM sts_users AS users
+                          INNER JOIN sts_access_levels AS nivel_acesso ON nivel_acesso.id=users.access_level_id  
+                          LIMIT :limit", "limit=40");
         if ($users->getResultDb()) {
             $this->result = true;
             $this->resultDb = $users->getResultDb();

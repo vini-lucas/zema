@@ -17,7 +17,8 @@ if (isset($_SESSION['msg'])) {
 }
 ?>
 <h2>Cadastre-se!</h2>
-<form method="POST" action="" autocomplete="off">
+<span id="msg"></span>
+<form method="POST" action="" autocomplete="off" id="form-register">
     <label>Nome:</label>
     <input type="text" name="name" value="" placeholder="Ex.: Lucas Vinicius" autocomplete="off" required><br><br>
 
@@ -25,7 +26,7 @@ if (isset($_SESSION['msg'])) {
     <input type="text" name="cpf" value="" placeholder="XXX.XXX.XXX-XX" autocomplete="off" required><br><br>
 
     <label>Gênero:</label>
-    <select name="gender">
+    <select name="gender" required>
         <option selected>Selecione:</option>
         <option value="masculine">Masculino</option>
         <option value="feminine">Feminino</option>
@@ -45,10 +46,10 @@ if (isset($_SESSION['msg'])) {
     <input type="email" name="email" value="" placeholder="seu_nome@dominio.com" autocomplete="off" required><br><br>
 
     <label>Senha:</label>
-    <input type="password" name="password" value="" placeholder="********" autocomplete="off" required><br><br>
+    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off" required><br><br>
 
     <label>Confirme:</label>
-    <input type="password" value="" placeholder="********" autocomplete="off" required><br><br>
+    <input type="password" value="" id="conf-pass" placeholder="********" autocomplete="off" required><br><br>
 
     <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL;?>login/index">Possui ACESSO?</a>
 </form>

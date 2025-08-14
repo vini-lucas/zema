@@ -42,14 +42,26 @@ if (isset($_SESSION['msg'])) {
         ?>
             <tr>
                 <td><?php echo $id; ?></td>
-                <td><?php echo $name; ?></td>
+                <td><?php echo $name_user; ?></td>
                 <td><?php echo $cpf; ?></td>
+                <?php
+                $date_birth = date("d/m/Y", strtotime($date_birth));
+                ?>
                 <td><?php echo $date_birth; ?></td>
                 <td><?php echo $telephone; ?></td>
                 <td><?php echo $email; ?></td>
+                <?php
+                if ($gender == "masculine") {
+                    $gender = "Masculino";
+                } else if ($gender == "feminine") {
+                    $gender = "Feminino";
+                } else {
+                    $gender = "Não Informado";
+                }
+                ?>
                 <td><?php echo $gender; ?></td>
                 <td><?php echo $image; ?></td>
-                <td><?php echo $access_level_id; ?></td>
+                <td><?php echo $name_access; ?></td>
                 <td><a href="<?php echo URL; ?>edit-user/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-user/index<?php echo "/$id"; ?>" onclick="return confirm('Deseja realmente apagar este usuário?')">Apagar</a></td>
             </tr>
         <?php
