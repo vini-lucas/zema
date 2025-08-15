@@ -19,7 +19,7 @@ if (isset($_SESSION['msg'])) {
 
 <h2>Usuários</h2>
 
-<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a><br><br>
+<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a> - <a href="<?php echo URL; ?>add-user/index">Novo Usuário</a><br><br>
 <table>
     <thead>
         <tr>
