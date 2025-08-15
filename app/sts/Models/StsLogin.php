@@ -27,7 +27,10 @@ class StsLogin
     {
         $this->dataForm = $dataForm;
         $valLogin = new \Sts\Models\helper\StsRead();
-        $valLogin->fullRead("SELECT id, cpf, name, email, password, image FROM sts_users WHERE cpf=:cpf", "cpf={$this->dataForm['cpf']}");
+        $valLogin->fullRead("SELECT users.id, users.cpf, users.name AS user_name, users.email, users.password, users.image, users.access_level_id, level_access.name AS level_access_name
+                            FROM sts_users AS users
+                            INNER JOIN sts_access_levels AS level_access ON level_access.id=users.access_level_id
+                            WHERE users.cpf=:cpf", "cpf={$this->dataForm['cpf']}");
         if ($valLogin->getResultDb()) {
             $this->valPass = $valLogin->getResultDb();
             $this->valPassword();
@@ -42,8 +45,9 @@ class StsLogin
         if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
             $_SESSION['user_id'] = $this->valPass[0]['id'];
             $_SESSION['user_cpf'] = $this->valPass[0]['cpf'];
-            $_SESSION['user_name'] = $this->valPass[0]['name'];
+            $_SESSION['user_name'] = $this->valPass[0]['user_name'];
             $_SESSION['user_image'] = $this->valPass[0]['image'];
+            $_SESSION['user_access_level'] = $this->valPass[0]['level_access_name'];
             $this->result = true;
         } else {
             $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";

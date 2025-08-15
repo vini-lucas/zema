@@ -20,10 +20,10 @@ if (isset($_SESSION['msg'])) {
 <span id="msg"></span>
 <form method="POST" action="" autocomplete="off" id="form-register">
     <label>Nome:</label>
-    <input type="text" name="name" value="" placeholder="Ex.: Lucas Vinicius" autocomplete="off" required><br><br>
+    <input type="text" name="name" value="" id="name-register" placeholder="Ex.: Lucas Vinicius" autocomplete="off" ><br><br>
 
     <label>CPF:</label>
-    <input type="text" name="cpf" value="" placeholder="XXX.XXX.XXX-XX" autocomplete="off" required><br><br>
+    <input type="text" name="cpf" value="" id='cpf-register' placeholder="XXX.XXX.XXX-XX" autocomplete="off" ><br><br>
 
     <label>Gênero:</label>
     <select name="gender" required>
@@ -37,19 +37,19 @@ if (isset($_SESSION['msg'])) {
     <input type="hidden" name="access_level_id">
 
     <label>Nascimento:</label>
-    <input type="date" name="date_birth" value="" autocomplete="off" required><br><br>
+    <input type="date" name="date_birth" id="date_birth-register" value="" autocomplete="off" ><br><br>
 
     <label>Telefone:</label>
-    <input type="text" name="telephone" value="" placeholder="(XX) 9 XXXX-XXXX" autocomplete="off" required><br><br>
+    <input type="text" name="telephone" value="" id='telephone-register' placeholder="(XX) 9 XXXX-XXXX" autocomplete="off" ><br><br>
 
     <label>E-mail:</label>
-    <input type="email" name="email" value="" placeholder="seu_nome@dominio.com" autocomplete="off" required><br><br>
+    <input type="email" name="email" value="" id='email-register' placeholder="seu_nome@dominio.com" autocomplete="off" ><br><br>
 
     <label>Senha:</label>
-    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off" required><br><br>
+    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off" ><br><br>
 
     <label>Confirme:</label>
-    <input type="password" value="" id="conf-pass" placeholder="********" autocomplete="off" required><br><br>
+    <input type="password" value="" id="conf-pass" placeholder="********" autocomplete="off" ><br><br>
 
     <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL;?>login/index">Possui ACESSO?</a>
 </form>

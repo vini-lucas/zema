@@ -19,10 +19,17 @@ class Login
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
             unset($this->dataForm['SendLogin']);
-            $verifyLogin = new \Sts\Models\StsLogin();
-            $verifyLogin->login($this->dataForm);
-            if ($verifyLogin->getResult()) {
-                header("Location: " . URL . "dashboard/index");
+            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput->valInputField($this->dataForm);
+            if ($valInput->getResult()) {
+                $verifyLogin = new \Sts\Models\StsLogin();
+                $verifyLogin->login($this->dataForm);
+                if ($verifyLogin->getResult()) {
+                    header("Location: " . URL . "dashboard/index");
+                } else {
+                    $this->data['form'] = $this->dataForm;
+                    $this->loadView();
+                }
             } else {
                 $this->data['form'] = $this->dataForm;
                 $this->loadView();

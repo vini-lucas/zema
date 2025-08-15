@@ -17,7 +17,8 @@ if (isset($_SESSION['msg'])) {
 }
 ?>
 <h2>Conecte-se!</h2>
-<form method="POST" action="" autocomplete="off">
+<span id="msg"></span>
+<form method="POST" action="" id="form-login" autocomplete="off">
     <?php
     $cpf = "";
     if (isset($this->data['form']['cpf'])) {
@@ -25,38 +26,10 @@ if (isset($_SESSION['msg'])) {
     }
     ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" value="<?php echo $cpf; ?>" autocomplete="off" required>
+    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf-login' value="<?php echo $cpf; ?>" autocomplete="off" required>
 
     <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" value="" autocomplete="off" required><br><br>
+    <input type="password" name="password" placeholder="**************" id='password-login' value="" autocomplete="off" required><br><br>
 
     <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
 </form>
-<!--<h2>Cadastre-se!</h2>
-<form>
-    <label>CPF:</label>
-    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
-
-    <label>Nome Completo:</label>
-    <input type="password" name="name" placeholder="Nome Completo" required>
-
-    <label>Data de Nascimento:</label>
-    <input type="date" name="date_birth" required>
-
-    <label>Gênero</label>
-    <input type="text" name="gender">
-
-    <label>E-mail</label>
-    <input type="text" name="email" placeholder="exemplo@dominio.com" required>
-
-    <label>Telefone</label>
-    <input type="text" name="telephone" placeholder="(XX) 9 XXXX-XXXX" required>
-
-    <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" required>
-
-    <label>Confirme a Senha:</label>
-    <input type="password" placeholder="**************" required>
-
-    <input type="submit" name="SendLogin">
-</form>-->

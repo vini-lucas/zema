@@ -32,7 +32,7 @@ class StsDelete extends StsConn
 
     public function exeDelete(string $table, string $terms, string $parseString)
     {
-        $this->table = $table;  
+        $this->table = $table;
         parse_str($terms, $this->terms);
         parse_str($parseString, $this->values);
         $this->exeInstruction();
@@ -54,6 +54,10 @@ class StsDelete extends StsConn
             $this->resetAutoIncrement();
             $this->result = true;
         } catch (PDOException $err) {
+            if (strpos($err->getMessage(), 'Integrity constraint violation: 1217')) {
+                $_SESSION['msg'] = "<p style='color: red;'>Registro sendo utilizado por outro usuário!</p>";
+                $this->result = false;
+            }
             $this->result = false;
         }
     }
