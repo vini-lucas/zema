@@ -21,15 +21,30 @@ class EditPassword
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendEditPass'])) {
             unset($this->dataForm['SendEditPass']);
-            $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT);
-            $editPass = new \Sts\Models\StsEditPassword();
-            $editPass->editPass($this->id, $this->dataForm);
-            if ($editPass->getResult()) {
-                header("Location: " . URL . "edit-user/index/{$this->id}");
-                exit;
+            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput->valInputField($this->dataForm);
+            if ($valInput->getResult()) {
+                if ($this->dataForm['password'] == $this->dataForm['conf-password']) {
+                    $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT);
+                    $editPass = new \Sts\Models\StsEditPassword();
+                    $editPass->editPass($this->id, $this->dataForm);
+                    if ($editPass->getResult()) {
+                        header("Location: " . URL . "edit-user/index/{$this->id}");
+                        exit;
+                    } else {
+                        header("Location: " . URL . "edit-user/index/{$this->id}");
+                        exit;
+                    }
+                } else {
+                    $_SESSION['msg'] = "<p style='color: red'>Senha deve combinar!</p>";
+                    $this->data['form'] = $this->dataForm;
+                    $this->data['form']['id'] = $this->id;
+                    $this->loadView();
+                }
             } else {
-                header("Location: " . URL . "edit-user/index/{$this->id}");
-                exit;
+                $this->data['form'] = $this->dataForm;
+                $this->data['form']['id'] = $this->id;
+                $this->loadView();
             }
         } else {
             $this->data['form']['id'] = $this->id;

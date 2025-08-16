@@ -19,17 +19,27 @@ class AddUser
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($this->dataForm['SendAddUser'])) {
             unset($this->dataForm['SendAddUser']); // -> Destrói a posição do botão do array.
-            $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
-            $this->dataForm['created'] = date('Y-m-d H:i:s');
-            $this->dataForm['access_level_id'] = 4;
-            $valCpf = new \Sts\Models\StsAddUser();
-            $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
-            if ($valCpf->getResult()) {
-                header("Location: " . URL . "list-users/index");
-                exit;
+            $valInput = new \Sts\Models\helper\ValInputField();
+            $dataFormInput = [$this->dataForm['name'], $this->dataForm['cpf'], $this->dataForm['gender'], $this->dataForm['date_birth'], $this->dataForm['telephone'], $this->dataForm['email'], $this->dataForm['password'], $this->dataForm['conf-pass']];
+            $valInput->valInputField($dataFormInput);
+            if ($valInput->getResult()) {
+                $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
+                $this->dataForm['created'] = date('Y-m-d H:i:s');
+                $this->dataForm['access_level_id'] = 4;
+                unset($this->dataForm['conf-pass']);
+                $valCpf = new \Sts\Models\StsAddUser();
+                $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
+                if ($valCpf->getResult()) {
+                    header("Location: " . URL . "list-users/index");
+                    exit;
+                } else {
+                    header("Location: " . URL . "list-users/index");
+                    exit;
+                }
             } else {
-                header("Location: " . URL . "list-users/index");
-                exit;
+                $this->data['form'] = $this->dataForm;
+                $this->loadView();
+                //var_dump($this->dataForm);
             }
         } else {
             $this->data = [];

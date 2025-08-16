@@ -1,14 +1,22 @@
 const formRegister = document.getElementById("form-register");
 const msg = document.getElementById("msg");
-const formRecPass = document.getElementById("form-rec-pass");
+const formEditPass = document.getElementById("form-edit-pass");
 const formLogin = document.getElementById("form-login");
 const formAddLevelAccess = document.getElementById('form-add-level-access');
 const formEditLevelAccess = document.getElementById('form-edit-level-access');
-if (formRecPass) {
-    formRecPass.addEventListener("submit", function (e) {
+const formEditUser = document.getElementById('form-edit-user');
+if (formEditPass) {
+    formEditPass.addEventListener("submit", function (e) {
         var conf_pass = document.getElementById("conf-pass");
         var pass = document.getElementById("pass");
-        if (conf_pass.value != pass.value) {
+
+        if (pass.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe a nova SENHA!</p>";
+        } else if (conf_pass.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Confirme-a</p>";
+        } else if (conf_pass.value != pass.value) {
             e.preventDefault();
             msg.innerHTML = "<p style='color: red;'>Senha deve combinar!</p>";
         } else {
@@ -24,6 +32,7 @@ if (formRegister) {
         var name_register = document.getElementById('name-register');
         var cpf_register = document.getElementById('cpf-register');
         var date_birth_register = document.getElementById('date_birth-register');
+        var gender_register = document.getElementById("gender-register");
         var telephone_register = document.getElementById('telephone-register');
         var email_register = document.getElementById('email-register');
 
@@ -33,6 +42,9 @@ if (formRegister) {
         } else if (cpf_register.value == "") {
             e.preventDefault();
             msg.innerHTML = "<p style='color: red'>Preencha o CPF!</p>";
+        } else if (gender_register.value == 'Selecione:') {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red'>Selecione o gênero!</p>";
         } else if (date_birth_register.value == "") {
             e.preventDefault();
             msg.innerHTML = "<p style='color: red'>Preencha a Data de Nascimento!</p>";
@@ -91,6 +103,35 @@ if (formEditLevelAccess) {
         if (name_edit_level_access.value == "") {
             e.preventDefault();
             msg.innerHTML = "<p style='color: red;'>Preencha o nome do Nível de Acesso!</p>";
+        } else {
+            msg.innerHTML = "";
+        }
+    })
+}
+
+if (formEditUser) {
+    formEditUser.addEventListener('submit', function (e) {
+        var gender_edit_user = document.getElementById('gender-edit-user');
+        var name_edit_user = document.getElementById("name-edit-user");
+        var date_birth_edit_user = document.getElementById("date_birth-edit-user");
+        var telephone_edit_user = document.getElementById("telephone-edit-user");
+        var email_edit_user = document.getElementById("email-edit-user");
+
+        if (name_edit_user.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe o nome!</p>";
+        } else if (gender_edit_user.value == "Selecione:") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Selecione o gênero!</p>";
+        } else if (date_birth_edit_user.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe a Data de Nascimento!</p>";
+        } else if (telephone_edit_user.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe o telefone!</p>";
+        } else if (email_edit_user.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe o e-mail!</p>";
         } else {
             msg.innerHTML = "";
         }

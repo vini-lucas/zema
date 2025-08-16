@@ -26,10 +26,10 @@ if (isset($_SESSION['msg'])) {
     }
     ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf-login' value="<?php echo $cpf; ?>" autocomplete="off" required>
+    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf-login' value="<?php echo $cpf; ?>" autocomplete="off">
 
     <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" id='password-login' value="" autocomplete="off" required><br><br>
+    <input type="password" name="password" placeholder="**************" id='password-login' value="" autocomplete="off"><br><br>
 
     <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
 </form>

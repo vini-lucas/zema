@@ -16,10 +16,11 @@ if (isset($this->data['form'][0])) {
 ?>
 
 <h2>Editar Usuário</h2>
+<span id='msg'></span>
 
 <a href="<?php echo URL; ?>list-users/index">Usuários</a><br><br>
 
-<form method="POST" action="" autocomplete="off">
+<form method="POST" action="" id='form-edit-user' autocomplete="off">
     <input type="hidden" name="id" value="<?php echo $this->data['form'][0]['id']; ?>">
     <input type="hidden" name="modified" value="<?php echo $this->data['form'][0]['modified']; ?>">
 
@@ -30,10 +31,10 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>Nome:</label>
-    <input type="text" name="name" value="<?php echo $value_name; ?>" placeholder="Ex.: Lucas Vinicius" autocomplete="off" required><br><br>
+    <input type="text" name="name" id="name-edit-user" value="<?php echo $value_name; ?>" placeholder="Ex.: Lucas Vinicius" autocomplete="off"><br><br>
 
     <label>Gênero:</label>
-    <select name="gender">
+    <select name="gender" id="gender-edit-user">
         <option>Selecione:</option>
         <?php
         if ($this->data['form'][0]['gender'] == 'masculine') {
@@ -59,7 +60,7 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>Nascimento:</label>
-    <input type="date" name="date_birth" value="<?php echo $value_birth; ?>" autocomplete="off" required><br><br>
+    <input type="date" name="date_birth" id="date_birth-edit-user" value="<?php echo $value_birth; ?>" autocomplete="off"><br><br>
 
     <?php
     $value_tel = "";
@@ -68,7 +69,7 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>Telefone:</label>
-    <input type="text" name="telephone" value="<?php echo $value_tel; ?>" placeholder="(XX) 9 XXXX-XXXX" autocomplete="off" required><br><br>
+    <input type="text" name="telephone" id="telephone-edit-user" value="<?php echo $value_tel; ?>" placeholder="(XX) 9 XXXX-XXXX" autocomplete="off"><br><br>
 
     <?php
     $value_email = "";
@@ -77,7 +78,7 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>E-mail:</label>
-    <input type="email" name="email" value="<?php echo $value_email; ?>" placeholder="seu_nome@dominio.com" autocomplete="off" required><br><br>
+    <input type="email" name="email" id="email-edit-user" value="<?php echo $value_email; ?>" placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
 
     <input type="submit" name="SendEditUser" value="Editar"> <a href="<?php echo URL . "edit-password/index/{$this->data['form'][0]['id']}"; ?>">Editar Senha</a>
 </form>

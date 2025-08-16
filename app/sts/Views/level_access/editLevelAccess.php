@@ -31,7 +31,7 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>Nome:</label>
-    <input type="text" name="name" value="<?php echo $value_name; ?>" id="name-edit-level-access" placeholder="Ex.: Super Administrador" autocomplete="off" required><br><br>
+    <input type="text" name="name" value="<?php echo $value_name; ?>" id="name-edit-level-access" placeholder="Ex.: Super Administrador" autocomplete="off"><br><br>
 
     <input type="submit" name="SendEditLevelAccess" value="Editar">
 </form>

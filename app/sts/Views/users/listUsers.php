@@ -68,7 +68,7 @@ if (isset($_SESSION['msg'])) {
                 ?>
                 <td><?php echo $value_image; ?></td>
                 <td><?php echo $name_access; ?></td>
-                <td><a href="<?php echo URL; ?>edit-user/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-user/index<?php echo "/$id"; ?>" onclick="return confirm('Deseja realmente apagar este usuário?')">Apagar</a></td>
+                <td><a href="<?php echo URL; ?>edit-user/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-user/index<?php echo "/$id"; ?>" onclick="return confirm('Deseja realmente apagar este usuário?')" name='drop-user'>Apagar</a></td>
             </tr>
         <?php
         }

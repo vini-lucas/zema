@@ -24,10 +24,9 @@ class EditUser
             $this->data['form'] = $editUser->getResultDb();
             $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> "$this->dataForm" recebe os dados que o usuário informou no formulário.
             if (!empty($this->dataForm['SendEditUser'])) { // -> Se o usuário clicar no botão "Editar" então:
-                unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão. 
+                unset($this->dataForm['SendEditUser']); // -> Destrua a posição do botão.
                 $this->dataForm['modified'] = date("Y-m-d H:i:s");
                 $editUser->exeUpdateUser($this->data['form'][0]['id'], $this->dataForm);
-    
                 if ($editUser->getResult()) {
                     $_SESSION['user_name'] = $this->dataForm['name'];
                     $_SESSION['user_image'] = $this->dataForm['image'];
