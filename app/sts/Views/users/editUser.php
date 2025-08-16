@@ -34,7 +34,7 @@ if (isset($this->data['form'][0])) {
 
     <label>Gênero:</label>
     <select name="gender">
-        <option selected>Selecione:</option>
+        <option>Selecione:</option>
         <?php
         if ($this->data['form'][0]['gender'] == 'masculine') {
             echo '<option selected value="masculine">Masculino</option>';
