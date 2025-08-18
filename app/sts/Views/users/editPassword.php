@@ -24,10 +24,10 @@ if (isset($this->data['form'])) {
 <form method="POST" action="" autocomplete="off" id="form-edit-pass">
 
     <label>Informe a nova SENHA:</label>
-    <input type="password" name="password" id="pass" placeholder="********"><br><br>
+    <input type="password" name="password" id="password" placeholder="********"><br><br>
 
     <label>Confirme-a</label>
-    <input type="password" name="conf-password" id="conf-pass" placeholder="********"><br><br>
+    <input type="password" name="conf-password" id="val-password" placeholder="********"><br><br>
 
     <input type="submit" name="SendEditPass" value="Editar"> - <a href="<?php echo URL . "edit-user/index/" . $id?>">Voltar</a>
 </form>

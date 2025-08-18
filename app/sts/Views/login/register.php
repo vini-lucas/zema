@@ -30,7 +30,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>Nome:</label>
-    <input type="text" name="name" value="<?php echo $name_value; ?>" id="name-register" placeholder="Ex.: Lucas Vinicius" autocomplete="off"><br><br>
+    <input type="text" name="name" value="<?php echo $name_value; ?>" id="name" placeholder="Ex.: Lucas Vinicius" autocomplete="off"><br><br>
 
     <?php
     $cpf_value = "";
@@ -39,10 +39,10 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" value="<?php echo $cpf_value; ?>" id='cpf-register' placeholder="XXX.XXX.XXX-XX" autocomplete="off"><br><br>
+    <input type="text" name="cpf" value="<?php echo $cpf_value; ?>" id='cpf' placeholder="XXX.XXX.XXX-XX" autocomplete="off"><br><br>
 
     <label>Gênero:</label>
-    <select name="gender" id="gender-register">
+    <select name="gender" id="gender">
         <?php
         if ($gender == 'masculine') {
             echo "<option>Selecione:</option>";
@@ -80,7 +80,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>Nascimento:</label>
-    <input type="date" name="date_birth" id="date_birth-register" value="<?php echo $date_birth_value; ?>" autocomplete="off"><br><br>
+    <input type="date" name="date_birth" id="date_birth" value="<?php echo $date_birth_value; ?>" autocomplete="off"><br><br>
 
     <?php
     $telephone_value = "";
@@ -89,7 +89,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>Telefone:</label>
-    <input type="text" name="telephone" value="<?php echo $telephone_value; ?>" id='telephone-register' placeholder="(XX) 9 XXXX-XXXX" autocomplete="off"><br><br>
+    <input type="text" name="telephone" value="<?php echo $telephone_value; ?>" id='telephone' placeholder="(XX) 9 XXXX-XXXX" autocomplete="off"><br><br>
 
     <?php
     $email_value = "";
@@ -98,14 +98,14 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>E-mail:</label>
-    <input type="email" name="email" value="<?php echo $email_value; ?>" id='email-register' placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
+    <input type="email" name="email" value="<?php echo $email_value; ?>" id='email' placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
 
     <label>Senha:</label>
-    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off"><br>
+    <input type="password" name="password" id="password" value="" placeholder="********" autocomplete="off"><br>
     <span id="msg-pass"></span>
 
     <br><label>Confirme:</label>
-    <input type="password" name="conf-pass" value="" id="conf-pass" placeholder="********" autocomplete="off"><br><br>
+    <input type="password" name="conf-pass" value="" id="val-password" placeholder="********" autocomplete="off"><br><br>
 
     <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL; ?>login/index">Possui ACESSO?</a>
 </form>

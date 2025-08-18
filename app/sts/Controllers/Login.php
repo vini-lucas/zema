@@ -19,6 +19,7 @@ class Login
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
             unset($this->dataForm['SendLogin']);
+            $this->dataForm['cpf'] = str_replace(['-', '.'], '', $this->dataForm['cpf']);
             $valInput = new \Sts\Models\helper\StsValInputField();
             $valInput->valInputField($this->dataForm);
             if ($valInput->getResult()) {
