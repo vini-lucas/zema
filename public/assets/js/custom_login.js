@@ -67,6 +67,38 @@ if (formRegister) {
             msg.innerHTML = "";
         }
     })
+
+    pass.addEventListener("input", function (e) {
+        let strengthPass = 0;
+        if (/^(?=(?:.*[A-Z]){2,}).*$/.test(pass.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*[a-z]){2,}).*$/.test(pass.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*\d){2,}).*$/.test(pass.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*[^a-zA-Z0-9]){2,}).*$/.test(pass.value)) {
+            strengthPass += 2;
+        }
+        var newPass = strengthPass;
+
+        if (newPass == 2) {
+            e.preventDefault();
+            document.getElementById('msg-pass').innerHTML = "<p style='color: red;'>Senha muito fraca!</p>";
+        } else if (newPass == 4) {
+            e.preventDefault();
+            document.getElementById('msg-pass').innerHTML = "<p style='color: orange;'>Senha fraca!</p>";
+        } else if (newPass == 6) {
+            e.preventDefault();
+            document.getElementById('msg-pass').innerHTML = "<p style='color: yellow;'>Senha média!</p>";
+        } else if (newPass >= 8) {
+            document.getElementById('msg-pass').innerHTML = "<p style='color: green;'>Senha boa!</p>";
+        } else if (pass.value == "") {
+            document.getElementById('msg-pass').innerHTML = "";
+        }
+    });
 }
 
 if (formLogin) {

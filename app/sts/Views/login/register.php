@@ -101,9 +101,10 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     <input type="email" name="email" value="<?php echo $email_value; ?>" id='email-register' placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
 
     <label>Senha:</label>
-    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off"><br><br>
+    <input type="password" name="password" id="pass" value="" placeholder="********" autocomplete="off"><br>
+    <span id="msg-pass"></span>
 
-    <label>Confirme:</label>
+    <br><label>Confirme:</label>
     <input type="password" name="conf-pass" value="" id="conf-pass" placeholder="********" autocomplete="off"><br><br>
 
     <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL; ?>login/index">Possui ACESSO?</a>

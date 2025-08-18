@@ -23,30 +23,37 @@ class Register
             $dataFormInput = [$this->dataForm['name'], $this->dataForm['cpf'], $this->dataForm['gender'], $this->dataForm['date_birth'], $this->dataForm['telephone'], $this->dataForm['email'], $this->dataForm['password'], $this->dataForm['conf-pass']]; // -> Valida se os campos foram preenchidos.
             $valInput->valInputField($dataFormInput);
             if ($valInput->getResult()) { // -> Se foram preenchidos, então:
-                if ($this->dataForm['gender'] != 'Selecione:') { // -> Se o usuário selecionou o gênero, então:
-                    if ($this->dataForm['password'] == $this->dataForm['conf-pass']) { // -> Verifica se a senha e o confirmar senha são iguais, se for então:
-                        $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
-                        $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
-                        $this->dataForm['access_level_id'] = 4; // -> Nível de Acesso recebe id 4 que é cliente.
-                        unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
-                        $valCpf = new \Sts\Models\StsRegister();
-                        $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
-                        if ($valCpf->getResult()) {
-                            header("Location: " . URL . "login/index");
-                            exit;
-                        } else {
-                            header("Location: " . URL . "login/index");
-                            exit;
+                $valPass = new \Sts\Models\helper\StsStrengthPassword();
+                $valPass->valStrengthPassword($this->dataForm['password']);
+                if ($valPass->getResult()) {
+                    if ($this->dataForm['gender'] != 'Selecione:') { // -> Se o usuário selecionou o gênero, então:
+                        if ($this->dataForm['password'] == $this->dataForm['conf-pass']) { // -> Verifica se a senha e o confirmar senha são iguais, se for então:
+                            $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
+                            $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
+                            $this->dataForm['access_level_id'] = 4; // -> Nível de Acesso recebe id 4 que é cliente.
+                            unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
+                            $valCpf = new \Sts\Models\StsRegister();
+                            $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
+                            if ($valCpf->getResult()) {
+                                header("Location: " . URL . "login/index");
+                                exit;
+                            } else {
+                                header("Location: " . URL . "login/index");
+                                exit;
+                            }
+                        } else { // -> Se a senha e o confirmar senha não forem iguais, então:
+                            $_SESSION['msg'] = "<p style='color: red;'>A senha deve combinar!</p>"; // -> Envia esta mensagem.
+                            $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
+                            $this->loadView(); // -> Carrega a VIEW.
                         }
-                    } else { // -> Se a senha e o confirmar senha não forem iguais, então:
-                        $_SESSION['msg'] = "<p style='color: red;'>A senha deve combinar!</p>"; // -> Envia esta mensagem.
+                    } else { // -> Se não selecionou, então:
+                        $_SESSION['msg'] = "<p style='color: red;'>Selecione o gênero!</p>"; // -> Envia esta mensagem.
                         $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                         $this->loadView(); // -> Carrega a VIEW.
                     }
-                } else { // -> Se não selecionou, então:
-                    $_SESSION['msg'] = "<p style='color: red;'>Selecione o gênero!</p>"; // -> Envia esta mensagem.
-                    $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
-                    $this->loadView(); // -> Carrega a VIEW.
+                } else {
+                    $this->data['form'] = $this->dataForm;
+                    $this->loadView();
                 }
             } else { // -> Se os dados não forem preenchidos totalmente, então:
                 $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
