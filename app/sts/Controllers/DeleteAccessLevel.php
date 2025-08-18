@@ -18,9 +18,9 @@ class DeleteAccessLevel
     {
         $level_access = filter_input(INPUT_GET, 'access-level', FILTER_DEFAULT);
         $id = filter_input(INPUT_GET, 'id', FILTER_DEFAULT);
-        $cookie_level_access = 
+        $cookie_level_access = strtolower($_SESSION['user_access_level']);
         $del_level_access = new \Sts\Models\helper\StsDelete();
-        if ($level_access == $_SESSION['access_level']) {
+        if ($level_access == $cookie_level_access) {
             $_SESSION['msg'] = "<p style='color: red;'>Seu usuário utiliza este Nível de Acesso!</p>";
             header("Location: " . URL . "list-levels-access/index");
             exit;

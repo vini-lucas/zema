@@ -57,6 +57,10 @@ class StsUpdade extends StsConn
             $this->update->execute(array_merge($this->data, $this->values));
             $this->result = true;
         } catch (PDOException $err) {
+            if (strpos($err->getMessage(), 'Integrity constraint violation: 1062')) {
+                $_SESSION['msg-helper'] = "<p style='color: red;'>Outro registro possui este nome!</p>";
+                $this->result = false;
+            }
             $this->result = false;
         }
     }

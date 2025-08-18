@@ -19,7 +19,7 @@ class Register
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> Recebe os dados do formulário.
         if (!empty($this->dataForm['SendRegister'])) { // -> Se o usuário clicar no botão para enviar então:
             unset($this->dataForm['SendRegister']); // -> Destrói a posição do botão do array.
-            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput = new \Sts\Models\helper\StsValInputField();
             $dataFormInput = [$this->dataForm['name'], $this->dataForm['cpf'], $this->dataForm['gender'], $this->dataForm['date_birth'], $this->dataForm['telephone'], $this->dataForm['email'], $this->dataForm['password'], $this->dataForm['conf-pass']]; // -> Valida se os campos foram preenchidos.
             $valInput->valInputField($dataFormInput);
             if ($valInput->getResult()) { // -> Se foram preenchidos, então:

@@ -19,7 +19,7 @@ class AddUser
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($this->dataForm['SendAddUser'])) {
             unset($this->dataForm['SendAddUser']); // -> Destrói a posição do botão do array.
-            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput = new \Sts\Models\helper\StsValInputField();
             $dataFormInput = [$this->dataForm['name'], $this->dataForm['cpf'], $this->dataForm['gender'], $this->dataForm['date_birth'], $this->dataForm['telephone'], $this->dataForm['email'], $this->dataForm['password'], $this->dataForm['conf-pass']];
             $valInput->valInputField($dataFormInput);
             if ($valInput->getResult()) {

@@ -24,9 +24,10 @@ class EditLevelAccess
             $this->data['form'] = $editLevelAccess->getResultDb();
             $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> "$this->dataForm" recebe os dados que o usuário informou no formulário.
             if (!empty($this->dataForm['SendEditLevelAccess'])) { // -> Se o usuário clicar no botão "Editar" então:
-                unset($this->dataForm['SendEditLevelAccess']); // -> Destrua a posição do botão. 
-                $valInputs = new \Sts\Models\helper\ValInputField();
-                $valInputs->valInputField($this->dataForm);
+                unset($this->dataForm['SendEditLevelAccess']); // -> Destrua a posição do botão.
+                $inputForm = [$this->dataForm['name']];
+                $valInputs = new \Sts\Models\helper\StsValInputField();
+                $valInputs->valInputField($inputForm);
                 if ($valInputs->getResult()) {
                     $this->dataForm['modified'] = date("Y-m-d H:i:s");
                     $editLevelAccess->exeUpdateLevelAccess($this->data['form'][0]['id'], $this->dataForm);
@@ -34,7 +35,7 @@ class EditLevelAccess
                         header("Location: " . URL . "list-levels-access/index");
                         exit;
                     } else {
-                        $this->data['form'] = $this->dataForm;
+                        $this->data['form'][0] = $this->dataForm;
                     }
                 }
             }

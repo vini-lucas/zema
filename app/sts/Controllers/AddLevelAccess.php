@@ -19,15 +19,23 @@ class AddLevelAccess
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($this->dataForm['SendAddLevelAccess'])) {
             unset($this->dataForm['SendAddLevelAccess']); // -> Destrói a posição do botão do array.
-            $this->dataForm['created'] = date('Y-m-d H:i:s');
-            $valCpf = new \Sts\Models\StsAddLevelAccess();
-            $valCpf->validadeLevelAccess($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
-            if ($valCpf->getResult()) {
-                header("Location: " . URL . "list-levels-access/index");
-                exit;
+            $valInput = new \Sts\Models\helper\StsValInputField();
+            $inputForm = [$this->dataForm['name']];
+            $valInput->valInputField($inputForm);
+            if ($valInput->getResult()) {
+                $this->dataForm['created'] = date('Y-m-d H:i:s');
+                $valCpf = new \Sts\Models\StsAddLevelAccess();
+                $valCpf->validadeLevelAccess($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
+                if ($valCpf->getResult()) {
+                    header("Location: " . URL . "list-levels-access/index");
+                    exit;
+                } else {
+                    header("Location: " . URL . "list-levels-access/index");
+                    exit;
+                }
             } else {
-                header("Location: " . URL . "list-levels-access/index");
-                exit;
+                $this->data['form'] = $this->dataForm;
+                $this->loadView();
             }
         } else {
             $this->data = [];

@@ -19,7 +19,7 @@ class Login
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendLogin'])) {
             unset($this->dataForm['SendLogin']);
-            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput = new \Sts\Models\helper\StsValInputField();
             $valInput->valInputField($this->dataForm);
             if ($valInput->getResult()) {
                 $verifyLogin = new \Sts\Models\StsLogin();

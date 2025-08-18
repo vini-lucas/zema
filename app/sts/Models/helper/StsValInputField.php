@@ -12,7 +12,7 @@ if (!defined('L4bar3tTA!')) {
 /**
  * Helper responsável em verificar se os campos foram preenchidos.
  */
-class ValInputField
+class StsValInputField
 {
     private bool $result; // -> Recebe o resultado da QUERY.
     private array|string $data = []; // -> Recebe os inputs que serão validados por este helper.

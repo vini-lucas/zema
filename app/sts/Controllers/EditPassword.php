@@ -21,7 +21,7 @@ class EditPassword
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendEditPass'])) {
             unset($this->dataForm['SendEditPass']);
-            $valInput = new \Sts\Models\helper\ValInputField();
+            $valInput = new \Sts\Models\helper\StsValInputField();
             $valInput->valInputField($this->dataForm);
             if ($valInput->getResult()) {
                 if ($this->dataForm['password'] == $this->dataForm['conf-password']) {
