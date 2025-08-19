@@ -39,7 +39,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" id="cpf" value="<?php echo $cpf_value; ?>" placeholder="XXX.XXX.XXX-XX" autocomplete="off"><br><br>
+    <input type="text" name="cpf" id="cpf" value="<?php echo $cpf_value; ?>" placeholder="XXX.XXX.XXX-XX" maxlength="14" autocomplete="off"><br><br>
 
     <label>Gênero:</label>
     <select name="gender" id="gender">
@@ -89,7 +89,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>Telefone:</label>
-    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone_value; ?>" placeholder="(XX) 9 XXXX-XXXX" autocomplete="off"><br><br>
+    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone_value; ?>" placeholder="(XX) 9 XXXX-XXXX" maxlength="16" autocomplete="off"><br><br>
 
     <?php
     $email_value = "";
@@ -98,7 +98,9 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>E-mail:</label>
-    <input type="email" name="email" id="email" value="<?php echo $email_value; ?>" placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
+    <input type="text" name="email" id="email" value="<?php echo $email_value; ?>" placeholder="seu_nome@dominio.com" autocomplete="off">
+    <span id="msg-email"></span>
+    <br><br>
 
     <label>Senha:</label>
     <input type="password" name="password" id="password" value="" placeholder="********" autocomplete="off"><br>

@@ -72,7 +72,7 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>Telefone:</label>
-    <input type="text" name="telephone" id="telephone" value="<?php echo $value_tel; ?>" placeholder="(XX) 9 XXXX-XXXX" autocomplete="off"><br><br>
+    <input type="text" name="telephone" id="telephone" value="<?php echo $value_tel; ?>" placeholder="(XX) 9 XXXX-XXXX" maxlength="16" autocomplete="off"><br><br>
 
     <?php
     $value_email = "";
@@ -81,7 +81,9 @@ if (isset($this->data['form'][0])) {
     }
     ?>
     <label>E-mail:</label>
-    <input type="email" name="email" id="email" value="<?php echo $value_email; ?>" placeholder="seu_nome@dominio.com" autocomplete="off"><br><br>
+    <input type="text" name="email" id="email" value="<?php echo $value_email; ?>" placeholder="seu_nome@dominio.com" autocomplete="off">
+    <span id="msg-email"></span>
+    <br><br>
 
     <input type="submit" name="SendEditUser" value="Editar"> <a href="<?php echo URL . "edit-password/index/{$this->data['form'][0]['id']}"; ?>">Editar Senha</a>
 </form>

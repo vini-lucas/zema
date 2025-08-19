@@ -26,5 +26,7 @@ abstract class Config
         define('DB_PASS', 'L4bar3tTA!'); // -> Usuário para executar apenas comandos do CRUD.
         define('DB_USER', 'zema'); // -> Usuário para executar apenas comandos do CRUD.
         define('DB_PORT', 3306);
+
+        define('ACCESS_NEW_USER', 4); // -> Nível de acesso que um novo usuário começa.
     }
 }

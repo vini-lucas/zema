@@ -8,6 +8,8 @@ const formEditUser = document.getElementById('form-edit-user');
 // -----------------------------------------------------------------------------------------------------------
 // Variáveis:-------------------------------------------------------------------------------------------------
 const msg = document.getElementById("msg");
+const msgPass = document.getElementById("msg-pass");
+const msgEmail = document.getElementById("msg-email");
 
 const password = document.getElementById("password");
 const val_password = document.getElementById("val-password");
@@ -17,6 +19,96 @@ const date_birth = document.getElementById("date_birth");
 const gender = document.getElementById("gender");
 const telephone = document.getElementById("telephone");
 const email = document.getElementById("email");
+// -----------------------------------------------------------------------------------------------------------
+// Máscara do CPF:
+if (cpf) {
+    cpf.addEventListener('input', function () {
+        let cpfValue = cpf.value.replace(/\D/g, "");
+        cpfValue = cpfValue.slice(0, 11);
+
+        cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2");
+        cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2");
+        cpfValue = cpfValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        cpf.value = cpfValue;
+    });
+}
+// -----------------------------------------------------------------------------------------------------------
+// Máscara do telefone:
+if (telephone) {
+    telephone.addEventListener('input', function () {
+        let numbersTelephone = telephone.value.replace(/\D/g, "").slice(0, 11);
+        let telephoneFormatted = "";
+
+        if (numbersTelephone.length > 0) {
+            telephoneFormatted += "(" + numbersTelephone.slice(0, 2) + ") ";
+        }
+        if (numbersTelephone.length > 2) {
+            telephoneFormatted += numbersTelephone.slice(2, 3) + " ";
+        }
+        if (numbersTelephone.length > 3) {
+            telephoneFormatted += numbersTelephone.slice(3, 7);
+        }
+        if (numbersTelephone.length > 7) {
+            telephoneFormatted += "-" + numbersTelephone.slice(7, 11);
+        }
+
+        telephone.value = telephoneFormatted;
+    });
+}
+// -----------------------------------------------------------------------------------------------------------
+// Máscara do e-mail:
+if (email) {
+    email.addEventListener('input', function () {
+        const valor = email.value;
+
+        if (valor === "") {
+            msgEmail.innerHTML = "";
+        } else if (!/@/.test(valor)) {
+            msgEmail.innerHTML = "<p style='color: red'>Informe o '@'!</p>";
+        } else if (!/\.[a-z]{2,}$/i.test(valor)) {
+            msgEmail.innerHTML = "<p style='color: red'>Informe o domínio!</p>";
+        } else {
+            msgEmail.innerHTML = "";
+        }
+    });
+}
+
+// -----------------------------------------------------------------------------------------------------------
+// Calcula força da senha ------------------------------------------------------------------------------------
+if (val_password) {
+    password.addEventListener("input", function (e) {
+        let strengthPass = 0;
+        if (/^(?=(?:.*[A-Z]){2,}).*$/.test(password.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*[a-z]){2,}).*$/.test(password.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*\d){2,}).*$/.test(password.value)) {
+            strengthPass += 2;
+        }
+        if (/^(?=(?:.*[^a-zA-Z0-9]){2,}).*$/.test(password.value)) {
+            strengthPass += 2;
+        }
+        var newPass = strengthPass;
+
+        if (newPass == 2) {
+            e.preventDefault();
+            msgPass.innerHTML = "<p style='color: red;'>Senha muito fraca!</p>";
+        } else if (newPass == 4) {
+            e.preventDefault();
+            msgPass.innerHTML = "<p style='color: orange;'>Senha fraca!</p>";
+        } else if (newPass == 6) {
+            e.preventDefault();
+            msgPass.innerHTML = "<p style='color: yellow;'>Senha média!</p>";
+        } else if (newPass >= 8) {
+            msgPass.innerHTML = "<p style='color: green;'>Senha boa!</p>";
+        } else if (password.value == "") {
+            msgPass.innerHTML = "";
+        }
+    });
+}
 // -----------------------------------------------------------------------------------------------------------
 // Valida se preencheu os dados do formulário para editar senha e se os dois campos combinam.-----------------
 if (formEditPass) {
@@ -70,55 +162,9 @@ if (formRegister) {
             msg.innerHTML = "";
         }
     })
-
-    password.addEventListener("input", function (e) {
-        let strengthPass = 0;
-        if (/^(?=(?:.*[A-Z]){2,}).*$/.test(password.value)) {
-            strengthPass += 2;
-        }
-        if (/^(?=(?:.*[a-z]){2,}).*$/.test(password.value)) {
-            strengthPass += 2;
-        }
-        if (/^(?=(?:.*\d){2,}).*$/.test(password.value)) {
-            strengthPass += 2;
-        }
-        if (/^(?=(?:.*[^a-zA-Z0-9]){2,}).*$/.test(password.value)) {
-            strengthPass += 2;
-        }
-        var newPass = strengthPass;
-
-        if (newPass == 2) {
-            e.preventDefault();
-            document.getElementById('msg-pass').innerHTML = "<p style='color: red;'>Senha muito fraca!</p>";
-        } else if (newPass == 4) {
-            e.preventDefault();
-            document.getElementById('msg-pass').innerHTML = "<p style='color: orange;'>Senha fraca!</p>";
-        } else if (newPass == 6) {
-            e.preventDefault();
-            document.getElementById('msg-pass').innerHTML = "<p style='color: yellow;'>Senha média!</p>";
-        } else if (newPass >= 8) {
-            document.getElementById('msg-pass').innerHTML = "<p style='color: green;'>Senha boa!</p>";
-        } else if (password.value == "") {
-            document.getElementById('msg-pass').innerHTML = "";
-        }
-    });
-
-    cpf.addEventListener('input', function (e) {
-        cpf.value = cpf.value.slice(0, 14);
-        cpf.value = cpf.value.replace(/[^0-9.-]/g, "");
-        if (cpf.value.length == 3) {
-            cpf.value += ".";
-        }
-        if (cpf.value.length == 7) {
-            cpf.value += ".";
-        }
-        if (cpf.value.length == 11) {
-            cpf.value += "-";
-        }
-    })
 }
 // -----------------------------------------------------------------------------------------------------------
-// Valida se preencheu todos os campos do formulário login e aplica a máscara do CPF.
+// Valida se preencheu todos os campos do formulário login.
 if (formLogin) {
     formLogin.addEventListener('submit', function (e) {
         if (cpf.value == "") {
@@ -130,33 +176,6 @@ if (formLogin) {
         } else {
             msg.innerHTML = "";
         }
-    })
-
-    cpf.addEventListener('input', function () {
-        cpf.value = cpf.value.slice(0, 14);
-        cpf.value = cpf.value.replace(/[^0-9.-]/g, "");
-        let cpfArray = cpf.value.split("");
-        if (cpfArray.length > 11) {
-            cpfArray[2] += ".";
-            cpfArray[5] += ".";
-            cpfArray[8] += "-";
-        } else if (cpfArray.length > 9) {
-            cpfArray[2] += ".";
-            cpfArray[5] += ".";
-        } else if (cpfArray.length > 6) {
-            cpfArray[2] += ".";
-        }
-        console.log(cpfArray);
-        /*if (cpf.value.length == 3) {
-            cpf.value += ".";
-        }
-        if (cpf.value.length == 7) {
-            cpf.value += ".";
-        }
-        if (cpf.value.length == 11) {
-            cpf.value += "-";
-        }*/
-
     })
 }
 // -----------------------------------------------------------------------------------------------------------

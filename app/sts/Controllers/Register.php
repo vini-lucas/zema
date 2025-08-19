@@ -2,8 +2,6 @@
 
 namespace Sts\Controllers;
 
-use DateTime;
-
 /**
  * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
  */
@@ -21,24 +19,24 @@ class Register
         $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT); // -> Recebe os dados do formulário.
         if (!empty($this->dataForm['SendRegister'])) { // -> Se o usuário clicar no botão para enviar então:
             unset($this->dataForm['SendRegister']); // -> Destrói a posição do botão do array.
-            $this->dataForm['cpf'] = str_replace(['-', '.'], '', $this->dataForm['cpf']);
             $valInput = new \Sts\Models\helper\StsValInputField();
             $dataFormInput = [$this->dataForm['name'], $this->dataForm['cpf'], $this->dataForm['gender'], $this->dataForm['date_birth'], $this->dataForm['telephone'], $this->dataForm['email'], $this->dataForm['password'], $this->dataForm['conf-pass']]; // -> Valida se os campos foram preenchidos.
             $valInput->valInputField($dataFormInput);
-
             if ($valInput->getResult()) { // -> Se foram preenchidos, então:
+                $clearString = new \Sts\Models\helper\StsClearString();
+                $this->dataForm['cpf'] = $clearString->exeClear($this->dataForm['cpf']); // -> Remove os caracteres especiais do CPF.
                 $valPass = new \Sts\Models\helper\StsStrengthPassword();
-                $valPass->valStrengthPassword($this->dataForm['password']);
-                if ($valPass->getResult()) {
-                    if ($this->dataForm['gender'] != 'Selecione:') { // -> Se o usuário selecionou o gênero, então:
+                $valPass->valStrengthPassword($this->dataForm['password']); // -> Valida a força da senha.
+                if ($valPass->getResult()) { // -> Se a senha inserida for uma senha forte, então: 
+                    if ($this->dataForm['gender'] != 'Selecione:') { // -> Verifica se o usuário selecionou o gênero, então:
                         if ($this->dataForm['password'] == $this->dataForm['conf-pass']) { // -> Verifica se a senha e o confirmar senha são iguais, se for então:
-                            $now = new DateTime();
-                            $date_birth = new DateTime($this->dataForm['date_birth']);
-                            $years = $now->diff($date_birth)->y;
-                            if ($years >= 18) {
+                            $valBirth = new \Sts\Models\helper\StsValDateBirth();
+                            $valBirth->valDateBirth($this->dataForm['date_birth']);
+                            if ($valBirth->getResult()) { // -> Valida se o usuário tem mais de 18 anos, se tiver então:
+                                $this->dataForm['telephone'] = $clearString->exeClear($this->dataForm['telephone']); // -> Remove os caracteres especiais do telefone.
                                 $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
                                 $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
-                                $this->dataForm['access_level_id'] = 4; // -> Nível de Acesso recebe id 4 que é cliente.
+                                $this->dataForm['access_level_id'] = ACCESS_NEW_USER; // -> Nível de Acesso recebe id 4 que é cliente.
                                 unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
                                 $valCpf = new \Sts\Models\StsRegister();
                                 $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
@@ -50,7 +48,6 @@ class Register
                                     exit;
                                 }
                             } else {
-                                $_SESSION['msg'] = "<p style='color: red;'>Idade mínima para registrar-se é de 18 anos!</p>"; // -> Envia esta mensagem.
                                 $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                                 $this->loadView(); // -> Carrega a VIEW.  
                             }
@@ -64,9 +61,9 @@ class Register
                         $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                         $this->loadView(); // -> Carrega a VIEW.
                     }
-                } else {
-                    $this->data['form'] = $this->dataForm;
-                    $this->loadView();
+                } else { // -> Se a senha inserida for fraca, então:
+                    $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
+                    $this->loadView(); // -> Carrega a VIEW.
                 }
             } else { // -> Se os dados não forem preenchidos totalmente, então:
                 $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
