@@ -103,7 +103,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     <br><br>
 
     <label>Senha:</label>
-    <input type="password" name="password" id="password" value="" placeholder="********" autocomplete="off"><br>
+    <input type="password" name="password" id="password" value="" placeholder="********" autocomplete="off"><i class="fa-solid fa-eye" id="icon-password"></i><br>
     <span id="msg-pass"></span>
 
     <br><label>Confirme:</label>

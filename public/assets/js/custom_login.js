@@ -11,6 +11,7 @@ const msg = document.getElementById("msg");
 const msgPass = document.getElementById("msg-pass");
 const msgEmail = document.getElementById("msg-email");
 
+const icon_password = document.getElementById("icon-password");
 const password = document.getElementById("password");
 const val_password = document.getElementById("val-password");
 const name = document.getElementById("name");
@@ -19,6 +20,18 @@ const date_birth = document.getElementById("date_birth");
 const gender = document.getElementById("gender");
 const telephone = document.getElementById("telephone");
 const email = document.getElementById("email");
+// -----------------------------------------------------------------------------------------------------------
+// Visualizar senha digitada:
+if (icon_password) {
+    icon_password.addEventListener('mouseover', function () {
+            password.type = "text";
+            icon_password.className = "fa-solid fa-eye-slash";
+    });
+    icon_password.addEventListener('mouseout', function () {
+            password.type = "password";
+            icon_password.className = "fa-solid fa-eye";
+    });
+}
 // -----------------------------------------------------------------------------------------------------------
 // Máscara do CPF:
 if (cpf) {

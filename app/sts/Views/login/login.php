@@ -32,7 +32,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf' value="<?php echo $cpf; ?>" maxlength="14" autocomplete="off">
 
     <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" id='password' value="" autocomplete="off"><br><br>
+    <input type="password" name="password" placeholder="**************" id='password' value="" autocomplete="off"><i class="fa-solid fa-eye" id="icon-password"></i><br><br>
 
     <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
 </form>

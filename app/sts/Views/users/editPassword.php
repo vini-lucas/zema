@@ -24,7 +24,7 @@ if (isset($this->data['form'])) {
 <form method="POST" action="" autocomplete="off" id="form-edit-pass">
 
     <label>Informe a nova SENHA:</label>
-    <input type="password" name="password" id="password" placeholder="********"><br><br>
+    <input type="password" name="password" id="password" placeholder="********"><i class="fa-solid fa-eye" id="icon-password"></i><br><br>
 
     <label>Confirme-a</label>
     <input type="password" name="conf-password" id="val-password" placeholder="********"><br><br>
