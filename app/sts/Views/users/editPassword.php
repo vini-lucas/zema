@@ -27,7 +27,7 @@ if (isset($this->data['form'])) {
     <input type="password" name="password" id="password" placeholder="********"><i class="fa-solid fa-eye" id="icon-password"></i><br><br>
 
     <label>Confirme-a</label>
-    <input type="password" name="conf-password" id="val-password" placeholder="********"><br><br>
+    <input type="password" name="conf-password" id="val-password" placeholder="********"><i class="fa-solid fa-eye" id="icon-val-password"></i><br><br>
 
     <input type="submit" name="SendEditPass" value="Editar"> - <a href="<?php echo URL . "edit-user/index/" . $id?>">Voltar</a>
 </form>

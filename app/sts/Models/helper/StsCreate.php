@@ -62,6 +62,7 @@ class StsCreate extends StsConn
             $this->result = true;
         } catch (PDOException $err) {
             $this->result = false;
+            echo $err->getMessage();
         }
     }
 }

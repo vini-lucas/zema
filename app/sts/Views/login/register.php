@@ -107,7 +107,7 @@ if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
     <span id="msg-pass"></span>
 
     <br><label>Confirme:</label>
-    <input type="password" name="conf-pass" value="" id="val-password" placeholder="********" autocomplete="off"><br><br>
+    <input type="password" name="conf-pass" value="" id="val-password" placeholder="********" autocomplete="off"><i class="fa-solid fa-eye" id="icon-val-password"></i><br><br>
 
     <input type="submit" name="SendRegister" value="Cadastrar"> - <a href="<?php echo URL; ?>login/index">Possui ACESSO?</a>
 </form>

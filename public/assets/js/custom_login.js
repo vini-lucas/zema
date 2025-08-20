@@ -12,6 +12,7 @@ const msgPass = document.getElementById("msg-pass");
 const msgEmail = document.getElementById("msg-email");
 
 const icon_password = document.getElementById("icon-password");
+const icon_val_password = document.getElementById("icon-val-password");
 const password = document.getElementById("password");
 const val_password = document.getElementById("val-password");
 const name = document.getElementById("name");
@@ -30,6 +31,17 @@ if (icon_password) {
     icon_password.addEventListener('mouseout', function () {
             password.type = "password";
             icon_password.className = "fa-solid fa-eye";
+    });
+}
+
+if (icon_val_password) {
+    icon_val_password.addEventListener('mouseover', function () {
+            val_password.type = "text";
+            icon_val_password.className = "fa-solid fa-eye-slash";
+    });
+    icon_val_password.addEventListener('mouseout', function () {
+            val_password.type = "password";
+            icon_val_password.className = "fa-solid fa-eye";
     });
 }
 // -----------------------------------------------------------------------------------------------------------

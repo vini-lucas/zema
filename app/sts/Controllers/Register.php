@@ -44,8 +44,8 @@ class Register
                                     header("Location: " . URL . "login/index");
                                     exit;
                                 } else {
-                                    header("Location: " . URL . "login/index");
-                                    exit;
+                                    //header("Location: " . URL . "login/index");
+                                    //exit;
                                 }
                             } else {
                                 $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
