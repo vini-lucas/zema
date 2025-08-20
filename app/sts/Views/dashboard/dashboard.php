@@ -11,7 +11,7 @@ if (isset($this->data)) {
     extract($this->data);
 }
 
-if ((isset($_SESSION['msg'])) and (isset($_SESSION['msg-helper']))) {
+if ((isset($_SESSION['msg-helper']))) {
     echo $_SESSION['msg-helper'];
     unset($_SESSION['msg-helper']);
 } else if (isset($_SESSION['msg'])) {

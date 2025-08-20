@@ -33,7 +33,8 @@ class EditUser
                     header("Location: " . URL . "list-users/index");
                     exit;
                 } else {
-                    $this->data['form'] = $this->dataForm;
+                    header("Location: " . URL . "list-users/index");
+                    exit;
                 }
             }
         } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:

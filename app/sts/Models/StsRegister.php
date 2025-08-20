@@ -27,7 +27,7 @@ class StsRegister
         $this->dataForm = $dataForm;
         $valCpf = new \Sts\Models\helper\StsRead();
         $valCpf->fullRead("SELECT cpf FROM sts_users WHERE cpf=:cpf", "cpf={$this->dataForm['cpf']}");
-        if ($valCpf->getResultDb() == null){
+        if ($valCpf->getResultDb() == null) {
             $this->createUser();
         } else {
             $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro, realize o login!</p>";
@@ -39,12 +39,16 @@ class StsRegister
     {
         $createUser = new \Sts\Models\helper\StsCreate();
         $createUser->exeCreate("sts_users", $this->dataForm);
-        if ($createUser->getResult()){
+        if ($createUser->getResult()) {
             $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não cadastrado com sucesso!</p>";
-            $this->result = false;
+            if (isset($_SESSION['msg-helper'])) {
+                $this->result = false;
+            } else {
+                $_SESSION['msg'] = "<p style='color: red;'>Usuário não cadastrado com sucesso!</p>";;
+                $this->result = false;
+            }
         }
     }
 }

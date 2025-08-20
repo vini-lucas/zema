@@ -49,7 +49,12 @@ class StsEditLevelAccess
             $_SESSION['msg'] = "<p style='color: green;'>Nível de Acesso editado com sucesso!</p>";
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso não editado com sucesso!</p>";
+            if (isset($_SESSION['msg-helper'])) {
+                $this->result = false;
+            } else {
+                $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso não editado com sucesso!</p>";
+                $this->result = false;
+            }
             $this->result = false;
         }
     }

@@ -16,7 +16,6 @@ class StsClearString
 {
     private string $data = ""; // -> Recebe os inputs que serão validados por este helper.
 
-
     public function exeClear(array|string $data): string
     {
         $this->data = $data;

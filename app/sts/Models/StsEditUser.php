@@ -49,8 +49,12 @@ class StsEditUser
             $_SESSION['msg'] = "<p style='color: green;'>Usuário editado com sucesso!</p>";
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não editado com sucesso!</p>";
-            $this->result = false;
+            if (isset($_SESSION['msg-helper'])) {
+                $this->result = false;
+            } else {
+                $_SESSION['msg'] = "<p style='color: red;'>Usuário não editado com sucesso!</p>";
+                $this->result = false;
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ class Register
             if ($valInput->getResult()) { // -> Se foram preenchidos, então:
                 $clearString = new \Sts\Models\helper\StsClearString();
                 $this->dataForm['cpf'] = $clearString->exeClear($this->dataForm['cpf']); // -> Remove os caracteres especiais do CPF.
+                $this->dataForm['telephone'] = $clearString->exeClear($this->dataForm['telephone']); // -> Remove os caracteres especiais do telefone.
                 $valPass = new \Sts\Models\helper\StsStrengthPassword();
                 $valPass->valStrengthPassword($this->dataForm['password']); // -> Valida a força da senha.
                 if ($valPass->getResult()) { // -> Se a senha inserida for uma senha forte, então: 
@@ -33,19 +34,25 @@ class Register
                             $valBirth = new \Sts\Models\helper\StsValDateBirth();
                             $valBirth->valDateBirth($this->dataForm['date_birth']);
                             if ($valBirth->getResult()) { // -> Valida se o usuário tem mais de 18 anos, se tiver então:
-                                $this->dataForm['telephone'] = $clearString->exeClear($this->dataForm['telephone']); // -> Remove os caracteres especiais do telefone.
-                                $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
-                                $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
-                                $this->dataForm['access_level_id'] = ACCESS_NEW_USER; // -> Nível de Acesso recebe id 4 que é cliente.
-                                unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
-                                $valCpf = new \Sts\Models\StsRegister();
-                                $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
-                                if ($valCpf->getResult()) {
-                                    header("Location: " . URL . "login/index");
-                                    exit;
+                                $valEmail = new \Sts\Models\helper\StsValEmail();
+                                $valEmail->valEmail($this->dataForm['email']);
+                                if ($valEmail->getResult()) {
+                                    $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
+                                    $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
+                                    $this->dataForm['access_level_id'] = ACCESS_NEW_USER; // -> Nível de Acesso recebe id 4 que é cliente.
+                                    unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
+                                    $valCpf = new \Sts\Models\StsRegister();
+                                    $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
+                                    if ($valCpf->getResult()) {
+                                        header("Location: " . URL . "login/index");
+                                        exit;
+                                    } else {
+                                        header("Location: " . URL . "login/index");
+                                        exit;
+                                    }
                                 } else {
-                                    //header("Location: " . URL . "login/index");
-                                    //exit;
+                                    $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
+                                    $this->loadView(); // -> Carrega a VIEW.
                                 }
                             } else {
                                 $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
