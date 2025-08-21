@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 12/08/2025 às 03:28
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 21/08/2025 às 13:43
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,10 +30,11 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `sts_access_levels`;
 CREATE TABLE IF NOT EXISTS `sts_access_levels` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -43,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `sts_access_levels` (
 INSERT INTO `sts_access_levels` (`id`, `name`, `created`, `modified`) VALUES
 (1, 'Super Administrador', '2025-08-13 00:02:19', NULL),
 (2, 'Administrador', '2025-08-12 03:02:52', NULL),
-(3, 'Vendedor', '2025-08-12 03:02:52', NULL),
-(4, 'Cliente', '2025-08-12 03:03:07', NULL);
+(3, 'Vendedor', '2025-08-12 03:02:52', '2025-08-15 20:16:45'),
+(4, 'Cliente', '2025-08-15 17:08:45', '2025-08-15 17:11:13');
 
 -- --------------------------------------------------------
 
@@ -59,24 +60,28 @@ CREATE TABLE IF NOT EXISTS `sts_users` (
   `cpf` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_birth` date NOT NULL,
   `telephone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `recover_password` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `recover_password` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `access_level_id` int NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `cpf` (`cpf`),
+  UNIQUE KEY `telephone` (`telephone`),
+  UNIQUE KEY `email` (`email`),
   KEY `access_level_id` (`access_level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_users`
 --
 
 INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`, `password`, `recover_password`, `gender`, `image`, `access_level_id`, `created`, `modified`) VALUES
-(1, 'Lucas', '12428432990', '2006-02-06', '4399859499', 'lucas@gmail.com', '$2y$10$pz42Qm3xFSf95qZOGx7giOGtpjPRQs7lS9Mr0F2Roqg.7eMgviSrq', NULL, 'masculine', NULL, 1, '2025-08-12 00:14:09', NULL);
+(1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', NULL, 'masculine', NULL, 1, '2025-08-14 18:01:19', '2025-08-20 16:54:55'),
+(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', NULL, 'masculine', NULL, 4, '2025-08-15 17:15:33', '2025-08-16 11:49:56');
 
 --
 -- Restrições para tabelas despejadas

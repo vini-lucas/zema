@@ -52,6 +52,10 @@ if (isset($this->data['form'][0])) {
             echo '<option selected value="no_info">Não Informar</option>';
             echo '<option value="masculine">Masculino</option>';
             echo '<option value="feminine">Feminino</option>';
+        } else {
+            echo '<option value="masculine">Masculino</option>';
+            echo '<option value="feminine">Feminino</option>';
+            echo '<option value="no_info">Não Informar</option>';
         }
         ?>
     </select><br><br>
