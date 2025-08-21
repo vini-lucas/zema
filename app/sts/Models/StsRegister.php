@@ -40,6 +40,7 @@ class StsRegister
         $createUser = new \Sts\Models\helper\StsCreate();
         $createUser->exeCreate("sts_users", $this->dataForm);
         if ($createUser->getResult()) {
+            $this->sendEmail();
             $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
             $this->result = true;
         } else {
@@ -50,5 +51,11 @@ class StsRegister
                 $this->result = false;
             }
         }
+    }
+
+    private function sendEmail()
+    {
+        $sendEmail = new \Sts\Models\helper\StsSendEmail();
+        $sendEmail->sendEmail();
     }
 }
