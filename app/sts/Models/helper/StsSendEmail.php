@@ -6,9 +6,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require 'path/to/PHPMailer/src/Exception.php';
+/*require 'path/to/PHPMailer/src/Exception.php';
 require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
+require 'path/to/PHPMailer/src/SMTP.php';*/
 
 /**
  * Caso o usuário tente acessar a página sem ser pelo arquivo index, acessa este if.
@@ -23,9 +23,10 @@ if (!defined('L4bar3tTA!')) {
 class StsSendEmail
 {
     private bool $result; // -> Recebe o resultado do "getResult()".
-    private array $data; // Recebe as informações do conteúdo do e-mail.
+    private array $data = []; // Recebe as informações do conteúdo do e-mail.
     private array $dataInfoEmail; // -> Recebe as credencias do e-mail.
     private string $fromEmail; // -> Recebe o e-mail do remetente.
+    private array $resultDb; // -> Recebe o resultado da QUERY.
 
     /**
      * Recebe true se enviou com sucesso ou false se não preencheu.
@@ -40,22 +41,33 @@ class StsSendEmail
      * Método responsável em enviar o e-mail.
      * @return void
      */
-    public function sendEmail(): void
+    public function sendEmail(array $dataForm): void
     {
-        $this->dataInfoEmail['host'] = "sandbox.smtp.mailtrap.io"; // -> Local do servidor.
-        $this->dataInfoEmail['fromEmail'] = "atendimento@zema.com"; // -> E-mail de quem está enviando.
-        $this->fromEmail = $this->dataInfoEmail['fromEmail'];
-        $this->dataInfoEmail['fromName'] = "Zema"; // -> Nome de quem está enviando.
-        $this->dataInfoEmail['username'] = "8ac29ca061a315"; // -> Usuário do servidor.
-        $this->dataInfoEmail['password'] = "****94c8"; // -> Senha do usuário do servidor.
-        $this->dataInfoEmail['port'] = 2525; // -> Porta do servidor.
+        $this->data['toEmail'] = $dataForm['toEmail'];
+        $this->data['toName'] = $dataForm['toName'];
+        $this->data['subject'] = $dataForm['subject'];
+        $this->data['contentHtml'] = $dataForm['contentHtml'];
+        $this->data['contentText'] = $dataForm['contentText'];
+        $this->infoPhpMailer();
+    }
 
-        $this->data['toEmail'] = "lucasvini269@gmail.com";
-        $this->data['toName'] = "Lucas";
-        $this->data['subject'] = "Confirmar E-mail";
-        $this->data['contentHtml'] = "Olá, <b>Lucas</b>!<p>Seu cadastro foi realizado com sucesso!</p>";
-        $this->data['contentText'] = "Olá, Lucas!\n\nSeu cadastro foi realizado com sucesso!</p>";
-        $this->sendEmailPhpMailer();
+    private function infoPhpMailer(): void
+    {
+        $readEmail = new \Sts\Models\helper\StsRead();
+        $readEmail->fullRead("SELECT name, email, host, username, password, smtpsecure, port FROM sts_confs_emails WHERE id=:id LIMIT :limit", "id=1&limit=1");
+        if ($readEmail->getResultDb()) {
+            $this->dataInfoEmail['host'] = $readEmail->getResultDb()[0]['host']; // -> Local do servidor.
+            $this->dataInfoEmail['fromEmail'] = $readEmail->getResultDb()[0]['email']; // -> E-mail de quem está enviando.
+            $this->fromEmail = $this->dataInfoEmail['fromEmail'];
+            $this->dataInfoEmail['fromName'] = $readEmail->getResultDb()[0]['name']; // -> Nome de quem está enviando.
+            $this->dataInfoEmail['username'] = $readEmail->getResultDb()[0]['username']; // -> Usuário do servidor.
+            $this->dataInfoEmail['password'] = $readEmail->getResultDb()[0]['password']; // -> Senha do usuário do servidor.
+            $this->dataInfoEmail['port'] = $readEmail->getResultDb()[0]['port']; // -> Porta do servidor.
+            $this->dataInfoEmail['smtpsecure'] = $readEmail->getResultDb()[0]['smtpsecure'];
+            $this->sendEmailPhpMailer();
+        } else {
+            $this->result = false;
+        }
     }
 
     /**
@@ -65,20 +77,29 @@ class StsSendEmail
     private function sendEmailPhpMailer(): void
     {
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug  = SMTP::DEBUG_SERVER;
-        $mail->isSMTP();
-        $mail->Host       = $this->dataInfoEmail['host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $this->dataInfoEmail['username'];
-        $mail->Password   = $this->dataInfoEmail['password'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = $this->dataInfoEmail['port'];
+        try {
+            //$mail->SMTPDebug  = SMTP::DEBUG_SERVER;
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host       = $this->dataInfoEmail['host'];
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $this->dataInfoEmail['username'];
+            $mail->Password   = $this->dataInfoEmail['password'];
+            $mail->SMTPSecure = $this->dataInfoEmail['smtpsecure'];
+            $mail->Port       = $this->dataInfoEmail['port'];
 
-        $mail->setFrom($this->dataInfoEmail['fromEmail'], 'Mailer');
-        $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
-        $mail->addAddress('ellen@example.com');               //Name is optional
-        $mail->addReplyTo('info@example.com', 'Information');
-        $mail->addCC('cc@example.com');
-        $mail->addBCC('bcc@example.com');
+            $mail->setFrom($this->dataInfoEmail['fromEmail'], $this->dataInfoEmail['fromName']);
+            $mail->addAddress($this->data['toEmail'], $this->data['toName']);
+
+            $mail->isHTML(true);
+            $mail->Subject = $this->data['subject'];
+            $mail->Body    = $this->data['contentHtml'];
+            $mail->AltBody = $this->data['contentText'];
+
+            $mail->send();
+            $this->result = true;
+        } catch (Exception $err) {
+            $this->result = false;
+        }
     }
 }

@@ -70,9 +70,6 @@ if ((isset($_SESSION['msg-helper']))) {
         ?>
     </select><br><br>
 
-    <input type="hidden" name="created">
-    <input type="hidden" name="access_level_id">
-
     <?php
     $date_birth_value = "";
     if (!empty($date_birth)) {

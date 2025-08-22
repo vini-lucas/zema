@@ -40,6 +40,8 @@ class Register
                                     $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
                                     $this->dataForm['created'] = date('Y-m-d H:i:s'); // -> Posição 'created' recebe a hora na qual o usuário foi criado.
                                     $this->dataForm['access_level_id'] = ACCESS_NEW_USER; // -> Nível de Acesso recebe id 4 que é cliente.
+                                    $this->dataForm['sit_user_id'] = 3; // -> Situação do Usuário recebe "Aguardando Confirmação".
+                                    $this->dataForm['conf_email'] = password_hash($this->dataForm['cpf'], PASSWORD_DEFAULT);
                                     unset($this->dataForm['conf-pass']); // -> Destrói a posição de confirmar senha.
                                     $valCpf = new \Sts\Models\StsRegister();
                                     $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
