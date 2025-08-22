@@ -19,9 +19,9 @@ if ((isset($_SESSION['msg-helper']))) {
     unset($_SESSION['msg']);
 }
 ?>
-<h2>Conecte-se!</h2>
+<h2>Reconecte-se!</h2>
 <span id="msg"></span>
-<form method="POST" action="" id="form-login" autocomplete="off">
+<form method="POST" action="" id="form-recover" autocomplete="off">
     <?php
     $cpf = "";
     if (isset($this->data['form']['cpf'])) {
@@ -29,10 +29,7 @@ if ((isset($_SESSION['msg-helper']))) {
     }
     ?>
     <label>CPF:</label>
-    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf' value="<?php echo $cpf; ?>" maxlength="14" autocomplete="off">
+    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX" id='cpf' value="<?php echo $cpf; ?>" maxlength="14" autocomplete="off"><br><br>
 
-    <label>Senha:</label>
-    <input type="password" name="password" placeholder="**************" id='password' value="" autocomplete="off"><i class="fa-solid fa-eye" id="icon-password"></i><br><br>
-
-    <input type="submit" name="SendLogin"> - <a href="<?php echo URL; ?>rec-password/index">Esqueceu?</a> - <a href="<?php echo URL; ?>register/index">Não possui ACESSO?</a>
+    <input type="submit" name="SendRecover" value="Enviar"> - <a href="<?php echo URL; ?>login/index">Lembrou?</a>
 </form>

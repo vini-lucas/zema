@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22/08/2025 às 11:02
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 22/08/2025 às 20:32
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,13 +56,13 @@ INSERT INTO `sts_access_levels` (`id`, `name`, `created`, `modified`) VALUES
 DROP TABLE IF EXISTS `sts_confs_emails`;
 CREATE TABLE IF NOT EXISTS `sts_confs_emails` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `host` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `smtpsecure` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `host` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `smtpsecure` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `port` int NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
@@ -85,7 +85,7 @@ INSERT INTO `sts_confs_emails` (`id`, `title`, `name`, `email`, `host`, `usernam
 DROP TABLE IF EXISTS `sts_sit_users`;
 CREATE TABLE IF NOT EXISTS `sts_sit_users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `sts_users` (
   `telephone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recover_password` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `conf_email` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -135,10 +136,10 @@ CREATE TABLE IF NOT EXISTS `sts_users` (
 -- Despejando dados para a tabela `sts_users`
 --
 
-INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`, `password`, `conf_email`, `gender`, `image`, `access_level_id`, `sit_user_id`, `created`, `modified`) VALUES
-(1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', NULL, 'masculine', NULL, 1, 1, '2025-08-14 18:01:19', '2025-08-22 03:25:31'),
-(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56'),
-(3, 'teste', '11111111111', '1111-11-11', '11111111111', 'teste@teste.teste', '$2y$10$L5qP90jTlYYZkcFVx5eUGuSZoP7YgIcpRBK5z7GymG8bFy.W.STQy', '$2y$10$7w4w3Sykcv4.aYzRoYLB9.F4xX2O0L8HUE3cyY.vXfxyfMeWH6.oK', 'masculine', NULL, 4, 3, '2025-08-22 03:53:49', NULL);
+INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`, `password`, `recover_password`, `conf_email`, `gender`, `image`, `access_level_id`, `sit_user_id`, `created`, `modified`) VALUES
+(1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', '$2y$10$G2pQqvRrj9.ZaN9fUOYy9u316rASHOkQfJj.2en6oQdNrGiBrvQV.', NULL, 'masculine', NULL, 1, 1, '2025-08-14 18:01:19', '2025-08-22 03:25:31'),
+(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', '$2y$10$BQzZe2TYv.D9JRyPeVF3julDHXw.tYvMMnjUMhNRiqxEIhZdRjABO', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56'),
+(3, 'Teste', '11111111111', '2001-01-01', '11111111111', 'teste@teste.com', '$2y$10$3yNmsdy4esEJwnnZhz5Um.igM01GO7z.LLoxbfpTChCBaHqB7Fs0.', '$2y$10$JJi7bx7GA.JfIPNK15emd.JkTITp6GhIGx.hLtC/VecAbKnF/VRR2', '$2y$10$HPBY5MrUJxLddmG5M61H7Oir6Y0YyO9iXfhZ.Abt6y9Ar6SQz7U0G', 'masculine', NULL, 4, 1, '2025-08-22 19:39:32', NULL);
 
 --
 -- Restrições para tabelas despejadas

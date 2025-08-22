@@ -10,46 +10,40 @@ if (!defined('L4bar3tTA!')) {
 }
 
 /**
- * Models da controller register.
+ * Models da controller RecPassword.
  */
-class StsRegister
+class StsRecPassword
 {
     private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
     private bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
-    private string $firstName = ""; // -> Recebe o primeiro nome do usuário.
     private array $emailData = []; // -> Recebe os dados do e-mail que foi cadastrado.
+    private string $firstName = ""; // -> Recebe o primeiro nome do usuário.
+    private array|null $dataDatabase;
 
     public function getResult(): bool
     {
         return $this->result;
     }
 
-    public function validadeCpf(array $dataForm)
+    public function validateCpf(array $dataForm)
     {
         $this->dataForm = $dataForm;
         $valCpf = new \Sts\Models\helper\StsRead();
-        $valCpf->fullRead("SELECT cpf FROM sts_users WHERE cpf=:cpf", "cpf={$this->dataForm['cpf']}");
-        if ($valCpf->getResultDb() == null) {
-            $this->createUser();
-        } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro, realize o login!</p>";
-            $this->result = false;
-        }
-    }
-
-    private function createUser()
-    {
-        $createUser = new \Sts\Models\helper\StsCreate();
-        $createUser->exeCreate("sts_users", $this->dataForm);
-        if ($createUser->getResult()) {
-            $this->sendEmail();
-        } else {
-            if (isset($_SESSION['msg-helper'])) {
-                $this->result = false;
+        $valCpf->fullRead("SELECT cpf, name, email, recover_password FROM sts_users WHERE cpf=:cpf", "cpf={$this->dataForm['cpf']}");
+        if ($valCpf->getResultDb() == true) {
+            $upPassword = new \Sts\Models\helper\StsUpdade();
+            $data['recover_password'] = password_hash("1234", PASSWORD_DEFAULT);
+            $upPassword->exeUpdate("sts_users", $data, "WHERE cpf=:cpf", "cpf={$valCpf->getResultDb()[0]['cpf']}");
+            if ($upPassword->getResult()) {
+                $this->dataDatabase = $valCpf->getResultDb();
+                $this->sendEmail();
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário não cadastrado com sucesso!</p>";;
+                $_SESSION['msg'] = "<p style='color: red;'>Houve um erro ao seguir com a recuperação de senha.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
                 $this->result = false;
             }
+        } else {
+            $_SESSION['msg'] = "<p style='color: red;'>Este CPF não possui cadastro em nossa plataforma, cadastre-se!</p>";
+            $this->result = false;
         }
     }
 
@@ -61,27 +55,27 @@ class StsRegister
         $sendEmail->sendEmail($this->emailData);
 
         if ($sendEmail->getResult()) {
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso.<br>Acesse sua caixa de e-mail para confirmar seu registro!</p>";
+            $_SESSION['msg'] = "<p style='color: green;'>Uma mensagem com instruções para recuperação de senha foi enviada à caixa de e-mail pertencente à este CPF!</p>";
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
+            $_SESSION['msg'] = "<p style='color: red;'>Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
             $this->result = false;
         }
     }
 
     private function contentEmailHtml()
     {
-        $name = explode(" ", $this->dataForm['name']);
+        $name = explode(" ", $this->dataDatabase[0]['name']);
         $this->firstName = $name[0];
 
-        $this->emailData['toEmail'] = $this->dataForm['email'];
-        $this->emailData['toName'] = $this->dataForm['name'];
-        $this->emailData['subject'] = "Confirmar E-mail";
+        $this->emailData['toEmail'] = $this->dataDatabase[0]['email'];
+        $this->emailData['toName'] = $this->dataDatabase[0]['name'];
+        $this->emailData['subject'] = "Recuperar Acesso";
 
         $this->emailData['contentHtml'] = "Prezado(a) Sr(a). {$this->firstName},<br><br>";
-        $this->emailData['contentHtml'] .= "Transbordamos de satisfação com a sua solicitação de cadastro em nossa plataforma!<br>";
+        $this->emailData['contentHtml'] .= "Recebemos sua solicitação para recadastro de senha em nossa plataforma!<br>";
         $this->emailData['contentHtml'] .= "A fim de prosseguirmos com seu requerimento, solicitamos a gentileza de vossa confirmação junto ao link abaixo:<br><br>";
-        $this->emailData['contentHtml'] .= '<a href="' . URL . 'conf-email/index?key=' . $this->dataForm['conf_email'] . '">Confirmar E-mail</a>';
+        $this->emailData['contentHtml'] .= '<a href="' . URL . 'new-password/index?key=' . $this->dataDatabase[0]['recover_password'] . '">Recuperar Acesso</a>';
         $this->emailData['contentHtml'] .= "<br><h3 style='color: red'>Atenção:</h3>";
         $this->emailData['contentHtml'] .= "Isto é uma mensagem automática, não responda-a!<br>";
         $this->emailData['contentHtml'] .= "Ela foi enviada à você pela empresa Zema Financeira, nenhum e-mail encaminhado pela mesma possui arquivos anexados ou solicita o preenchimento de senhas e informações cadastrais!<br><br>";
@@ -91,17 +85,17 @@ class StsRegister
 
     private function contentEmailText()
     {
-        $name = explode(" ", $this->dataForm['name']);
+        $name = explode(" ", $this->dataDatabase[0]['name']);
         $this->firstName = $name[0];
 
-        $this->emailData['toEmail'] = $this->dataForm['email'];
-        $this->emailData['toName']  = $this->dataForm['name'];
-        $this->emailData['subject'] = "Confirmar E-mail";
+        $this->emailData['toEmail'] = $this->dataDatabase[0]['email'];
+        $this->emailData['toName']  = $this->dataDatabase[0]['name'];
+        $this->emailData['subject'] = "Recuperar Acesso";
 
         $this->emailData['contentText']  = "Prezado(a) Sr(a). {$this->firstName},\n\n\n\n";
-        $this->emailData['contentText'] .= "Transbordamos de satisfação com a sua solicitação de cadastro em nossa plataforma!\n\n";
+        $this->emailData['contentText'] .= "Recebemos sua solicitação para recadastro de senha em nossa plataforma!\n\n";
         $this->emailData['contentText'] .= "A fim de prosseguirmos com seu requerimento, solicitamos a gentileza de vossa confirmação junto ao link abaixo:\n\n";
-        $this->emailData['contentText'] .= URL . 'conf-email/index?key=' . $this->dataForm['conf_email'];
+        $this->emailData['contentText'] .= URL . 'new-password/index?key=' . $this->dataDatabase[0]['recover_password'];
         $this->emailData['contentText'] .= "\n\n\n\nAtenção:\n\n";
         $this->emailData['contentText'] .= "Isto é uma mensagem automática, não responda-a!\n\n";
         $this->emailData['contentText'] .= "Ela foi enviada à você pela empresa Zema Financeira, nenhum e-mail encaminhado pela mesma possui arquivos anexados ou solicita o preenchimento de senhas e informações cadastrais!\n\n\n\n";

@@ -1,10 +1,13 @@
 // Formulários:-----------------------------------------------------------------------------------------------
 const formRegister = document.getElementById("form-register");
 const formEditPass = document.getElementById("form-edit-pass");
+const formNewPass = document.getElementById("form-new-password");
 const formLogin = document.getElementById("form-login");
 const formAddLevelAccess = document.getElementById('form-add-level-access');
 const formEditLevelAccess = document.getElementById('form-edit-level-access');
 const formEditUser = document.getElementById('form-edit-user');
+const formRecover = document.getElementById("form-recover");
+
 // -----------------------------------------------------------------------------------------------------------
 // Variáveis:-------------------------------------------------------------------------------------------------
 const msg = document.getElementById("msg");
@@ -25,23 +28,23 @@ const email = document.getElementById("email");
 // Visualizar senha digitada:
 if (icon_password) {
     icon_password.addEventListener('mouseover', function () {
-            password.type = "text";
-            icon_password.className = "fa-solid fa-eye-slash";
+        password.type = "text";
+        icon_password.className = "fa-solid fa-eye-slash";
     });
     icon_password.addEventListener('mouseout', function () {
-            password.type = "password";
-            icon_password.className = "fa-solid fa-eye";
+        password.type = "password";
+        icon_password.className = "fa-solid fa-eye";
     });
 }
 
 if (icon_val_password) {
     icon_val_password.addEventListener('mouseover', function () {
-            val_password.type = "text";
-            icon_val_password.className = "fa-solid fa-eye-slash";
+        val_password.type = "text";
+        icon_val_password.className = "fa-solid fa-eye-slash";
     });
     icon_val_password.addEventListener('mouseout', function () {
-            val_password.type = "password";
-            icon_val_password.className = "fa-solid fa-eye";
+        val_password.type = "password";
+        icon_val_password.className = "fa-solid fa-eye";
     });
 }
 // -----------------------------------------------------------------------------------------------------------
@@ -153,6 +156,24 @@ if (formEditPass) {
     })
 }
 // -----------------------------------------------------------------------------------------------------------
+// Valida se preencheu os dados do formulário para nova senha e se os dois campos combinam.-----------------
+if (formNewPass) {
+    formNewPass.addEventListener("submit", function (e) {
+        if (password.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Informe a nova SENHA!</p>";
+        } else if (val_password.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Confirme-a</p>";
+        } else if (val_password.value != password.value) {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Senha deve combinar!</p>";
+        } else {
+            msg.innerHTML = "";
+        }
+    })
+}
+// -----------------------------------------------------------------------------------------------------------
 // Valida se preencheu os campos do formulário para criar usuário, se as senhas combinam, calcula a força da senha e aplica a máscara no campo do CPF.
 if (formRegister) {
     formRegister.addEventListener("submit", function (e) {
@@ -204,6 +225,19 @@ if (formLogin) {
     })
 }
 // -----------------------------------------------------------------------------------------------------------
+// Valida se preencheu todos os campos do formulário recover password.
+if (formRecover) {
+    formRecover.addEventListener('submit', function (e) {
+        if (cpf.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Preencha o CPF!</p>";
+        } else {
+            msg.innerHTML = "";
+        }
+    })
+}
+// -----------------------------------------------------------------------------------------------------------
+
 // Valida se preencheu todos os campos do formulário para adicionar nível de acesso.
 if (formAddLevelAccess) {
     formAddLevelAccess.addEventListener('submit', function (e) {

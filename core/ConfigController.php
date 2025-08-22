@@ -137,7 +137,7 @@ class ConfigController extends Config
      */
     private function pagePublic()
     {
-        $this->listPgPublic = ["Login", "Register"];
+        $this->listPgPublic = ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword"];
 
         /**
          * Se no array do primeiro argumento existir a string do segundo argumento então acessa o if.
