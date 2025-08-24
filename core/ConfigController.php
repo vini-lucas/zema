@@ -137,7 +137,7 @@ class ConfigController extends Config
      */
     private function pagePublic()
     {
-        $this->listPgPublic = ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword"];
+        $this->listPgPublic = ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail"];
 
         /**
          * Se no array do primeiro argumento existir a string do segundo argumento então acessa o if.
@@ -151,7 +151,7 @@ class ConfigController extends Config
 
     private function pagePrivate()
     {
-        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess"];
+        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails"];
 
         if (in_array($this->urlController, $this->listPgPrivate)) {
             $this->verifyLogin();

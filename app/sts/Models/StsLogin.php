@@ -44,7 +44,7 @@ class StsLogin
     {
         if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
             if ($this->valPass[0]['sit_user_id'] == 3) {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário aguardando confirmação, <a>CLIQUE AQUI</a> para solicitar sua ativação!</p>";
+                $_SESSION['msg'] = "<p style='color: red;'>Usuário aguardando confirmação, <a href='" . URL . "new-email/index'>CLIQUE AQUI</a> para solicitar sua ativação!</p>";
                 $this->result = false;
             } else if ($this->valPass[0]['sit_user_id'] == 2) {
                 $_SESSION['msg'] = "<p style='color: red;'>Usuário inativo!</p>";

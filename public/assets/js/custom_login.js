@@ -7,6 +7,7 @@ const formAddLevelAccess = document.getElementById('form-add-level-access');
 const formEditLevelAccess = document.getElementById('form-edit-level-access');
 const formEditUser = document.getElementById('form-edit-user');
 const formRecover = document.getElementById("form-recover");
+const formConfEmail = document.getElementById("form-conf-email");
 
 // -----------------------------------------------------------------------------------------------------------
 // Variáveis:-------------------------------------------------------------------------------------------------
@@ -104,7 +105,7 @@ if (email) {
 
 // -----------------------------------------------------------------------------------------------------------
 // Calcula força da senha ------------------------------------------------------------------------------------
-if (val_password) {
+if (password) {
     password.addEventListener("input", function (e) {
         let strengthPass = 0;
         if (/^(?=(?:.*[A-Z]){2,}).*$/.test(password.value)) {
@@ -237,7 +238,18 @@ if (formRecover) {
     })
 }
 // -----------------------------------------------------------------------------------------------------------
-
+// Valida se preencheu todos os campos do formulário confirmar e-mail.
+if (formConfEmail) {
+    formConfEmail.addEventListener('submit', function (e) {
+        if (cpf.value == "") {
+            e.preventDefault();
+            msg.innerHTML = "<p style='color: red;'>Preencha o CPF!</p>";
+        } else {
+            msg.innerHTML = "";
+        }
+    })
+}
+// -----------------------------------------------------------------------------------------------------------
 // Valida se preencheu todos os campos do formulário para adicionar nível de acesso.
 if (formAddLevelAccess) {
     formAddLevelAccess.addEventListener('submit', function (e) {

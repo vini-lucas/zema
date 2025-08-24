@@ -25,6 +25,7 @@ if ((isset($_SESSION['msg-helper']))) {
 
     <label>Informe a nova SENHA:</label>
     <input type="password" name="password" id="password" placeholder="********"><i class="fa-solid fa-eye" id="icon-password"></i><br><br>
+    <span id="msg-pass"></span>
 
     <label>Confirme-a</label>
     <input type="password" name="conf-password" id="val-password" placeholder="********"><i class="fa-solid fa-eye" id="icon-val-password"></i><br><br>
