@@ -20,21 +20,15 @@ if ((isset($_SESSION['msg-helper']))) {
 }
 ?>
 
-<h2>E-mails</h2>
+<h2>Cores</h2>
 
-<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a> - <a href="<?php echo URL; ?>add-email/index">Novo E-mail</a><br><br>
+<a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a> - <a href="<?php echo URL; ?>add-color/index">Nova cor</a><br><br>
 <table>
     <thead>
         <tr>
             <th>ID</th>
-            <th>Título</th>
             <th>Nome</th>
-            <th>E-mail</th>
-            <th>Host</th>
-            <th>Usuário</th>
-            <th>Senha</th>
-            <th>SMTP Secure</th>
-            <th>Porta</th>
+            <th>Cor</th>
             <th>Data Criação</th>
             <th>Última Modificação</th>
             <th>Ações</th>
@@ -42,21 +36,15 @@ if ((isset($_SESSION['msg-helper']))) {
     </thead>
     <tbody>
         <?php
-        foreach ($this->data['form'] as $email) {
-            extract($email);
+        foreach ($this->data['form'] as $colors) {
+            extract($colors);
         ?>
             <tr>
-                <td><?php echo $id; ?></td>
-                <td><?php echo $title; ?></td>
-                <td><?php echo $name; ?></td>
-                <td><?php echo $email; ?></td>
-                <td><?php echo $host; ?></td>
-                <td><?php echo $username; ?></td>
-                <td><?php echo $password; ?></td>
-                <td><?php echo $smtpsecure; ?></td>
-                <td><?php echo $port; ?></td>
-                <td><?php echo $created; ?></td>
-                <td><?php echo $modified; ?></td>
+                <td style='background-color: <?php echo $color; ?>'><?php echo $id; ?></td>
+                <td style='background-color: <?php echo $color; ?>'><?php echo $name; ?></td>
+                <td style='background-color: <?php echo $color; ?>'><?php echo $color; ?></td>
+                <td style='background-color: <?php echo $color; ?>'><?php echo $created; ?></td>
+                <td style='background-color: <?php echo $color; ?>'><?php echo $modified; ?></td>
                 <td><a href="<?php echo URL; ?>edit-email/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-email/index/<?php echo $id; ?>" onclick=" return confirm('Deseja realmente apagar este E-mail?')">Apagar</a></td>
             </tr>
         <?php

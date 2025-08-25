@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22/08/2025 às 20:32
+-- Tempo de geração: 25/08/2025 às 20:52
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.3.6
 
@@ -50,6 +50,31 @@ INSERT INTO `sts_access_levels` (`id`, `name`, `created`, `modified`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `sts_colors`
+--
+
+DROP TABLE IF EXISTS `sts_colors`;
+CREATE TABLE IF NOT EXISTS `sts_colors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `color` (`color`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `sts_colors`
+--
+
+INSERT INTO `sts_colors` (`id`, `name`, `color`, `created`, `modified`) VALUES
+(1, 'Primária', '#4682B4', '2025-08-13 16:26:40', NULL),
+(2, 'Secundária', '#FFD700', '2025-08-12 16:26:40', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `sts_confs_emails`
 --
 
@@ -74,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `sts_confs_emails` (
 --
 
 INSERT INTO `sts_confs_emails` (`id`, `title`, `name`, `email`, `host`, `username`, `password`, `smtpsecure`, `port`, `created`, `modified`) VALUES
-(1, 'Suporte', 'Suporte Zema Financeira', 'atendimento@zema.com', 'sandbox.smtp.mailtrap.io', '8ac29ca061a315', 'd54fb9280f94c8', 'HPMailer::ENCRYPTION_STARTTLS', 2525, '2025-08-18 21:33:21', NULL);
+(1, 'Suporte', 'Suporte Zema Financeira', 'atendimento@zema.com', 'sandbox.smtp.mailtrap.io', '945d8cbd5835e7', 'dba4f56b622fa0', 'HPMailer::ENCRYPTION_STARTTLS', 2525, '2025-08-18 21:33:21', '2025-08-25 19:01:06');
 
 -- --------------------------------------------------------
 
@@ -130,16 +155,15 @@ CREATE TABLE IF NOT EXISTS `sts_users` (
   UNIQUE KEY `email` (`email`),
   KEY `access_level_id` (`access_level_id`),
   KEY `sit_user_id` (`sit_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_users`
 --
 
 INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`, `password`, `recover_password`, `conf_email`, `gender`, `image`, `access_level_id`, `sit_user_id`, `created`, `modified`) VALUES
-(1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', '$2y$10$G2pQqvRrj9.ZaN9fUOYy9u316rASHOkQfJj.2en6oQdNrGiBrvQV.', NULL, 'masculine', NULL, 1, 1, '2025-08-14 18:01:19', '2025-08-22 03:25:31'),
-(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', '$2y$10$BQzZe2TYv.D9JRyPeVF3julDHXw.tYvMMnjUMhNRiqxEIhZdRjABO', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56'),
-(3, 'Teste', '11111111111', '2001-01-01', '11111111111', 'teste@teste.com', '$2y$10$3yNmsdy4esEJwnnZhz5Um.igM01GO7z.LLoxbfpTChCBaHqB7Fs0.', '$2y$10$JJi7bx7GA.JfIPNK15emd.JkTITp6GhIGx.hLtC/VecAbKnF/VRR2', '$2y$10$HPBY5MrUJxLddmG5M61H7Oir6Y0YyO9iXfhZ.Abt6y9Ar6SQz7U0G', 'masculine', NULL, 4, 1, '2025-08-22 19:39:32', NULL);
+(1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', '$2y$10$v0hzKc43WMjFsgyei5l4leZZAXcvyMq2JkN/zunrzokzxUHkT9GaC', NULL, 'masculine', NULL, 1, 1, '2025-08-14 18:01:19', '2025-08-22 03:25:31'),
+(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', '$2y$10$BQzZe2TYv.D9JRyPeVF3julDHXw.tYvMMnjUMhNRiqxEIhZdRjABO', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56');
 
 --
 -- Restrições para tabelas despejadas
