@@ -16,7 +16,14 @@ class ListEmails
 
     public function index()
     {
-        $this->data = [];
+        $listEmails = new \Sts\Models\StsListEmails();
+        $listEmails->emailsDatabase();
+        if ($listEmails->getResult()) {
+            $this->data['form'] = $listEmails->getResultDb();
+        } else {
+            $_SESSION['msg'] = "<p style='color: red;'>Nenhum registro encontrado!<br></p>";
+            $this->data['form'] = $this->dataForm;
+        }
         $this->loadView();
     }
 
