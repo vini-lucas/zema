@@ -37,7 +37,7 @@ class StsValDateBirth
         if ($years >= 18) {
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Idade mínima para registrar-se é de 18 anos!</p>";
+            $_SESSION['msg'] = MSG_18_YEARS;
             $this->result = false;
         }
     }

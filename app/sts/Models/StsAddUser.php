@@ -30,7 +30,7 @@ class StsAddUser
         if ($valCpf->getResultDb() == null){
             $this->createUser();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro, realize o login!</p>";
+            $_SESSION['msg'] = MSG_CPF_TRUE_CAD;
             $this->result = false;
         }
     }
@@ -40,10 +40,10 @@ class StsAddUser
         $createUser = new \Sts\Models\helper\StsCreate();
         $createUser->exeCreate("sts_users", $this->dataForm);
         if ($createUser->getResult()){
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não cadastrado com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
             $this->result = false;
         }
     }

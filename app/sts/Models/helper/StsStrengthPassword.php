@@ -30,16 +30,16 @@ class StsStrengthPassword
     {
         $this->data = $data;
         if (strpos($this->data, " ")) {
-            $_SESSION['msg'] = "<p style='color: red'>Proibido utilizar espaço(s) em branco na senha!</p>";
+            $_SESSION['msg'] = MSG_SPACE_WHITE;
             $this->result = false;
         } else if (strpos($this->data, "'")) {
-            $_SESSION['msg'] = "<p style='color: red'>Proibido utilizar aspa(s) simples ou dupla(s) ('', " . '""' . ") na senha!</p>";
+            $_SESSION['msg'] = MSG_QUOT_SIMPLE;
             $this->result = false;
         } else if ((strpos($this->data, '"'))) {
-            $_SESSION['msg'] = "<p style='color: red'>Proibido utilizar aspa(s) simples ou dupla(s) ('', " . '""' . ") na senha!</p>";
+            $_SESSION['msg'] = MSG_QUOT_SIMPLE;
             $this->result = false;
         } else if (strlen($this->data) < 8) {
-            $_SESSION['msg'] = "<p style='color: red;'>Proibido utilizar menos que 8 caracteres na senha!</p>";
+            $_SESSION['msg'] = MSG_MORE_8_CARACTERER;
             $this->result = false;
         } else {
             $this->result = true;

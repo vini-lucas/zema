@@ -33,7 +33,7 @@ class StsValInputField
         $this->data = array_map('trim', $this->data);
 
         if (in_array('', $this->data)) {
-            $_SESSION['msg'] = "<p style='color: red;'>Preencha todos os campos!</p>";
+            $_SESSION['msg'] = MSG_INPUT_FIELD;
             $this->result = false;
         } else {
             $this->result = true;

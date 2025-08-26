@@ -32,7 +32,7 @@ class StsValEmail
         if (filter_var($this->data, FILTER_VALIDATE_EMAIL)) {
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>E-mail inválido!</p>";
+            $_SESSION['msg'] = MSG_EMAIL_INVALID;
             $this->result = false;
         }
     }

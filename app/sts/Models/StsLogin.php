@@ -35,7 +35,7 @@ class StsLogin
             $this->valPass = $valLogin->getResultDb();
             $this->valPassword();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";
+            $_SESSION['msg'] = MSG_USER_PASS_INV;
             $this->result = false;
         }
     }
@@ -44,10 +44,10 @@ class StsLogin
     {
         if (password_verify($this->dataForm['password'], $this->valPass[0]['password'])) {
             if ($this->valPass[0]['sit_user_id'] == 3) {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário aguardando confirmação, <a href='" . URL . "new-email/index'>CLIQUE AQUI</a> para solicitar sua ativação!</p>";
+                $_SESSION['msg'] = MSG_USER_WAIT_CONF;
                 $this->result = false;
             } else if ($this->valPass[0]['sit_user_id'] == 2) {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário inativo!</p>";
+                $_SESSION['msg'] = MSG_USER_INACTIVE;
                 $this->result = false;
             } else {
                 $_SESSION['user_id'] = $this->valPass[0]['id'];
@@ -58,7 +58,7 @@ class StsLogin
                 $this->result = true;
             }
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário e/ou senha inválido(a)!</p>";
+            $_SESSION['msg'] = MSG_USER_PASS_INV;
             $this->result = false;
         }
     }

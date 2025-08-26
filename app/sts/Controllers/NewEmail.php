@@ -27,11 +27,11 @@ class NewEmail
                 $newEmail = new \Sts\Models\StsNewEmail();
                 $newEmail->alterEmail($this->dataForm['cpf']);
                 if ($newEmail->getResult()) {
-                    $_SESSION['msg'] = "<p style='color: green'>Uma mensagem com instruções para recuperação de senha foi enviada à caixa de e-mail pertencente à este CPF!</p>";
+                    $_SESSION['msg'] = MSG_MSG_SEND_REC_PASS;
                     header("Location: " . URL . "login/index");
                     exit;
                 } else {
-                    $_SESSION['msg'] = "<p style='color: red;'>Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
+                    $_SESSION['msg'] = MSG_MSG_NOT_SEND_REC_PASS;
                     header("Location: " . URL . "login/index");
                     exit;
                 }

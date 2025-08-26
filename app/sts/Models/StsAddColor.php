@@ -12,7 +12,7 @@ if (!defined('L4bar3tTA!')) {
 /**
  * Models da controller register.
  */
-class StsAddEmail
+class StsAddColor
 {
     private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
     private bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
@@ -22,15 +22,15 @@ class StsAddEmail
         return $this->result;
     }
 
-    public function validadeEmaill(array $dataForm)
+    public function validadeColor(array $dataForm)
     {
-        $this->createEmail();
+        $this->createColor();
     }
 
-    private function createEmail()
+    private function createColor()
     {
         $createEmail = new \Sts\Models\helper\StsCreate();
-        $createEmail->exeCreate("sts_confs_emails", $this->dataForm);
+        $createEmail->exeCreate("sts_colors", $this->dataForm);
         if ($createEmail->getResult()){
             $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;

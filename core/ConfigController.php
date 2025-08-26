@@ -46,14 +46,14 @@ class ConfigController extends Config
                     $this->urlParameter = ""; // -> O parâmetro não recebe nada.
                 }
             } else { // -> Se não houver a controller e/ou o método informado, então:
-                $this->urlController = "Login"; // -> A controller recebe a página Home.
-                $this->urlMethod = "index"; // -> O método recebe o index.
-                $this->urlParameter = ""; // -> O parâmetro não recebe nada.
+                $this->urlController = CONTROLLER_NOT_CONTROLLER; // -> A controller recebe a página Home.
+                $this->urlMethod = METHOD_NOT_CONTROLLER; // -> O método recebe o index.
+                $this->urlParameter = PARAMETER_NOT_CONTROLLER; // -> O parâmetro não recebe nada.
             }
         } else { // -> Se não existir nada na URL, então:
-            $this->urlController = "Login"; // -> A controller recebe a página Home.
-            $this->urlMethod = "index"; // -> O método recebe o index.
-            $this->urlParameter = ""; // -> O parâmetro não recebe nada.
+            $this->urlController = CONTROLLER_NOT_CONTROLLER; // -> A controller recebe a página Home.
+            $this->urlMethod = METHOD_NOT_CONTROLLER; // -> O método recebe o index.
+            $this->urlParameter = PARAMETER_NOT_CONTROLLER; // -> O parâmetro não recebe nada.
         }
     }
 
@@ -125,10 +125,10 @@ class ConfigController extends Config
                 $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
                 $classPage->{$this->urlMethod}($this->urlParameter); // -> Depois, chama o método desta classe/controller junto do parâmetro.
             } else { // -> Se não existar, retorna este die:
-                die('Erro 639: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+                die(MSG_ERR_PAGE_NOT_FOUND_639);
             }
         } else { // -> Se não existar, retorna este die:
-            die('Erro 527: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+            die(MSG_ERR_PAGE_NOT_FOUND_527);
         }
     }
 
@@ -137,8 +137,7 @@ class ConfigController extends Config
      */
     private function pagePublic()
     {
-        $this->listPgPublic = ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail"];
-
+        $this->listPgPublic = PAGES_PUBLICS;
         /**
          * Se no array do primeiro argumento existir a string do segundo argumento então acessa o if.
          */
@@ -151,12 +150,12 @@ class ConfigController extends Config
 
     private function pagePrivate()
     {
-        $this->listPgPrivate = ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors"];
+        $this->listPgPrivate = PAGES_PRIVATES;
 
         if (in_array($this->urlController, $this->listPgPrivate)) {
             $this->verifyLogin();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Página não encontrada!<br></p>";
+            $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
             header("Location: " . URL . "login/index");
         }
     }
@@ -166,7 +165,7 @@ class ConfigController extends Config
         if ((isset($_SESSION['user_cpf'])) and ($_SESSION['user_id'])) {
             $classLoad = "\\Sts\Controllers\\" . $this->urlController;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Realize o login para obter acesso à página!</p>";
+            $_SESSION['msg'] = MSG_NECE_LOGIN_ACCESS_PAGE;
             header("Location: " . URL . "login/index");
         }
     }

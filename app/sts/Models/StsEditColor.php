@@ -12,7 +12,7 @@ if (!defined('L4bar3tTA!')) {
 /**
  * Models da controller login.
  */
-class StsEditEmail
+class StsEditColor
 {
     private array|null $dataForm; // -> Recebe os dados que a controller enviou.
     private bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
@@ -28,10 +28,10 @@ class StsEditEmail
         return $this->resultDb;
     }
 
-    public function searchEmail(int $id)
+    public function searchColor(int $id)
     {
         $searchUser = new \Sts\Models\helper\StsRead();
-        $searchUser->fullRead("SELECT id, title, name, email, host, username, password, port, smtpsecure, created, modified FROM sts_confs_emails WHERE id=:id", "id={$id}");
+        $searchUser->fullRead("SELECT id, name, color, created, modified FROM sts_colors WHERE id=:id", "id={$id}");
         if ($searchUser->getResultDb()) {
             $this->result = true;
             $this->resultDb = $searchUser->getResultDb();
@@ -40,11 +40,11 @@ class StsEditEmail
         }
     }
 
-    public function exeUpdateEmail(int $id, array $dataForm)
+    public function exeUpdateColor(int $id, array $dataForm)
     {
         $this->dataForm = $dataForm;
         $emailEdit = new \Sts\Models\helper\StsUpdade(); // -> Instancia o helper para editar registros no Banco de Dados.
-        $emailEdit->exeUpdate("sts_confs_emails", $this->dataForm, "WHERE id=:id", "id={$id}"); // -> Passa os parâmetros que irão construir a QUERY.
+        $emailEdit->exeUpdate("sts_colors", $this->dataForm, "WHERE id=:id", "id={$id}"); // -> Passa os parâmetros que irão construir a QUERY.
         if ($emailEdit->getResult()) {
             $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;

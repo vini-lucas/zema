@@ -62,7 +62,7 @@ class StsCreate extends StsConn
             $this->result = true;
         } catch (PDOException $err) {
             if (strpos($err->getMessage(), 'Integrity constraint violation: 1062')) {
-                $_SESSION['msg-helper'] = "<p style='color: red;'>Um ou mais registros inseridos já estão sendo utilizados por outro usuário!</p>";
+                $_SESSION['msg-helper'] = MSG_VIOLATION_1062;
                 $this->result = false;
             }
             $this->result = false;

@@ -39,7 +39,7 @@ class AddEmail
                                         exit;
                                     }
                                 } else {
-                                    $_SESSION['msg'] = "<p style='color: red;'>A senha deve combinar!</p>"; // -> Envia esta mensagem.
+                                    $_SESSION['msg'] = MSG_MATCH_PASS; // -> Envia esta mensagem.
                                     $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                                     $this->loadView(); // -> Carrega a VIEW.
                                 }

@@ -46,13 +46,13 @@ class StsEditUser
         $userEdit = new \Sts\Models\helper\StsUpdade(); // -> Instancia o helper para editar registros no Banco de Dados.
         $userEdit->exeUpdate("sts_users", $this->dataForm, "WHERE id=:id", "id={$id}"); // -> Passa os parâmetros que irão construir a QUERY.
         if ($userEdit->getResult()) {
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário editado com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;
         } else {
             if (isset($_SESSION['msg-helper'])) {
                 $this->result = false;
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário não editado com sucesso!</p>";
+                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
                 $this->result = false;
             }
         }

@@ -22,7 +22,7 @@ abstract class StsConn
         try {
             $this->connect = new PDO("mysql:port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
         } catch (PDOException $err) {
-            die('Erro 333: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+            die(MSG_ERR_PAGE_NOT_FOUND_333 . '"' . EMAILADM . '"' . '.');
         }
         return $this->connect;
     }

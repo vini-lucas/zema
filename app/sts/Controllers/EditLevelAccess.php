@@ -40,7 +40,7 @@ class EditLevelAccess
                 }
             }
         } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:
-            $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso não encontrado!</p>"; // -> Aparece esta mensagem.
+            $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND; // -> Aparece esta mensagem.
             header("Location: " . URL . "list-levels-access/index"); // -> Direciona para a página de listar usuários.
         }
         $this->loadView();

@@ -28,10 +28,10 @@ class StsEditPassword
         $upPass = new \Sts\Models\helper\StsUpdade();
         $upPass->exeUpdate("sts_users", $this->dataForm, "WHERE id=:id", "id=$id");
         if ($upPass->getResult()) {
-            $_SESSION['msg'] = "<p style='color: green;'>Senha editada com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Senha editada com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
             $this->result = false;
         }
     }

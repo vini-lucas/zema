@@ -32,7 +32,7 @@ class StsRegister
         if ($valCpf->getResultDb() == null) {
             $this->createUser();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Este CPF já possui cadastro, realize o login!</p>";
+            $_SESSION['msg'] = MSG_CPF_TRUE_CAD;
             $this->result = false;
         }
     }
@@ -47,7 +47,7 @@ class StsRegister
             if (isset($_SESSION['msg-helper'])) {
                 $this->result = false;
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Usuário não cadastrado com sucesso!</p>";;
+                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
                 $this->result = false;
             }
         }
@@ -61,10 +61,10 @@ class StsRegister
         $sendEmail->sendEmail($this->emailData);
 
         if ($sendEmail->getResult()) {
-            $_SESSION['msg'] = "<p style='color: green;'>Usuário cadastrado com sucesso.<br>Acesse sua caixa de e-mail para confirmar seu registro!</p>";
+            $_SESSION['msg'] = MSG_USER_CREATED_SUCCESS;
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
+            $_SESSION['msg'] = MSG_USER_CREATED_SUCCESS_NOT_EMAIL;
             $this->result = false;
         }
     }

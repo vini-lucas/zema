@@ -36,14 +36,14 @@ class NewPassword
                                 $upPass = new \Sts\Models\helper\StsUpdade();
                                 $upPass->exeUpdate("sts_users", $this->dataForm, "WHERE recover_password=:recover_password", "recover_password=$key");
                                 if ($upPass->getResult()) {
-                                    $_SESSION['msg'] = "<p style='color: green'>Senha editada com sucesso!</p>";
+                                    $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
                                     header("Location: " . URL . "login/index");
                                 } else {
-                                    $_SESSION['msg'] = "<p style='color: red'>Senha não editada com sucesso!</p>";
+                                    $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
                                     header("Location: " . URL . "login/index");
                                 }
                             } else {
-                                $_SESSION['msg'] = "<p>Devem combinar!</p>";
+                                $_SESSION['msg'] = MSG_MATCH_PASS;
                                 $this->loadView();
                             }
                         } else {
@@ -57,12 +57,12 @@ class NewPassword
                     $this->loadView();
                 }
             } else {
-                $_SESSION['msg'] = "<p style='color: red'>Página não encontrada!</p>";
+                $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
                 header("Location: " . URL . "login/index");
                 exit;
             }
         } else {
-            $_SESSION['msg'] = "<p style='color: red'>Página não encontrada!</p>";
+            $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
             header("Location: " . URL . "login/index");
             exit;
         }

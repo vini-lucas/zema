@@ -40,6 +40,7 @@ class AddUser
                                     $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT); // -> Criptografa a senha antes de enviá-la ao Banco de Dados.
                                     $this->dataForm['created'] = date('Y-m-d H:i:s');
                                     $this->dataForm['access_level_id'] = 4;
+                                    $this->dataForm['sit_user_id'] = 1; // -> Situação do Usuário recebe "Ativo".
                                     unset($this->dataForm['conf-pass']);
                                     $valCpf = new \Sts\Models\StsAddUser();
                                     $valCpf->validadeCpf($this->dataForm); // -> Instancia a classe para validar se já possui registro e, se não possuir, criá-lo no Banco de Dados.
@@ -51,7 +52,7 @@ class AddUser
                                         exit;
                                     }
                                 } else {
-                                    $_SESSION['msg'] = "<p style='color: red;'>A senha deve combinar!</p>"; // -> Envia esta mensagem.
+                                    $_SESSION['msg'] = MSG_MATCH_PASS; // -> Envia esta mensagem.
                                     $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                                     $this->loadView(); // -> Carrega a VIEW.
                                 }
@@ -60,7 +61,7 @@ class AddUser
                                 $this->loadView(); // -> Carrega a VIEW
                             }
                         } else {
-                            $_SESSION['msg'] = "<p style='color: red;'>Selecione o gênero!</p>"; // -> Envia esta mensagem.
+                            $_SESSION['msg'] = MSG_SEL_GENDER; // -> Envia esta mensagem.
                             $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                             $this->loadView(); // -> Carrega a VIEW.
                         }

@@ -25,17 +25,15 @@ class ConfEmail
             $upKey = new \Sts\Models\helper\StsUpdade();
             $upKey->exeUpdate("sts_users", $data, "WHERE conf_email=:conf_email", "conf_email=$email");
             if ($upKey->getResult()) {
-                $_SESSION['msg'] = "<p style='color: green;'>Usuário ativado com sucesso, realize o login com seu CPF e senha!</p>";
+                $_SESSION['msg'] = MSG_USER_ACTIVE;
                 header("Location: " . URL . "login/index");
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Link inválido, solicite um novo para seguimento! nao editou com sucesso</p>";
+                $_SESSION['msg'] = MSG_LINK_EMAIL_INV;
                 header("Location: " . URL . "login/index");
             }
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Link inválido, solicite um novo para seguimento! nao encontrou o user</p>";
-            //header("Location: " . URL . "login/index");
-            var_dump($readKey->getResultDb());
-            echo "<p style='color: red;'>Link inválido, solicite um novo para seguimento! nao encontrou o user</p>";;
+            $_SESSION['msg'] = MSG_LINK_EMAIL_INV;
+            header("Location: " . URL . "login/index");
         }
     }
 }

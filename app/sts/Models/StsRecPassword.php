@@ -41,11 +41,11 @@ class StsRecPassword
                 //var_dump($this->dataDatabase);
                 $this->sendEmail();
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Houve um erro ao seguir com a recuperação de senha.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
+                $_SESSION['msg'] = MSG_ERR_REC_PASS;
                 $this->result = false;
             }
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Este CPF não possui cadastro em nossa plataforma, cadastre-se!</p>";
+            $_SESSION['msg'] = MSG_USER_NOT_ACCOUNT;
             $this->result = false;
         }
     }
@@ -58,10 +58,10 @@ class StsRecPassword
         $sendEmail->sendEmail($this->emailData);
 
         if ($sendEmail->getResult()) {
-            $_SESSION['msg'] = "<p style='color: green;'>Uma mensagem com instruções para recuperação de senha foi enviada à caixa de e-mail pertencente à este CPF!</p>";
+            $_SESSION['msg'] = MSG_MSG_SEND_INST_REC_PASS;
             $this->result = true;
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>";
+            $_SESSION['msg'] = MSG_MSG_NOT_SEND_INST_REC_PASS;
             $this->result = false;
         }
     }

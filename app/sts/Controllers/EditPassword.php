@@ -36,7 +36,7 @@ class EditPassword
                         exit;
                     }
                 } else {
-                    $_SESSION['msg'] = "<p style='color: red'>Senha deve combinar!</p>";
+                    $_SESSION['msg'] = MSG_MATCH_PASS;
                     $this->data['form'] = $this->dataForm;
                     $this->data['form']['id'] = $this->id;
                     $this->loadView();

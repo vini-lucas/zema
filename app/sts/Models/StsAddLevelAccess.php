@@ -24,15 +24,7 @@ class StsAddLevelAccess
 
     public function validadeLevelAccess(array $dataForm)
     {
-        $this->dataForm = $dataForm;
-        $valLevelAccess = new \Sts\Models\helper\StsRead();
-        $valLevelAccess->fullRead("SELECT name FROM sts_access_levels WHERE name=:name", "name={$this->dataForm['name']}");
-        if ($valLevelAccess->getResultDb() == null){
-            $this->createLevelAccess();
-        } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso já cadastrado no sistema!</p>";
-            $this->result = false;
-        }
+        $this->createLevelAccess();
     }
 
     private function createLevelAccess()
@@ -40,13 +32,13 @@ class StsAddLevelAccess
         $createUser = new \Sts\Models\helper\StsCreate();
         $createUser->exeCreate("sts_access_levels", $this->dataForm);
         if ($createUser->getResult()){
-            $_SESSION['msg'] = "<p style='color: green;'>Nível de Acesso cadastrado com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
             $this->result = true;
         } else {
             if (isset($_SESSION['msg-helper'])) {
                 $this->result = false;
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso não cadastrado com sucesso!</p>";
+                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
                 $this->result = false;
             }
             $this->result = false;

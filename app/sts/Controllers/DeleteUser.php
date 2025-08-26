@@ -33,14 +33,14 @@ class DeleteUser
 
         if ($del_user->getResult()) {
             if ((!empty($_SESSION['user_id'])) and ($_SESSION['user_cpf'])) {
-                $_SESSION['msg'] = "<p style='color: green;'>Usuário excluído com sucesso!</p>";
+                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
                 header("Location: " . URL . "list-users/index");
             } else {
-                $_SESSION['msg'] = "<p style='color: green;'>Usuário logado excluído com sucesso!</p>";
+                $_SESSION['msg'] = MSG_USER_DELETE_CON;
                 header("Location: " . URL . "login/index");
             }
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não excluído com sucesso!</p>";
+            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
             header("Location: " . URL . "list-users/index");
         }
     }

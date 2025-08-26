@@ -61,12 +61,12 @@ class Register
                                 $this->loadView(); // -> Carrega a VIEW.  
                             }
                         } else { // -> Se a senha e o confirmar senha não forem iguais, então:
-                            $_SESSION['msg'] = "<p style='color: red;'>A senha deve combinar!</p>"; // -> Envia esta mensagem.
+                            $_SESSION['msg'] = MSG_MATCH_PASS; // -> Envia esta mensagem.
                             $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                             $this->loadView(); // -> Carrega a VIEW.
                         }
                     } else { // -> Se não selecionou, então:
-                        $_SESSION['msg'] = "<p style='color: red;'>Selecione o gênero!</p>"; // -> Envia esta mensagem.
+                        $_SESSION['msg'] = MSG_SEL_GENDER; // -> Envia esta mensagem.
                         $this->data['form'] = $this->dataForm; // -> Mantém os dados no formulário.
                         $this->loadView(); // -> Carrega a VIEW.
                     }

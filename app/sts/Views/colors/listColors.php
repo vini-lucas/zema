@@ -45,7 +45,7 @@ if ((isset($_SESSION['msg-helper']))) {
                 <td style='background-color: <?php echo $color; ?>'><?php echo $color; ?></td>
                 <td style='background-color: <?php echo $color; ?>'><?php echo $created; ?></td>
                 <td style='background-color: <?php echo $color; ?>'><?php echo $modified; ?></td>
-                <td><a href="<?php echo URL; ?>edit-email/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-email/index/<?php echo $id; ?>" onclick=" return confirm('Deseja realmente apagar este E-mail?')">Apagar</a></td>
+                <td><a href="<?php echo URL; ?>edit-color/index/<?php echo $id; ?>">Editar</a> - <a href="<?php echo URL; ?>delete-color/index/<?php echo $id; ?>" onclick=" return confirm('Deseja realmente apagar esta cor?')">Apagar</a></td>
             </tr>
         <?php
         }

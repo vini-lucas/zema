@@ -18,7 +18,7 @@ class Dashboard
         if (isset($_SESSION['user_cpf']) and (isset($_SESSION['user_name']))) {
             $this->loadView();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Realize o login para obter acesso à página!</p>";
+            $_SESSION['msg'] = MSG_PERFOM_LOGIN;
             header("Location: " . URL . "login/index");
         }
     }

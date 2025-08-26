@@ -21,17 +21,17 @@ class DeleteAccessLevel
         $cookie_level_access = strtolower($_SESSION['user_access_level']);
         $del_level_access = new \Sts\Models\helper\StsDelete();
         if ($level_access == $cookie_level_access) {
-            $_SESSION['msg'] = "<p style='color: red;'>Seu usuário utiliza este Nível de Acesso!</p>";
+            $_SESSION['msg'] = MSG_USE_ACCESS_LEVEL;
             header("Location: " . URL . "list-levels-access/index");
             exit;
         } else {
             $del_level_access->exeDelete("sts_access_levels", "id=:id", "id=$id");
             if ($del_level_access->getResult()) {
-                $_SESSION['msg'] = "<p style='color: green;'>Nível de Acesso excluído com sucesso!</p>";
+                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
                 header("Location: " . URL . "list-levels-access/index");
                 exit;
             } else {
-                $_SESSION['msg'] = "<p style='color: red;'>Nível de Acesso não excluído com sucesso!</p>";
+                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
                 header("Location: " . URL . "list-levels-access/index");
                 exit;
             }

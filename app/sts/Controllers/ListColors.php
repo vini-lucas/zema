@@ -21,7 +21,7 @@ class ListColors
         if ($listColors->getResult()) {
             $this->data['form'] = $listColors->getResultDb();
         } else {
-            $_SESSION['msg'] = "<p style='color: red;'>Nenhum registro encontrado!<br></p>";
+            $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND;
             $this->data['form'] = $this->dataForm;
         }
         $this->loadView();

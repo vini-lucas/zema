@@ -48,7 +48,7 @@ class EditUser
                             $this->data['form'][0] = $this->dataForm;
                         }
                     } else {
-                        $_SESSION['msg'] = "<p style='color: red'>Informe o gênero!</p>";
+                        $_SESSION['msg'] = MSG_SEL_GENDER;
                         $this->data['form'][0] = $this->dataForm;
                     }
                 } else {
@@ -56,7 +56,7 @@ class EditUser
                 }
             }
         } else { // -> Se não encontrar algum usuário com o ID do parâmetro informado então:
-            $_SESSION['msg'] = "<p style='color: red;'>Usuário não encontrado!</p>"; // -> Aparece esta mensagem.
+            $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND; // -> Aparece esta mensagem.
             header("Location: " . URL . "list-users/index"); // -> Direciona para a página de listar usuários.
         }
         $this->loadView();

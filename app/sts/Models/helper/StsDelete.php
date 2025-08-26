@@ -55,7 +55,7 @@ class StsDelete extends StsConn
             $this->result = true;
         } catch (PDOException $err) {
             if (strpos($err->getMessage(), 'Integrity constraint violation: 1217')) {
-                $_SESSION['msg-helper'] = "<p style='color: red;'>Registro sendo utilizado por outro usuário!</p>";
+                $_SESSION['msg-helper'] = MSG_VIOLATION_1217;
                 $this->result = false;
             }
             $this->result = false;

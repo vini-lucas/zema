@@ -28,7 +28,7 @@ class ConfigView
             require $this->nameView . '.php';
             require 'app/sts/Views/include/footer.php';
         } else {
-            die('Erro 404: Página não encontrada! Caso o erro persista, acione o suporte pelo e-mail: ' . '"' . EMAILADM . '"' . '.');
+            die(MSG_ERR_PAGE_NOT_FOUND_404);
         }
     }
 }
