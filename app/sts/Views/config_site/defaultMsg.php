@@ -19,10 +19,5 @@ if ((isset($_SESSION['msg-helper']))) {
     unset($_SESSION['msg']);
 }
 ?>
-<h2>Informações do Banco de Dados</h2>
-
-<form>
-    <label></label>
-</form>
-
+<h2>Mensagens Padrão</h2>
 <a href="<?php echo URL; ?>config-site/index">Voltar</a>

@@ -9,20 +9,20 @@ if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
 
-class InfoDatabase
+class DefaultMsg
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
     private array|null $dataForm; // -> Recebe os dados que o usuário informou no formulário.
 
     public function index()
     {
-      $this->data = [];
-      $this->loadView();  
+        $this->data = [];
+        $this->loadView();
     }
 
     public function loadView()
     {
         $loadView = new \Core\ConfigView();
-        $loadView->loadView("app/sts/Views/config_site/infoDatabase", $this->data);
+        $loadView->loadView("app/sts/Views/config_site/defaultMsg", $this->data);
     }
 }
