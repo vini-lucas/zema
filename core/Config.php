@@ -21,14 +21,9 @@ abstract class Config
         define('PAGES_PUBLICS', ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail", "PageErr"]);
 //------------------------------------------------------------------------------------------------------------
 //Páginas Privadas: -----------------------------------------------------------------------------------------
-        define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor"]);
+        define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "InfoDatabase"]);
 //------------------------------------------------------------------------------------------------------------
 // Informações do BD: ----------------------------------------------------------------------------------------
-        define('URL', 'http://localhost/zema/');
-        define('URLADM', 'http://localhost/zema/adm');
-
-        define('EMAILADM', 'lucasvini269@gmail.com');
-
         define('DB_NAME', 'zema');
         define('DB_PASS', 'L4bar3tTA!'); // -> Usuário para executar apenas comandos do CRUD.
         define('DB_USER', 'zema'); // -> Usuário para executar apenas comandos do CRUD.
@@ -38,6 +33,8 @@ abstract class Config
         define('CONTROLLER_NOT_CONTROLLER', 'PageErr'); // -> O que a Controller recebe se não haver controller informada na URL.
         define('METHOD_NOT_CONTROLLER', 'index'); // -> O que o Método recebe se não haver controller informada na URL.
         define('PARAMETER_NOT_CONTROLLER', ''); // -> O que o Parâmetro recebe se não haver controller informada na URL.
+        define('URL', 'http://localhost/zema/');
+        define('EMAILADM', 'lucasvini269@gmail.com');
 // Mensagens: ------------------------------------------------------------------------------------------------
         define('MSG_MATCH_PASS', "<p style='color: red;'>A senha deve combinar!</p>");
         define('MSG_SEL_GENDER', "<p style='color: red;'>Selecione o gênero!</p>");  

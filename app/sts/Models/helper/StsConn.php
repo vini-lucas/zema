@@ -20,7 +20,7 @@ abstract class StsConn
     protected function conection(): object
     {
         try {
-            $this->connect = new PDO("mysql:port=" . DB_PORT . ";dbname=" . "celke", DB_USER, DB_PASS);
+            $this->connect = new PDO("mysql:port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
         } catch (PDOException $err) {
             $_SESSION['msg-helper'] = MSG_ERR_PAGE_NOT_FOUND_333;
             header("Location: " . URL . "page-err/index");
