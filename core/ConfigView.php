@@ -28,7 +28,9 @@ class ConfigView
             require $this->nameView . '.php';
             require 'app/sts/Views/include/footer.php';
         } else {
-            die(MSG_ERR_PAGE_NOT_FOUND_404);
+            $_SESSION['msg-helper'] = MSG_ERR_PAGE_NOT_FOUND_404;
+            header("Location: " . URL . "page-err/index");
+            die();
         }
     }
 }

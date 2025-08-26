@@ -57,13 +57,11 @@ class NewPassword
                     $this->loadView();
                 }
             } else {
-                $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
-                header("Location: " . URL . "login/index");
+                header("Location: " . URL . "page-err/index");
                 exit;
             }
         } else {
-            $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
-            header("Location: " . URL . "login/index");
+            header("Location: " . URL . "page-err/index");
             exit;
         }
 

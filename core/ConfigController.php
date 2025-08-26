@@ -125,10 +125,14 @@ class ConfigController extends Config
                 $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
                 $classPage->{$this->urlMethod}($this->urlParameter); // -> Depois, chama o método desta classe/controller junto do parâmetro.
             } else { // -> Se não existar, retorna este die:
-                die(MSG_ERR_PAGE_NOT_FOUND_639);
+                $_SESSION['msg-helper'] = MSG_ERR_PAGE_NOT_FOUND_639;
+                header("Location: " . URL . "page-err/index");
+                die();
             }
         } else { // -> Se não existar, retorna este die:
-            die(MSG_ERR_PAGE_NOT_FOUND_527);
+            $_SESSION['msg-helper'] = MSG_ERR_PAGE_NOT_FOUND_527;
+            header("Location: " . URL . "page-err/index");
+            die();
         }
     }
 
@@ -155,8 +159,7 @@ class ConfigController extends Config
         if (in_array($this->urlController, $this->listPgPrivate)) {
             $this->verifyLogin();
         } else {
-            $_SESSION['msg'] = MSG_PAGE_NOT_FOUND;
-            header("Location: " . URL . "login/index");
+            header("Location: " . URL . "page-err/index");
         }
     }
 
@@ -165,8 +168,7 @@ class ConfigController extends Config
         if ((isset($_SESSION['user_cpf'])) and ($_SESSION['user_id'])) {
             $classLoad = "\\Sts\Controllers\\" . $this->urlController;
         } else {
-            $_SESSION['msg'] = MSG_NECE_LOGIN_ACCESS_PAGE;
-            header("Location: " . URL . "login/index");
+            header("Location: " . URL . "page-err/index");
         }
     }
 }

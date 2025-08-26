@@ -9,23 +9,25 @@ if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
 
-class Dashboard
+class PageErr
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
 
     public function index()
     {
-        if (isset($_SESSION['user_cpf']) and (isset($_SESSION['user_name']))) {
-            $this->loadView();
-        } else {
-            header("Location: " . URL . "page-err/index");
-        }
+        unset(
+            $_SESSION['user_id'],
+            $_SESSION['user_cpf'],
+            $_SESSION['user_name'],
+            $_SESSION['user_image']
+        );
+        $this->data = [];
+        $this->loadView();
     }
 
     public function loadView()
     {
-        $this->data = [];
         $loadView = new \Core\ConfigView();
-        $loadView->loadView("app/sts/Views/dashboard/dashboard", $this->data);
+        $loadView->loadView("app/sts/Views/err/pageErr", $this->data);
     }
 }
