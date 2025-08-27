@@ -25,6 +25,7 @@ const date_birth = document.getElementById("date_birth");
 const gender = document.getElementById("gender");
 const telephone = document.getElementById("telephone");
 const email = document.getElementById("email");
+const buttonDefaultMsg = document.querySelectorAll(".button-default-msg");
 // -----------------------------------------------------------------------------------------------------------
 // Visualizar senha digitada:
 if (icon_password) {
@@ -296,5 +297,36 @@ if (formEditUser) {
             msg.innerHTML = "";
         }
     })
+}
+// -----------------------------------------------------------------------------------------------------------
+// Passar o valor do placeholder para o input no formulário da página de mensagens padrão:
+if (document.querySelectorAll('.button-default-msg')) {
+    document.querySelectorAll('.button-default-msg').forEach((btn, index) => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            let textarea = document.querySelectorAll('.msg-textarea')[index];
+
+            if (textarea.value === "") {
+                textarea.value = textarea.placeholder;
+            } else {
+                textarea.readOnly = true;
+            }
+        });
+    });
+}
+
+if (document.querySelectorAll('.button-default-msg-shortcut')) {
+    document.querySelectorAll('.button-default-msg-shortcut').forEach((btn, index) => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            let textarea_shortcut = document.querySelectorAll('.msg-shortcut')[index];
+
+            if (textarea_shortcut.value === "") {
+                textarea_shortcut.value = textarea_shortcut.placeholder;
+            } else {
+                textarea_shortcut.readOnly = true;
+            }
+        });
+    });
 }
 // -----------------------------------------------------------------------------------------------------------

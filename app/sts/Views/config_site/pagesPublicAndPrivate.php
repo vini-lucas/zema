@@ -19,6 +19,6 @@ if ((isset($_SESSION['msg-helper']))) {
     unset($_SESSION['msg']);
 }
 ?>
-<h2>Configurações do Site</h2>
-<a href="<?php echo URL; ?>pages-public-and-privates/index">Informações de Páginas Públicas/Privadas</a> - <a href="<?php echo URL; ?>default-msg/index">Informações de Mensagens Padrão</a> - <a href="#">Demais Informações</a><br><br>
-<a href="<?php echo URL; ?>dashboard/index">Voltar</a>
+<h2>Páginas Públicas e Privadas</h2>
+
+<a href="<?php echo URL; ?>config-site/index">Voltar</a>

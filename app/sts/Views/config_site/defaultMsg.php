@@ -41,8 +41,9 @@ if ((isset($_SESSION['msg-helper']))) {
             extract($msg);
             echo "<tr>";
             echo "<td><input style='width: 20px'; type='int' name='id' value='$id' readonly></td>";
-            echo "<td><input type='text' name='shortcut' placeholder='$shortcut'></td>";
-            echo "<td><textarea style='width: 1200px;' type='text' name='msg' placeholder='$msg'></textarea></td>";
+            echo "<td><input type='text' name='shortcut' class='msg-shortcut' placeholder='$shortcut'><button class='button-default-msg-shortcut'>Utilizá-lo</button></td>";
+
+            echo "<td><textarea style='width: 1200px;' type='text' name='msg' class='msg-textarea' placeholder='$msg'></textarea><button class='button-default-msg'>Utilizá-lo</button></td>";
             echo "<td><input type='text' name='created' placeholder='$created' disabled></td>";
             echo "<td><input type='text' name='modified' placeholder='$modified' disabled></td>";
             echo "<td><input type='submit' name='SendDefaultMsg' value='Editar'>";
