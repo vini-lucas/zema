@@ -17,10 +17,18 @@ abstract class Config
 {
         protected function config()
         {
+                // Buscar mensagens padrão no banco de dados:
+                $readMsg = new \Sts\Models\helper\StsRead();
+                $readMsg->fullRead("SELECT shortcut, msg FROM sts_default_msg");
+                foreach ($readMsg->getResultDb() as $define) {
+                        extract($define);
+                        define($shortcut, $msg);
+                }
+
                 //Páginas Públicas:
                 define('PAGES_PUBLICS', ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail", "PageErr"]);
                 //Páginas Privadas: 
-                define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "DefaultMsg"]);
+                define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "DefaultMsg", "AddMsg", "DeleteMsg"]);
                 // Informações do BD: 
                 define('DB_NAME', "zema");
                 define('DB_PASS', "L4bar3tTA!"); // -> Usuário para executar apenas comandos do CRUD.
@@ -34,7 +42,7 @@ abstract class Config
                 define('URL', 'http://localhost/zema/');
                 define('EMAILADM', 'lucasvini269@gmail.com');
                 // Mensagens:------------------------------------------------------------------------------------
-                define('MSG_MATCH_PASS', "<p style='color: red;'>A senha deve combinar!</p>");
+                /*define('MSG_MATCH_PASS', "<p style='color: red;'>A senha deve combinar!</p>");
                 define('MSG_SEL_GENDER', "<p style='color: red;'>Selecione o gênero!</p>");
                 define('MSG_USER_ACTIVE', "<p style='color: green;'>Usuário ativado com sucesso, realize o login com seu CPF e senha!</p>");
                 define('MSG_LINK_EMAIL_INV', "<p style='color: red;'>Link inválido, solicite um novo para seguimento!</p>");
@@ -72,7 +80,7 @@ abstract class Config
                 define('MSG_MSG_SEND_INST_REC_PASS', "<p style='color: green;'>Uma mensagem com instruções para recuperação de senha foi enviada à caixa de e-mail pertencente à este CPF!</p>");
                 define('MSG_MSG_NOT_SEND_INST_REC_PASS', "<p style='color: red;'>Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>");
                 define('MSG_USER_CREATED_SUCCESS', "<p style='color: green;'>Usuário cadastrado com sucesso.<br>Acesse sua caixa de e-mail para confirmar seu registro!</p>");
-                define('MSG_USER_CREATED_SUCCESS_NOT_EMAIL', "<p style='color: red;'>Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>");
+                define('MSG_USER_CREATED_SUCCESS_NOT_EMAIL', "<p style='color: red;'>Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (" . EMAILADM . ") para maiores informações!</p>");*/
                 // -------------------------------------------------------------------------------------------
         }
 }

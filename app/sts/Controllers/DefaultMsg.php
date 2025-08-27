@@ -23,13 +23,28 @@ class DefaultMsg
         } else {
             header("Location: " . URL . "config-site/index");
         }
-        /*$this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (!empty($this->dataForm['SendDefaultMsg'])) {
-
+            unset($this->dataForm['SendDefaultMsg']);
+            $valInput = new \Sts\Models\helper\StsValInputField();
+            $valInput->valInputField($this->dataForm);
+            if ($valInput->getResult()) {
+                $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                $upMsg = new \Sts\Models\StsDefaultMsg();
+                $upMsg->editMsg($this->dataForm['id'], $this->dataForm);
+                if ($upMsg->getResult()) {
+                    header("Location: " . URL . "config-site/index");
+                    exit;
+                } else {
+                    header("Location: " . URL . "config-site/index");
+                    exit;
+                }
+            } else {
+                $this->data['form'] = $searchMsg->getResultDb();
+            }
         } else {
-
+            $this->data['form'] = $searchMsg->getResultDb();
         }
-        $this->data = [];*/
         $this->loadView();
     }
 
