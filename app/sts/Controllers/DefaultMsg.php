@@ -16,7 +16,20 @@ class DefaultMsg
 
     public function index()
     {
-        $this->data = [];
+        $searchMsg = new \Sts\Models\StsDefaultMsg;
+        $searchMsg->searchMsg();
+        if ($searchMsg->getResultDb() != null) {
+            $this->data['form'] = $searchMsg->getResultDb();
+        } else {
+            header("Location: " . URL . "config-site/index");
+        }
+        /*$this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if (!empty($this->dataForm['SendDefaultMsg'])) {
+
+        } else {
+
+        }
+        $this->data = [];*/
         $this->loadView();
     }
 
