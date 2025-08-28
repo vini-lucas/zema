@@ -299,7 +299,7 @@ if (formEditUser) {
     })
 }
 // -----------------------------------------------------------------------------------------------------------
-// Passar o valor do placeholder para o input no formulário da página de mensagens padrão:
+// Passar o valor do placeholder para o input no formulário
 if (document.querySelectorAll('.button-default-msg')) {
     document.querySelectorAll('.button-default-msg').forEach((btn, index) => {
         btn.addEventListener('click', function (e) {
@@ -325,6 +325,21 @@ if (document.querySelectorAll('.button-default-msg-shortcut')) {
                 textarea_shortcut.value = textarea_shortcut.placeholder;
             } else {
                 textarea_shortcut.readOnly = true;
+            }
+        });
+    });
+}
+
+if (document.querySelectorAll('.button-controller')) {
+    document.querySelectorAll('.button-controller').forEach((btn, index) => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            let controller = document.querySelectorAll('.controller')[index];
+
+            if (controller.value === "") {
+                controller.value = controller.placeholder;
+            } else {
+                document.querySelectorAll('.button-controller').readOnly = true;
             }
         });
     });

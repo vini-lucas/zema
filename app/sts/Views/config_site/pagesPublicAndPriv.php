@@ -20,6 +20,7 @@ if ((isset($_SESSION['msg-helper']))) {
 }
 ?>
 <h2>Páginas Públicas e Privadas</h2>
+<a href="<?php echo URL; ?>add-controller/index">Adicionar Controller</a> - <a href="<?php echo URL; ?>config-site/index">Voltar</a>
 <table>
     <thead>
         <tr>
@@ -40,7 +41,7 @@ if ((isset($_SESSION['msg-helper']))) {
             extract($pages);
             echo "<tr>";
             echo "<td><input type='int' name='id' value='$id' readonly></td>";
-            echo "<td><input type='text' name='controller' placeholder='$controller'><button>Utilizá-lo</button></td>";
+            echo "<td><input type='text' name='controller' class='controller' placeholder='$controller'><button class='button-controller'>Utilizá-lo</button></td>";
             if ($public == 1) {
                 echo "<td><input type='radio' name='public' value='1' checked>";
                 echo "<label>Pública</label>";
@@ -62,4 +63,3 @@ if ((isset($_SESSION['msg-helper']))) {
             ?>
     </tbody>
 </table>
-<a href="<?php echo URL; ?>add-controller/index">Adicionar Controller</a> - <a href="<?php echo URL; ?>config-site/index">Voltar</a>

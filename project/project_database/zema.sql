@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 28/08/2025 às 14:29
+-- Tempo de geração: 28/08/2025 às 20:42
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.3.6
 
@@ -46,6 +46,30 @@ INSERT INTO `sts_access_levels` (`id`, `name`, `created`, `modified`) VALUES
 (2, 'Administrador', '2025-08-12 03:02:52', NULL),
 (3, 'Vendedor', '2025-08-12 03:02:52', '2025-08-15 20:16:45'),
 (4, 'Cliente', '2025-08-15 17:08:45', '2025-08-15 17:11:13');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `sts_access_new_user`
+--
+
+DROP TABLE IF EXISTS `sts_access_new_user`;
+CREATE TABLE IF NOT EXISTS `sts_access_new_user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `shortcut` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_level_id` int NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `access_level_id` (`access_level_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Nível de acesso que um usuário que se auto cadastrou recebe.';
+
+--
+-- Despejando dados para a tabela `sts_access_new_user`
+--
+
+INSERT INTO `sts_access_new_user` (`id`, `shortcut`, `access_level_id`, `created`, `modified`) VALUES
+(1, 'ACCESS_NEW_USER', 4, '2025-08-11 17:09:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -172,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -180,13 +204,13 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
 
 INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VALUES
 (1, 'Login', 1, '2025-08-27 20:51:09', '2025-08-28 14:07:47'),
-(2, 'Register', 1, '2025-08-27 20:51:09', NULL),
+(2, 'Register', 1, '2025-08-27 20:51:09', '2025-08-28 19:57:56'),
 (3, 'ConfEmail', 1, '2025-08-27 20:51:09', NULL),
 (4, 'RecPassword', 1, '2025-08-27 20:51:09', NULL),
 (5, 'NewPassword', 1, '2025-08-27 20:51:09', NULL),
 (6, 'NewEmail', 1, '2025-08-27 20:51:09', NULL),
 (7, 'PageErr', 1, '2025-08-27 20:51:09', NULL),
-(8, 'Dashboard', 0, '2025-08-27 20:51:09', NULL),
+(8, 'Dashboard', 0, '2025-08-27 20:51:09', '2025-08-28 20:00:08'),
 (9, 'Logout', 0, '2025-08-27 20:51:09', NULL),
 (10, 'ListUsers', 0, '2025-08-27 20:51:09', NULL),
 (11, 'DeleteUser', 0, '2025-08-27 20:51:09', NULL),
@@ -208,7 +232,9 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (27, 'DefaultMsg', 0, '2025-08-27 20:51:09', NULL),
 (28, 'AddMsg', 0, '2025-08-27 20:51:09', NULL),
 (29, 'DeleteMsg', 0, '2025-08-27 20:51:09', NULL),
-(30, 'PagesPublicAndPriv', 0, '2025-08-27 20:51:09', NULL);
+(30, 'PagesPublicAndPriv', 0, '2025-08-27 20:51:09', NULL),
+(31, 'AddController', 0, '2025-08-28 20:23:43', NULL),
+(32, 'AccessNewUser', 0, '2025-08-28 20:41:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -277,6 +303,12 @@ INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`
 --
 -- Restrições para tabelas despejadas
 --
+
+--
+-- Restrições para tabelas `sts_access_new_user`
+--
+ALTER TABLE `sts_access_new_user`
+  ADD CONSTRAINT `sts_access_new_user_ibfk_1` FOREIGN KEY (`access_level_id`) REFERENCES `sts_access_levels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Restrições para tabelas `sts_users`

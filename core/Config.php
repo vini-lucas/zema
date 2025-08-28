@@ -17,10 +17,6 @@ abstract class Config
 {
         protected function config()
         {
-                //Páginas Públicas:
-                define('PAGES_PUBLICS', ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail", "PageErr"]);
-                //Páginas Privadas: 
-                define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "DefaultMsg", "AddMsg", "DeleteMsg", "PagesPublicAndPriv", "DeleteController", "AddController"]);
                 // Informações do BD: 
                 define('DB_NAME', "zema");
                 define('DB_PASS', "L4bar3tTA!"); // -> Usuário para executar apenas comandos do CRUD.
@@ -41,5 +37,33 @@ abstract class Config
                         extract($define);
                         define($shortcut, $msg);
                 }
+
+                // Buscar as páginas públicas e privadas no banco de dados:
+                define('PAGES_PUBLICS', $this->pagesPublic());
+                define('PAGES_PRIVATES', $this->pagesPrivate());
+        }
+
+        public function pagesPublic()
+        {
+                $readControllersPublic = new \Sts\Models\helper\StsRead();
+                $readControllersPublic->fullRead("SELECT controller, public FROM sts_pages WHERE public=:public", "public=1");
+
+                foreach ($readControllersPublic->getResultDb() as $pagesPublic) {
+                        extract($pagesPublic);
+                        $array[] = $controller;
+                }
+                return $array;
+        }
+
+        public function pagesPrivate()
+        {
+                $readControllersPrivate = new \Sts\Models\helper\StsRead();
+                $readControllersPrivate->fullRead("SELECT controller, public FROM sts_pages WHERE public=:public", "public=0");
+
+                foreach ($readControllersPrivate->getResultDb() as $pagesPrivate) {
+                        extract($pagesPrivate);
+                        $array[] = $controller;
+                }
+                return $array;
         }
 }

@@ -46,5 +46,5 @@ if ((isset($_SESSION['msg-helper']))) {
     <label>Privada</label>
     <br><br>
 
-    <input type="submit" name="SendAddMsg" value="Cadastrar"> - <a href="<?php echo URL; ?>default-msg/index">Voltar</a>
+    <input type="submit" name="SendAddController" value="Cadastrar"> - <a href="<?php echo URL; ?>pages-public-and-priv/index">Voltar</a>
 </form>
