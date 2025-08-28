@@ -26,6 +26,7 @@ class EditPassword
             if ($valInput->getResult()) {
                 if ($this->dataForm['password'] == $this->dataForm['conf-password']) {
                     $this->dataForm['password'] = password_hash($this->dataForm['password'], PASSWORD_DEFAULT);
+                    unset($this->dataForm['conf-password']);
                     $editPass = new \Sts\Models\StsEditPassword();
                     $editPass->editPass($this->id, $this->dataForm);
                     if ($editPass->getResult()) {

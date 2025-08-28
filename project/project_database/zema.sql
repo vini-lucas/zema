@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 28/08/2025 às 11:19
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 28/08/2025 às 14:29
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `sts_default_msg` (
 --
 
 INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) VALUES
-(1, 'MSG_MATCH_PASS', '<p style=\"color: red;\">A senha deve combinar!</p>', '2025-08-26 17:53:03', '2025-08-27 20:12:19'),
+(1, 'MSG_MATCH_PASS', '<p style=\"color: red;\">A senha deve combinar!</p>', '2025-08-26 17:53:03', '2025-08-28 14:04:33'),
 (2, 'MSG_SEL_GENDER', '<p style=\"color: red;\">Selecione o gênero!</p>', '2025-08-26 17:53:03', NULL),
 (3, 'MSG_USER_ACTIVE', '<p style=\"color: green;\">Usuário ativado com sucesso, realize o login com seu CPF e senha!</p>', '2025-08-26 17:53:03', NULL),
 (4, 'MSG_LINK_EMAIL_INV', '<p style=\"color: red;\">Link inválido, solicite um novo para seguimento!</p>', '2025-08-26 17:53:03', NULL),
@@ -166,7 +166,7 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 DROP TABLE IF EXISTS `sts_pages`;
 CREATE TABLE IF NOT EXISTS `sts_pages` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `controller` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `controller` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `public` tinyint(1) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
 --
 
 INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VALUES
-(1, 'Login', 1, '2025-08-27 20:51:09', NULL),
+(1, 'Login', 1, '2025-08-27 20:51:09', '2025-08-28 14:07:47'),
 (2, 'Register', 1, '2025-08-27 20:51:09', NULL),
 (3, 'ConfEmail', 1, '2025-08-27 20:51:09', NULL),
 (4, 'RecPassword', 1, '2025-08-27 20:51:09', NULL),
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `sts_users` (
 
 INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`, `password`, `recover_password`, `conf_email`, `gender`, `image`, `access_level_id`, `sit_user_id`, `created`, `modified`) VALUES
 (1, 'Lucas Vinicius', '12428432990', '2006-02-06', '43999859499', 'lucasvini269@gmail.com', '$2y$10$0Rsl7izmNxVUsDwG65SgbuaMrv02YyZKAfec.DVlejwsfPc8q2n2m', '$2y$10$v0hzKc43WMjFsgyei5l4leZZAXcvyMq2JkN/zunrzokzxUHkT9GaC', NULL, 'masculine', NULL, 1, 1, '2025-08-14 18:01:19', '2025-08-22 03:25:31'),
-(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Blga39Mgyr9gpKjyoEuLcOnA/nMXBjq98/mm7BYMxQTLu6TQ2ppq.', '$2y$10$BQzZe2TYv.D9JRyPeVF3julDHXw.tYvMMnjUMhNRiqxEIhZdRjABO', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56');
+(2, 'Elias Miguel', '1234', '2020-08-13', '1234', 'elias@gmail.com', '$2y$10$Izui18mIDD11EgCDhy8nZ.cjwa60RS7pf6Pvd0w6FAek0.zNfdq12', '$2y$10$BQzZe2TYv.D9JRyPeVF3julDHXw.tYvMMnjUMhNRiqxEIhZdRjABO', NULL, 'masculine', NULL, 4, 1, '2025-08-15 17:15:33', '2025-08-16 11:49:56');
 
 --
 -- Restrições para tabelas despejadas

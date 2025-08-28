@@ -20,7 +20,7 @@ abstract class Config
                 //Páginas Públicas:
                 define('PAGES_PUBLICS', ["Login", "Register", "ConfEmail", "RecPassword", "NewPassword", "NewEmail", "PageErr"]);
                 //Páginas Privadas: 
-                define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "DefaultMsg", "AddMsg", "DeleteMsg", "PagesPublicAndPriv"]);
+                define('PAGES_PRIVATES', ["Dashboard", "Logout", "ListUsers", "DeleteUser", "EditUser", "EditPassword", "AddUser", "ListLevelsAccess", "EditLevelAccess", "DeleteAccessLevel", "AddLevelAccess", "ListEmails", "EditEmail", "AddEmail", "ListColors", "AddColor", "DeleteColor", "EditColor", "ConfigSite", "DefaultMsg", "AddMsg", "DeleteMsg", "PagesPublicAndPriv", "DeleteController", "AddController"]);
                 // Informações do BD: 
                 define('DB_NAME', "zema");
                 define('DB_PASS', "L4bar3tTA!"); // -> Usuário para executar apenas comandos do CRUD.

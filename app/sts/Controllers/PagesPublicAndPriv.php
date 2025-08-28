@@ -16,7 +16,34 @@ class PagesPublicAndPriv
 
     public function index()
     {
-        $this->data = [];
+        $searchPages = new \Sts\Models\StsPagesPublicAndPriv();
+        $searchPages->searchPage();
+        if ($searchPages->getResult()) {
+            $this->data['form'] = $searchPages->getResultDb();
+            $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            if (!empty($this->dataForm['SendPages'])) {
+                unset($this->dataForm['SendPages']);
+                $valInput = new \Sts\Models\helper\StsValInputField();
+                $valInput->valInputField($this->dataForm);
+                if ($valInput->getResult()) {
+                    $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                    $searchPages->upPage($this->dataForm, $this->dataForm['id']);
+                    if ($searchPages->getResult()) {
+                        header("Location: " . URL . "config-site/index");
+                        exit;
+                    } else {
+                        header("Location: " . URL . "config-site/index");
+                        exit;
+                    }
+                } else {
+                    $this->data['form'] = $searchPages->getResultDb();
+                }
+            } else {
+                $this->data['form'] = $searchPages->getResultDb();
+            }
+        } else {
+            $this->data = [];
+        }
         $this->loadView();
     }
 

@@ -18,7 +18,9 @@ class Logout
             $_SESSION['user_id'],
             $_SESSION['user_cpf'],
             $_SESSION['user_name'],
-            $_SESSION['user_image']
+            $_SESSION['user_image'],
+            $_SESSION['access_level'],
+            $_SESSION['user_access_level']
         );
         header("Location: " . URL . "login/index");
     }
