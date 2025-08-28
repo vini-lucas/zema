@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 27/08/2025 às 20:56
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 28/08/2025 às 11:19
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -114,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `sts_default_msg` (
   `msg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `shortcut` (`shortcut`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -155,6 +156,59 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 (31, 'MSG_MSG_NOT_SEND_INST_REC_PASS', '<p style=\"color: red;\">Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (EMAILADM) para maiores informações!</p>', '2025-08-26 17:53:03', NULL),
 (32, 'MSG_USER_CREATED_SUCCESS', '<p style=\"color: green;\">Usuário cadastrado com sucesso.<br>Acesse sua caixa de e-mail para confirmar seu registro!</p>', '2025-08-26 17:53:03', NULL),
 (33, 'MSG_USER_CREATED_SUCCESS_NOT_EMAIL', '<p style=\"color: red;\">Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (EMAILADM) para maiores informações!</p>', '2025-08-26 17:53:03', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `sts_pages`
+--
+
+DROP TABLE IF EXISTS `sts_pages`;
+CREATE TABLE IF NOT EXISTS `sts_pages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `controller` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `public` tinyint(1) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `controller` (`controller`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+
+--
+-- Despejando dados para a tabela `sts_pages`
+--
+
+INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VALUES
+(1, 'Login', 1, '2025-08-27 20:51:09', NULL),
+(2, 'Register', 1, '2025-08-27 20:51:09', NULL),
+(3, 'ConfEmail', 1, '2025-08-27 20:51:09', NULL),
+(4, 'RecPassword', 1, '2025-08-27 20:51:09', NULL),
+(5, 'NewPassword', 1, '2025-08-27 20:51:09', NULL),
+(6, 'NewEmail', 1, '2025-08-27 20:51:09', NULL),
+(7, 'PageErr', 1, '2025-08-27 20:51:09', NULL),
+(8, 'Dashboard', 0, '2025-08-27 20:51:09', NULL),
+(9, 'Logout', 0, '2025-08-27 20:51:09', NULL),
+(10, 'ListUsers', 0, '2025-08-27 20:51:09', NULL),
+(11, 'DeleteUser', 0, '2025-08-27 20:51:09', NULL),
+(12, 'EditUser', 0, '2025-08-27 20:51:09', NULL),
+(13, 'EditPassword', 0, '2025-08-27 20:51:09', NULL),
+(14, 'AddUser', 0, '2025-08-27 20:51:09', NULL),
+(15, 'ListLevelsAccess', 0, '2025-08-27 20:51:09', NULL),
+(16, 'EditLevelAccess', 0, '2025-08-27 20:51:09', NULL),
+(17, 'DeleteAccessLevel', 0, '2025-08-27 20:51:09', NULL),
+(18, 'AddLevelAccess', 0, '2025-08-27 20:51:09', NULL),
+(19, 'ListEmails', 0, '2025-08-27 20:51:09', NULL),
+(20, 'EditEmail', 0, '2025-08-27 20:51:09', NULL),
+(21, 'AddEmail', 0, '2025-08-27 20:51:09', NULL),
+(22, 'ListColors', 0, '2025-08-27 20:51:09', NULL),
+(23, 'AddColor', 0, '2025-08-27 20:51:09', NULL),
+(24, 'DeleteColor', 0, '2025-08-27 20:51:09', NULL),
+(25, 'EditColor', 0, '2025-08-27 20:51:09', NULL),
+(26, 'ConfigSite', 0, '2025-08-27 20:51:09', NULL),
+(27, 'DefaultMsg', 0, '2025-08-27 20:51:09', NULL),
+(28, 'AddMsg', 0, '2025-08-27 20:51:09', NULL),
+(29, 'DeleteMsg', 0, '2025-08-27 20:51:09', NULL),
+(30, 'PagesPublicAndPriv', 0, '2025-08-27 20:51:09', NULL);
 
 -- --------------------------------------------------------
 
