@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 28/08/2025 às 20:42
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 29/08/2025 às 01:55
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,7 +56,7 @@ INSERT INTO `sts_access_levels` (`id`, `name`, `created`, `modified`) VALUES
 DROP TABLE IF EXISTS `sts_access_new_user`;
 CREATE TABLE IF NOT EXISTS `sts_access_new_user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `shortcut` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shortcut` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `access_level_id` int NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
@@ -184,6 +184,29 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `sts_load_controller`
+--
+
+DROP TABLE IF EXISTS `sts_load_controller`;
+CREATE TABLE IF NOT EXISTS `sts_load_controller` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `controller` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `controller` (`controller`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Página que é carregada caso não seja informada nada na URL.';
+
+--
+-- Despejando dados para a tabela `sts_load_controller`
+--
+
+INSERT INTO `sts_load_controller` (`id`, `controller`, `created`, `modified`) VALUES
+(1, 'PageErr', '2025-08-12 21:07:40', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `sts_pages`
 --
 
@@ -196,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -234,7 +257,8 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (29, 'DeleteMsg', 0, '2025-08-27 20:51:09', NULL),
 (30, 'PagesPublicAndPriv', 0, '2025-08-27 20:51:09', NULL),
 (31, 'AddController', 0, '2025-08-28 20:23:43', NULL),
-(32, 'AccessNewUser', 0, '2025-08-28 20:41:32', NULL);
+(32, 'AccessNewUser', 0, '2025-08-28 20:41:32', '2025-08-28 23:04:21'),
+(33, 'LoadController', 0, '2025-08-28 23:51:43', NULL);
 
 -- --------------------------------------------------------
 

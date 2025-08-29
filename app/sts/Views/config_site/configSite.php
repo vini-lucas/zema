@@ -20,5 +20,5 @@ if ((isset($_SESSION['msg-helper']))) {
 }
 ?>
 <h2>Configurações do Site</h2>
-<a href="<?php echo URL; ?>pages-public-and-priv/index">Informações de Páginas Públicas/Privadas</a> - <a href="<?php echo URL; ?>default-msg/index">Informações de Mensagens Padrão</a> - <a href="<?php echo URL; ?>access-new-user/index">Acesso de Novo Usuário</a><br><br>
+<a href="<?php echo URL; ?>pages-public-and-priv/index">Informações de Páginas Públicas/Privadas</a> - <a href="<?php echo URL; ?>default-msg/index">Informações de Mensagens Padrão</a> - <a href="<?php echo URL; ?>access-new-user/index">Acesso de Novo Usuário</a> - <a href="<?php echo URL; ?>load-controller/index">Carregar Controller</a><br><br>
 <a href="<?php echo URL; ?>dashboard/index">Voltar</a>
