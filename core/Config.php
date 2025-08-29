@@ -23,6 +23,9 @@ abstract class Config
                 define('DB_USER', "zema"); // -> Usuário para executar apenas comandos do CRUD.
                 define('DB_PORT', 3306);
                 //--------------------------------------------------------------------------------------------
+                // URL do projeto:
+                define('URL', 'http://localhost/zema/');
+                //--------------------------------------------------------------------------------------------
                 // Nível de acesso que um usuário que se auto cadastrou recebe: ------------------------------
                 $readLevel = new \Sts\Models\helper\StsRead();
                 $readLevel->fullRead("SELECT access_level_id FROM sts_access_new_user");
@@ -35,9 +38,10 @@ abstract class Config
                 define('METHOD_NOT_CONTROLLER', 'index');
                 define('PARAMETER_NOT_CONTROLLER', '');
                 //--------------------------------------------------------------------------------------------
-                // URL do projeto e e-mail do administrador:
-                define('URL', 'http://localhost/zema/');
-                define('EMAILADM', 'lucasvini269@gmail.com');
+                //E-mail do ADM: -----------------------------------------------------------------------------
+                $readEmail = new \Sts\Models\helper\StsRead();
+                $readEmail->fullRead("SELECT email FROM sts_email_msg");
+                define('EMAILADM', $readEmail->getResultDb()[0]['email']);
                 //--------------------------------------------------------------------------------------------
                 // Buscar mensagens padrão no banco de dados: ------------------------------------------------
                 $readMsg = new \Sts\Models\helper\StsRead();

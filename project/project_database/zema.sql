@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 29/08/2025 às 01:55
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 29/08/2025 às 14:31
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -184,6 +184,29 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `sts_email_msg`
+--
+
+DROP TABLE IF EXISTS `sts_email_msg`;
+CREATE TABLE IF NOT EXISTS `sts_email_msg` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='E-mail do ADM que aparece nas MSG que orientam a contatar.';
+
+--
+-- Despejando dados para a tabela `sts_email_msg`
+--
+
+INSERT INTO `sts_email_msg` (`id`, `email`, `created`, `modified`) VALUES
+(1, 'lucasvini269@gmail.com', '2025-08-11 09:49:55', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `sts_load_controller`
 --
 
@@ -219,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -258,7 +281,8 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (30, 'PagesPublicAndPriv', 0, '2025-08-27 20:51:09', NULL),
 (31, 'AddController', 0, '2025-08-28 20:23:43', NULL),
 (32, 'AccessNewUser', 0, '2025-08-28 20:41:32', '2025-08-28 23:04:21'),
-(33, 'LoadController', 0, '2025-08-28 23:51:43', NULL);
+(33, 'LoadController', 0, '2025-08-28 23:51:43', NULL),
+(34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20');
 
 -- --------------------------------------------------------
 
