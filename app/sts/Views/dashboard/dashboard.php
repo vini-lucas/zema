@@ -21,7 +21,7 @@ if ((isset($_SESSION['msg-helper']))) {
 ?>
 <h2>Página Dashboard</h2>
 <?php
-echo "<a href='" . URL . "list-users/index'>Usuários</a> - <a href='" . URL . "list-levels-access/index'>Níveis de Acesso</a> - <a href='" . URL . "list-emails/index'>E-mails</a> - <a href='" . URL . "list-colors/index'>Cores</a> - <a href='" . URL . "config-site/index'>Configurações do Site</a><br><br>";
+echo "<a href='" . URL . "fgts/index'>FGTS</a> - <a href='" . URL . "list-users/index'>Usuários</a> - <a href='" . URL . "list-levels-access/index'>Níveis de Acesso</a> - <a href='" . URL . "list-emails/index'>E-mails</a> - <a href='" . URL . "list-colors/index'>Cores</a> - <a href='" . URL . "config-site/index'>Configurações do Site</a><br><br>";
 if (is_array($_SESSION['user_name'])) {
     $_SESSION['user_name'][0] = ucwords($_SESSION['user_name'][0]);
     echo "Olá, {$_SESSION['user_name'][0]}!<br><br>";

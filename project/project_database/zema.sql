@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 29/08/2025 às 14:31
+-- Tempo de geração: 29/08/2025 às 20:45
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.3.6
 
@@ -70,6 +70,32 @@ CREATE TABLE IF NOT EXISTS `sts_access_new_user` (
 
 INSERT INTO `sts_access_new_user` (`id`, `shortcut`, `access_level_id`, `created`, `modified`) VALUES
 (1, 'ACCESS_NEW_USER', 4, '2025-08-11 17:09:21', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `sts_branch`
+--
+
+DROP TABLE IF EXISTS `sts_branch`;
+CREATE TABLE IF NOT EXISTS `sts_branch` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnpj` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `enterprise_id` int NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cnpj` (`cnpj`),
+  KEY `enterprise_id` (`enterprise_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `sts_branch`
+--
+
+INSERT INTO `sts_branch` (`id`, `city`, `cnpj`, `enterprise_id`, `created`, `modified`) VALUES
+(1, 'São Paulo', '1234679810', 1, '2025-08-13 17:25:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,6 +233,31 @@ INSERT INTO `sts_email_msg` (`id`, `email`, `created`, `modified`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `sts_enterprises`
+--
+
+DROP TABLE IF EXISTS `sts_enterprises`;
+CREATE TABLE IF NOT EXISTS `sts_enterprises` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnpj` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `cnpj` (`cnpj`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `sts_enterprises`
+--
+
+INSERT INTO `sts_enterprises` (`id`, `name`, `cnpj`, `created`, `modified`) VALUES
+(1, 'Móveis Gazin', '77941490000155', '2025-08-05 17:20:31', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `sts_load_controller`
 --
 
@@ -242,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -282,7 +333,38 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (31, 'AddController', 0, '2025-08-28 20:23:43', NULL),
 (32, 'AccessNewUser', 0, '2025-08-28 20:41:32', '2025-08-28 23:04:21'),
 (33, 'LoadController', 0, '2025-08-28 23:51:43', NULL),
-(34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20');
+(34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20'),
+(35, 'Fgts', 0, '2025-08-29 16:42:06', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `sts_proposal_fgts`
+--
+
+DROP TABLE IF EXISTS `sts_proposal_fgts`;
+CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cpf` int NOT NULL,
+  `enterprise` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `branch` int DEFAULT NULL,
+  `seller` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_birth` date NOT NULL,
+  `gender` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_mother` varchar(110) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_father` varchar(110) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` int DEFAULT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cep` int DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `banco` int DEFAULT NULL,
+  `agency` int DEFAULT NULL,
+  `account` int DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -357,6 +439,12 @@ INSERT INTO `sts_users` (`id`, `name`, `cpf`, `date_birth`, `telephone`, `email`
 --
 ALTER TABLE `sts_access_new_user`
   ADD CONSTRAINT `sts_access_new_user_ibfk_1` FOREIGN KEY (`access_level_id`) REFERENCES `sts_access_levels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Restrições para tabelas `sts_branch`
+--
+ALTER TABLE `sts_branch`
+  ADD CONSTRAINT `sts_branch_ibfk_1` FOREIGN KEY (`enterprise_id`) REFERENCES `sts_enterprises` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Restrições para tabelas `sts_users`
