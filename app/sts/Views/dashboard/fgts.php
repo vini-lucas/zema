@@ -20,4 +20,41 @@ if ((isset($_SESSION['msg-helper']))) {
 }
 ?>
 <h2>Página FGTS</h2>
-<a href="<?php echo URL; ?>dashboard/index">Dashboard</a>
+<?php
+foreach ($this->data['form'] as $pp) {
+    extract($pp);
+?>
+    <table>
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <?php
+                $value_cpf = "";
+                if (!empty($cpf)) {
+                    $value_cpf = $cpf;
+                }
+                ?>
+                <td><?php echo $value_cpf; ?></td>
+
+                <?php
+                $value_name = "";
+                if (!empty($name)) {
+                    $value_name = $name;
+                }
+                ?>
+                <td><?php echo $value_name; ?></td>
+                <td><a href="<?php echo URL; ?>view-proposal/index<?php //echo $id; 
+                                                                ?>">Atuar</a>
+            </tr>
+        </tbody>
+    <?php
+}
+    ?>
+    </table><br>
+    <a href="<?php echo URL; ?>dashboard/index">Dashboard</a> - <a href="<?php echo URL; ?>new-proposal/index">Nova Proposta</a>

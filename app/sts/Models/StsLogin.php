@@ -27,7 +27,7 @@ class StsLogin
     {
         $this->dataForm = $dataForm;
         $valLogin = new \Sts\Models\helper\StsRead();
-        $valLogin->fullRead("SELECT users.id, users.cpf, users.name AS user_name, users.email, users.password, users.image, users.access_level_id, level_access.name AS level_access_name, users.sit_user_id
+        $valLogin->fullRead("SELECT users.id, users.cpf, users.date_birth, users.name AS user_name, users.email, users.password, users.image, users.access_level_id, level_access.name AS level_access_name, users.sit_user_id
                             FROM sts_users AS users
                             INNER JOIN sts_access_levels AS level_access ON level_access.id=users.access_level_id
                             WHERE users.cpf=:cpf", "cpf={$this->dataForm['cpf']}");
@@ -55,6 +55,7 @@ class StsLogin
                 $_SESSION['user_name'] = $this->valPass[0]['user_name'];
                 $_SESSION['user_image'] = $this->valPass[0]['image'];
                 $_SESSION['user_access_level'] = $this->valPass[0]['level_access_name'];
+                $_SESSION['user_date_birth'] = $this->valPass[0]['date_birth'];
                 $this->result = true;
             }
         } else {

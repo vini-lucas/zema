@@ -16,7 +16,23 @@ class Fgts
 
     public function index()
     {
-        $this->data = [];
+        if ($_SESSION['user_access_level'] == 'Cliente') {
+            $modelFgts = new \Sts\Models\StsFgts();
+            $modelFgts->searchProposalsCustomer($_SESSION['user_cpf']);
+            if ($modelFgts->getResult()) {
+                $this->data['form'] = $modelFgts->getResultDb();
+            } else {
+                $this->data['form'] = [];
+            }
+        } else {
+            $modelFgts = new \Sts\Models\StsFgts();
+            $modelFgts->searchProposalsAll();
+            if ($modelFgts->getResult()) {
+                $this->data['form'] = $modelFgts->getResultDb();
+            } else {
+                $this->data['form'] = [];
+            }
+        }
         $this->loadView();
     }
 

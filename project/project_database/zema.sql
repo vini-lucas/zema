@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 29/08/2025 às 20:45
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 30/08/2025 às 21:24
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,8 +80,8 @@ INSERT INTO `sts_access_new_user` (`id`, `shortcut`, `access_level_id`, `created
 DROP TABLE IF EXISTS `sts_branch`;
 CREATE TABLE IF NOT EXISTS `sts_branch` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `city` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cnpj` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnpj` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `enterprise_id` int NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `sts_default_msg` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortcut` (`shortcut`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_default_msg`
@@ -205,7 +205,11 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 (30, 'MSG_MSG_SEND_INST_REC_PASS', '<p style=\"color: green;\">Uma mensagem com instruções para recuperação de senha foi enviada à caixa de e-mail pertencente à este CPF!</p>', '2025-08-26 17:53:03', NULL),
 (31, 'MSG_MSG_NOT_SEND_INST_REC_PASS', '<p style=\"color: red;\">Mensagem com instruções para recuperação de senha não foi enviada com sucesso.<br>Entre em contato com o suporte (EMAILADM) para maiores informações!</p>', '2025-08-26 17:53:03', NULL),
 (32, 'MSG_USER_CREATED_SUCCESS', '<p style=\"color: green;\">Usuário cadastrado com sucesso.<br>Acesse sua caixa de e-mail para confirmar seu registro!</p>', '2025-08-26 17:53:03', NULL),
-(33, 'MSG_USER_CREATED_SUCCESS_NOT_EMAIL', '<p style=\"color: red;\">Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (EMAILADM) para maiores informações!</p>', '2025-08-26 17:53:03', NULL);
+(33, 'MSG_USER_CREATED_SUCCESS_NOT_EMAIL', '<p style=\"color: red;\">Usuário cadastrado com sucesso.<br>Não foi possível enviar o e-mail de confirmação de cadastro, entre em contato com o suporte (EMAILADM) para maiores informações!</p>', '2025-08-26 17:53:03', NULL),
+(34, 'MSG_SEND_PP_CUST_SUCCESS', '<p style=\"color: green\">Simulação encaminhada com sucesso utilizando como parâmetro as suas informações do perfil!</p>', '2025-08-30 16:59:45', '2025-08-30 17:00:55'),
+(35, 'MSG_SEND_PP_CUST_ERR', '<p style=\"color: red\">Simulação não encaminhada com sucesso utilizando como parâmetro as suas informações do perfil!</p>', '2025-08-30 17:02:56', NULL),
+(36, 'MSG_SEND_PP_SELLER_SUCCESS', '<p style=\"color: green\">Operação cadastrada com sucesso!</p>', '2025-08-30 17:43:27', NULL),
+(37, 'MSG_SEND_PP_SELLER_ERR', '<p style=\"color: red\">Operação não cadastrada com sucesso!</p>', '2025-08-30 17:44:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -216,7 +220,7 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 DROP TABLE IF EXISTS `sts_email_msg`;
 CREATE TABLE IF NOT EXISTS `sts_email_msg` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -239,7 +243,7 @@ INSERT INTO `sts_email_msg` (`id`, `email`, `created`, `modified`) VALUES
 DROP TABLE IF EXISTS `sts_enterprises`;
 CREATE TABLE IF NOT EXISTS `sts_enterprises` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(220) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cnpj` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
@@ -293,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -334,7 +338,9 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (32, 'AccessNewUser', 0, '2025-08-28 20:41:32', '2025-08-28 23:04:21'),
 (33, 'LoadController', 0, '2025-08-28 23:51:43', NULL),
 (34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20'),
-(35, 'Fgts', 0, '2025-08-29 16:42:06', NULL);
+(35, 'Fgts', 0, '2025-08-29 16:42:06', NULL),
+(36, 'NewProposal', 0, '2025-08-30 16:42:15', NULL),
+(37, 'ViewProposal', 0, '2025-08-30 21:23:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -346,25 +352,34 @@ DROP TABLE IF EXISTS `sts_proposal_fgts`;
 CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cpf` int NOT NULL,
-  `enterprise` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `enterprise` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `branch` int DEFAULT NULL,
-  `seller` varchar(220) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seller` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(110) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_birth` date NOT NULL,
-  `gender` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_mother` varchar(110) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_father` varchar(110) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_mother` varchar(110) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_father` varchar(110) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telephone` int DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cep` int DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `banco` int DEFAULT NULL,
   `agency` int DEFAULT NULL,
   `account` int DEFAULT NULL,
+  `key_pp` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `possession` tinyint(1) NOT NULL COMMENT '1 = com a mesa, 0 = com o cliente/vendedor.',
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `sts_proposal_fgts`
+--
+
+INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `banco`, `agency`, `account`, `key_pp`, `possession`, `created`, `modified`) VALUES
+(1, 1234, NULL, NULL, NULL, 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 1, '2025-08-30 21:16:41', NULL);
 
 -- --------------------------------------------------------
 
