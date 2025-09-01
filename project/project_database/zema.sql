@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 01/09/2025 às 14:26
+-- Tempo de geração: 01/09/2025 às 20:52
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.3.6
 
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -339,7 +339,9 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (33, 'LoadController', 0, '2025-08-28 23:51:43', NULL),
 (34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20'),
 (35, 'Fgts', 0, '2025-08-29 16:42:06', NULL),
-(36, 'NewProposal', 0, '2025-08-30 16:42:15', NULL);
+(36, 'NewProposal', 0, '2025-08-30 16:42:15', NULL),
+(37, 'ViewProposal', 0, '2025-09-01 16:25:15', NULL),
+(38, 'ViewProposalCustomer', 0, '2025-09-01 16:25:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -368,22 +370,22 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `account` int DEFAULT NULL,
   `possession` tinyint(1) NOT NULL COMMENT '1 = com a mesa, 0 = com o cliente/vendedor, 2 = cancelada.',
   `value_released` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `prime_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `second_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `third_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fourth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fifth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sixth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seventh_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `eightth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nineth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tenth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `portions` json NOT NULL,
+  `date_portions` date DEFAULT NULL,
   `observation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `internship_proposal` int NOT NULL COMMENT '0 -> Vendedor (ou superior) está cadastrando o nome, CPF e data/nascimento para encaminhar operação;\r\n1 -> Mesa recebe a operação com estes dados preenchidos;\r\n2 -> Beneficiário recebe a operação com o valor liberado, pendência registrada ou cancelamento;\r\n3 -> Mesa recebe a operação com o valor escolhido ou pendência corrigida;\r\n4 -> Cliente recebe operação com a operação digitada e o link de formalização disponível (cliente não atua mais na proposta);\r\n5 -> Mesa atualiza a operação para paga ou cancelada.',
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `sts_proposal_fgts`
+--
+
+INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
+(1, 1234, NULL, NULL, NULL, 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'null', NULL, NULL, 1, '2025-09-01 16:21:19', NULL),
+(2, 1234, NULL, NULL, NULL, 'teste', '2006-09-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '{\"one_portion\": {\"label\": \"1ª\", \"value\": \"R$100,00\"}, \"six_portion\": {\"label\": \"6ª\", \"value\": \"R$100,00\"}, \"ten_portion\": {\"label\": \"10ª\", \"value\": \"R$100,00\"}, \"two_portion\": {\"label\": \"2ª\", \"value\": \"R$100,00\"}, \"five_portion\": {\"label\": \"5ª\", \"value\": \"R$100,00\"}, \"four_portion\": {\"label\": \"4ª\", \"value\": \"R$100,00\"}, \"nine_portion\": {\"label\": \"9ª\", \"value\": \"R$100,00\"}, \"eight_portion\": {\"label\": \"8ª\", \"value\": \"R$100,00\"}, \"seven_portion\": {\"label\": \"7ª\", \"value\": \"R$100,00\"}, \"three_portion\": {\"label\": \"3ª\", \"value\": \"R$100,00\"}}', NULL, NULL, 1, '2025-09-01 17:05:12', NULL);
 
 -- --------------------------------------------------------
 

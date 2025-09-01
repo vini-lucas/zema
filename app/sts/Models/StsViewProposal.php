@@ -31,7 +31,7 @@ class StsViewProposal
     public function searchDataPp(int $id)
     {
         $searchDataPp = new \Sts\Models\helper\StsRead();
-        $searchDataPp->fullRead("SELECT cpf, name, date_birth FROM sts_proposal_fgts WHERE id=:id", "id={$id}");
+        $searchDataPp->fullRead("SELECT cpf, name, date_birth, portions FROM sts_proposal_fgts WHERE id=:id", "id={$id}");
         if ($searchDataPp->getResultDb() != null){
             $this->resultDb = $searchDataPp->getResultDb();
             $this->result = true;
