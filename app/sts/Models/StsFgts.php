@@ -31,7 +31,7 @@ class StsFgts
     public function searchProposalsCustomer(string $cpf)
     {
         $searchProposals = new \Sts\Models\helper\StsRead();
-        $searchProposals->fullRead("SELECT cpf, name FROM sts_proposal_fgts WHERE cpf=:cpf AND possession=:possession", "cpf={$cpf}&possession=0");
+        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE cpf=:cpf AND possession=:possession", "cpf={$cpf}&possession=0");
         if ($searchProposals->getResultDb() != null){
             $this->resultDb = $searchProposals->getResultDb();
             $this->result = true;
@@ -43,7 +43,7 @@ class StsFgts
     public function searchProposalsAll()
     {
         $searchProposalsAll = new \Sts\Models\helper\StsRead();
-        $searchProposalsAll->fullRead("SELECT cpf, name FROM sts_proposal_fgts");
+        $searchProposalsAll->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE possession=:possession", "possession=1");
         if ($searchProposalsAll->getResultDb() != null){
             $this->resultDb = $searchProposalsAll->getResultDb();
             $this->result = true;

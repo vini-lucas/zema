@@ -9,18 +9,14 @@ if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
 
-class ViewProposal
+class ViewProposalCustomer
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
     private array|null $dataForm; // -> Recebe os dados que o usuário informou no formulário.
 
     public function index(int $id)
     {
-        if ($_SESSION['user_access_level'] == 'Cliente') {
-            header("Location: " . URL . "pageErr/index");
-            exit;
-        } else {
-            $viewPp = new \Sts\Models\StsViewProposal();
+            $viewPp = new \Sts\Models\StsViewProposalCustomer();
             $viewPp->searchDataPp($id);
             if ($viewPp->getResult()) {
                 $this->data['form'] = $viewPp->getResultDb();
@@ -44,20 +40,7 @@ class ViewProposal
                     }
                 } else if (!empty($this->dataForm['SendProposal'])) {
                     unset($this->dataForm['SendProposal']);
-                    if ($this->dataForm['value_released'] == '') {
-                        $_SESSION['msg'] = "<p style='color: red;'>Informe o valor liberado!</p>";
-                    } else {
-                        $this->dataForm['possession'] = 0;
-                        $delPp = new \Sts\Models\StsViewProposal();
-                        $delPp->editProposal($id, $this->dataForm);
-                        if ($delPp->getResult()) {
-                            header("Location: " . URL . "fgts/index");
-                            exit;
-                        } else {
-                            header("Location: " . URL . "fgts/index");
-                            exit;
-                        }
-                    }
+                    var_dump($this->dataForm);
                 } else {
                     $this->data['form'] = $viewPp->getResultDb();
                 }
@@ -65,12 +48,11 @@ class ViewProposal
                 $this->data = [];
             }
             $this->loadView();
-        }
     }
 
     public function loadView()
     {
         $loadView = new \Core\ConfigView();
-        $loadView->loadView("app/sts/Views/dashboard/viewProposal", $this->data);
+        $loadView->loadView("app/sts/Views/dashboard/viewProposalCustomer", $this->data);
     }
 }

@@ -101,7 +101,7 @@ class StsRead extends StsConn
                 if (($link == 'limit') || ($link == 'offset') || ($link == 'id')) {
                     $value = (int)$value;
                 }
-                $this->query->bindParam(":{$link}", $value, (is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR));
+                $this->query->bindValue(":{$link}", $value, (is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR));
             }
         }
     }

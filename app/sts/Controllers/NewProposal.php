@@ -30,7 +30,6 @@ class NewProposal
                     $valBirth->valDateBirth($this->dataForm['date_birth']);
                     if ($valBirth->getResult()) {
                         $this->dataForm['possession'] = 1;
-                        $this->dataForm['key_pp'] = password_hash("1234", PASSWORD_DEFAULT);
                         $newPpSeller = new \Sts\Models\StsNewProposal();
                         $newPpSeller->sendProposalSeller($this->dataForm);
                         if ($newPpSeller->getResult()) {

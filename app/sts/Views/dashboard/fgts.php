@@ -49,8 +49,14 @@ foreach ($this->data['form'] as $pp) {
                 }
                 ?>
                 <td><?php echo $value_name; ?></td>
-                <td><a href="<?php echo URL; ?>view-proposal/index<?php //echo $id; 
-                                                                ?>">Atuar</a>
+                <?php
+                    if ($_SESSION['user_access_level'] == 'Cliente') {
+                        $address = "view-proposal-customer/index/"; 
+                    } else {
+                        $address = "view-proposal/index/";
+                    }
+                ?>
+                <td><a href="<?php echo URL . $address . $id; ?>">Atuar</a>
             </tr>
         </tbody>
     <?php
