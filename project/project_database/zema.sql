@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 01/09/2025 às 11:02
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 01/09/2025 às 14:26
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `sts_pages` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller` (`controller`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Páginas Públicas e Privadas';
 
 --
 -- Despejando dados para a tabela `sts_pages`
@@ -339,9 +339,7 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 (33, 'LoadController', 0, '2025-08-28 23:51:43', NULL),
 (34, 'EmailMsg', 0, '2025-08-29 12:45:00', '2025-08-29 12:45:20'),
 (35, 'Fgts', 0, '2025-08-29 16:42:06', NULL),
-(36, 'NewProposal', 0, '2025-08-30 16:42:15', NULL),
-(37, 'ViewProposal', 0, '2025-08-30 21:23:40', NULL),
-(38, 'ViewProposalCustomer', 0, '2025-08-31 15:33:53', NULL);
+(36, 'NewProposal', 0, '2025-08-30 16:42:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -369,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `agency` int DEFAULT NULL,
   `account` int DEFAULT NULL,
   `possession` tinyint(1) NOT NULL COMMENT '1 = com a mesa, 0 = com o cliente/vendedor, 2 = cancelada.',
-  `value_released` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `value_released` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prime_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `second_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `third_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -380,18 +378,12 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `eightth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nineth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tenth_portion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `observation` text COLLATE utf8mb4_unicode_ci,
+  `observation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `internship_proposal` int NOT NULL COMMENT '0 -> Vendedor (ou superior) está cadastrando o nome, CPF e data/nascimento para encaminhar operação;\r\n1 -> Mesa recebe a operação com estes dados preenchidos;\r\n2 -> Beneficiário recebe a operação com o valor liberado, pendência registrada ou cancelamento;\r\n3 -> Mesa recebe a operação com o valor escolhido ou pendência corrigida;\r\n4 -> Cliente recebe operação com a operação digitada e o link de formalização disponível (cliente não atua mais na proposta);\r\n5 -> Mesa atualiza a operação para paga ou cancelada.',
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `sts_proposal_fgts`
---
-
-INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `prime_portion`, `second_portion`, `third_portion`, `fourth_portion`, `fifth_portion`, `sixth_portion`, `seventh_portion`, `eightth_portion`, `nineth_portion`, `tenth_portion`, `observation`, `created`, `modified`) VALUES
-(2, 1234, NULL, NULL, NULL, 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1.000,00', '100,00', '100,00', '100,00', '100,00', '100,00', '100,00', '100,00', '100,00', '100,00', '100,00', 'FACTA.', '2025-09-01 02:32:05', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 

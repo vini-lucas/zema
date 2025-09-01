@@ -345,10 +345,3 @@ if (document.querySelectorAll('.button-controller')) {
     });
 }
 // -----------------------------------------------------------------------------------------------------------
-// Aparecer campos para informar na proposta ao enviá-la à digitação: ----------------------------------------
-document.getElementById("view-inputs").style = "display: none";
-function viewInputs()
-{
-    document.getElementById("view-inputs").style = "display: block";
-}
-// -----------------------------------------------------------------------------------------------------------
