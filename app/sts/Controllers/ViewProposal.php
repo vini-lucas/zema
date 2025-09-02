@@ -24,31 +24,52 @@ class ViewProposal
                 $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                 if (!empty($this->dataForm['SendProposal'])) {
                     unset($this->dataForm['SendProposal']);
-                    if (
-                        (($this->dataForm['portions_one'] == '' AND ($this->dataForm['date_portions_one'] == '')))
-                    OR (($this->dataForm['portions_two'] == '' AND ($this->dataForm['date_portions_two'] == ''))) 
-                    OR (($this->dataForm['portions_three'] == '' AND ($this->dataForm['date_portions_three'] == ''))) 
-                    OR (($this->dataForm['portions_four'] == '' AND ($this->dataForm['date_portions_four'] == ''))) 
-                    OR (($this->dataForm['portions_five'] == '' AND ($this->dataForm['date_portions_five'] == ''))) 
-                    OR (($this->dataForm['portions_six'] == '' AND ($this->dataForm['date_portions_six'] == ''))) 
-                    OR (($this->dataForm['portions_seven'] == '' AND ($this->dataForm['portions_seven'] == ''))) 
-                    OR (($this->dataForm['portions_eight'] == '' AND ($this->dataForm['date_portions_eight'] == ''))) 
-                    OR (($this->dataForm['portions_nine'] == '' AND ($this->dataForm['date_portions_nine'] == ''))) 
-                    OR (($this->dataForm['portions_ten'] == '' AND ($this->dataForm['date_portions_ten'] == '')))) {
+                    if ((($this->dataForm['portions_one'] == '') and ($this->dataForm['date_portions_one'] != '')) or (($this->dataForm['date_portions_one'] == '') and ($this->dataForm['portions_one'] != '')) or ($this->dataForm['portions_one'] == '') and ($this->dataForm['date_portions_one'] == '')) {
                         $this->data['form'] = $this->dataForm;
-                        $_SESSION['msg'] = "<p style='color: red;'>Informe o valor e data da(s) parcela(s) antes de enviar a SIMULAÇÃO!</p>";
+                        $_SESSION['msg'] = MSG_PRIME_MSG;
                     } else {
-                        var_dump($this->dataForm);
+                        $pairs = [
+                            $this->dataForm['portions_two'] => $this->dataForm['date_portions_two'],
+                            $this->dataForm['portions_three'] => $this->dataForm['date_portions_three'],
+                            $this->dataForm['portions_four'] => $this->dataForm['date_portions_four'],
+                            $this->dataForm['portions_five'] => $this->dataForm['date_portions_five'],
+                            $this->dataForm['portions_six'] => $this->dataForm['date_portions_six'],
+                            $this->dataForm['portions_seven'] => $this->dataForm['date_portions_seven'],
+                            $this->dataForm['portions_eight'] => $this->dataForm['date_portions_eight'],
+                            $this->dataForm['portions_nine'] => $this->dataForm['date_portions_nine'],
+                            $this->dataForm['portions_ten'] => $this->dataForm['date_portions_ten']
+                        ];
+                        foreach ($pairs as $value => $index) {
+                            if ((($value == '') and ($index != '')) or (($index == '') and ($value != ''))) {
+                                $this->data['form'] = $this->dataForm;
+                                $_SESSION['msg'] = MSG_DATE_PORTION_REMAINING;
+                                break;
+                            } else {
+                                if ($this->dataForm['observation'] == '') {
+                                    $this->data['form'] = $this->dataForm;
+                                    $_SESSION['msg'] = "<p style='color: red;'>Informe a OBSERVAÇÃO antes de enviar a SIMULAÇÃO!</p>";
+                                } else {
+                                    foreach ($this->dataForm as $key => $val) {
+                                        if ($val === '') {
+                                            unset($this->dataForm[$key]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+                } else {
+                    $this->data = [];
                 }
             } else {
-                $this->data = [];
+                header("Location: " . URL . "page-err/index");
+                exit;
             }
+            $this->loadView();
         } else {
             header("Location: " . URL . "page-err/index");
             exit;
         }
-        $this->loadView();
     }
 
     public function loadView()

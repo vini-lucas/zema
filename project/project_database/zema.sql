@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 01/09/2025 às 20:52
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 02/09/2025 às 11:11
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `sts_default_msg` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortcut` (`shortcut`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_default_msg`
@@ -209,7 +209,9 @@ INSERT INTO `sts_default_msg` (`id`, `shortcut`, `msg`, `created`, `modified`) V
 (34, 'MSG_SEND_PP_CUST_SUCCESS', '<p style=\"color: green\">Simulação encaminhada com sucesso utilizando como parâmetro as suas informações do perfil!</p>', '2025-08-30 16:59:45', '2025-08-30 17:00:55'),
 (35, 'MSG_SEND_PP_CUST_ERR', '<p style=\"color: red\">Simulação não encaminhada com sucesso utilizando como parâmetro as suas informações do perfil!</p>', '2025-08-30 17:02:56', NULL),
 (36, 'MSG_SEND_PP_SELLER_SUCCESS', '<p style=\"color: green\">Operação cadastrada com sucesso!</p>', '2025-08-30 17:43:27', NULL),
-(37, 'MSG_SEND_PP_SELLER_ERR', '<p style=\"color: red\">Operação não cadastrada com sucesso!</p>', '2025-08-30 17:44:15', NULL);
+(37, 'MSG_SEND_PP_SELLER_ERR', '<p style=\"color: red\">Operação não cadastrada com sucesso!</p>', '2025-08-30 17:44:15', NULL),
+(38, 'MSG_PRIME_MSG', '<p style=\"color: red;\">Informe o valor e data da(s) parcela(s)!</p>', '2025-09-02 01:22:42', NULL),
+(39, 'MSG_DATE_PORTION_REMAINING', '<p style=\"color: red;\">Informe o valor ou a data não preenchida!</p>', '2025-09-02 01:24:47', '2025-09-02 01:42:31');
 
 -- --------------------------------------------------------
 

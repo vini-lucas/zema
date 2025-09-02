@@ -7,8 +7,8 @@ if (!defined('L4bar3tTA!')) {
     header("Location: /");
 }
 
-if (isset($this->data)) {
-    extract($this->data);
+if (isset($this->data['form'])) {
+    extract($this->data['form']);
 }
 
 if ((isset($_SESSION['msg-helper']))) {
@@ -52,53 +52,153 @@ if ((isset($_SESSION['msg-helper']))) {
         <tbody>
             <tr>
                 <td>1ª</td>
-                <td><input type="text" name="portions_one" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_one"></td>
+                <?php
+                $value_one = "";
+                if (!empty($portions_one)) {
+                    $value_one = $portions_one;
+                }
+                $value_date_one = "";
+                if (!empty($date_portions_one)) {
+                    $value_date_one = $date_portions_one;
+                }
+                ?>
+                <td><input type="text" name="portions_one" value="<?php echo $value_one; ?>" placeholder="R$ XXX,XX"></td>
+                <td><input type="date" name="date_portions_one" value="<?php echo $value_date_one; ?>"></td>
             </tr>
             <tr>
                 <td>2ª</td>
-                <td><input type="text" name="portions_two" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_two"></td>
+                <?php
+                $value_two = "";
+                if (!empty($portions_two)) {
+                    $value_two = $portions_two;
+                }
+                $value_date_two = "";
+                if (!empty($date_portions_two)) {
+                    $value_date_two = $date_portions_two;
+                }
+                ?>
+                <td><input type="text" name="portions_two" value="<?php echo $value_two; ?>" placeholder="R$ XXX,XX"></td>
+                <td><input type="date" name="date_portions_two" value="<?php echo $value_date_two; ?>" ></td>
             </tr>
             <tr>
                 <td>3ª</td>
-                <td><input type="text" name="portions_three" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_three"></td>
+                <?php
+                $value_three = "";
+                if (!empty($portions_three)) {
+                    $value_three = $portions_three;
+                }
+                $value_date_three = "";
+                if (!empty($date_portions_three)) {
+                    $value_date_three = $date_portions_three;
+                }
+                ?>
+                <td><input type="text" name="portions_three" value="<?php echo $value_three; ?>" placeholder="R$ XXX,XX"></td>
+                <td><input type="date" name="date_portions_three" value="<?php echo $value_date_three; ?>" ></td>
             </tr>
             <tr>
                 <td>4ª</td>
-                <td><input type="text" name="portions_four" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_four"></td>
+                <?php
+                $value_four = "";
+                if (!empty($portions_four)) {
+                    $value_four = $portions_four;
+                }
+                $value_date_four = "";
+                if (!empty($date_portions_four)) {
+                    $value_date_four = $date_portions_four;
+                }
+                ?>
+                <td><input type="text" name="portions_four" placeholder="R$ XXX,XX" value="<?php echo $value_four; ?>" ></td>
+                <td><input type="date" name="date_portions_four" value="<?php echo $value_date_four; ?>" ></td>
             </tr>
             <tr>
                 <td>5ª</td>
-                <td><input type="text" name="portions_five" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_five"></td>
+                <?php
+                $value_five = "";
+                if (!empty($portions_five)) {
+                    $value_five = $portions_five;
+                }
+                $value_date_five = "";
+                if (!empty($date_portions_five)) {
+                    $value_date_five = $date_portions_five;
+                }
+                ?>
+                <td><input type="text" name="portions_five" placeholder="R$ XXX,XX" value="<?php echo $value_five; ?>" ></td>
+                <td><input type="date" name="date_portions_five" value="<?php echo $value_date_five; ?>" ></td>
             </tr>
             <tr>
                 <td>6ª</td>
-                <td><input type="text" name="portions_six" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_six"></td>
+                <?php
+                $value_six = "";
+                if (!empty($portions_six)) {
+                    $value_six = $portions_six;
+                }
+                $value_date_six = "";
+                if (!empty($date_portions_six)) {
+                    $value_date_six = $date_portions_six;
+                }
+                ?>
+                <td><input type="text" name="portions_six" placeholder="R$ XXX,XX" value="<?php echo $value_six; ?>" ></td>
+                <td><input type="date" name="date_portions_six" value="<?php echo $value_date_six; ?>" ></td>
             </tr>
             <tr>
                 <td>7ª</td>
-                <td><input type="text" name="portions_seven" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_seven"></td>
+                <?php
+                $value_seven = "";
+                if (!empty($portions_seven)) {
+                    $value_seven = $portions_seven;
+                }
+                $value_date_seven = "";
+                if (!empty($date_portions_seven)) {
+                    $value_date_seven = $date_portions_seven;
+                }
+                ?>
+                <td><input type="text" name="portions_seven" placeholder="R$ XXX,XX" value="<?php echo $value_seven; ?>" ></td>
+                <td><input type="date" name="date_portions_seven" value="<?php echo $value_date_seven; ?>" ></td>
             </tr>
             <tr>
                 <td>8ª</td>
-                <td><input type="text" name="portions_eight" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_eight"></td>
+                <?php
+                $value_eight = "";
+                if (!empty($portions_eight)) {
+                    $value_eight = $portions_eight;
+                }
+                $value_date_eight = "";
+                if (!empty($date_portions_eight)) {
+                    $value_date_eight = $date_portions_eight;
+                }
+                ?>
+                <td><input type="text" name="portions_eight" placeholder="R$ XXX,XX" value="<?php echo $value_eight; ?>" ></td>
+                <td><input type="date" name="date_portions_eight" value="<?php echo $value_date_eight; ?>" ></td>
             </tr>
             <tr>
                 <td>9ª</td>
-                <td><input type="text" name="portions_nine" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_nine"></td>
+                <?php
+                $value_nine = "";
+                if (!empty($portions_nine)) {
+                    $value_nine = $portions_nine;
+                }
+                $value_date_nine = "";
+                if (!empty($date_portions_nine)) {
+                    $value_date_nine = $date_portions_nine;
+                }
+                ?>
+                <td><input type="text" name="portions_nine" placeholder="R$ XXX,XX" value="<?php echo $value_nine; ?>" ></td>
+                <td><input type="date" name="date_portions_nine" value="<?php echo $value_date_nine; ?>" ></td>
             </tr>
             <tr>
                 <td>10ª</td>
-                <td><input type="text" name="portions_ten" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_ten"></td>
+                <?php
+                $value_ten = "";
+                if (!empty($portions_ten)) {
+                    $value_ten = $portions_ten;
+                }
+                $value_date_ten = "";
+                if (!empty($date_portions_ten)) {
+                    $value_date_ten = $date_portions_ten;
+                }
+                ?>
+                <td><input type="text" name="portions_ten" placeholder="R$ XXX,XX" value="<?php echo $value_ten; ?>" ></td>
+                <td><input type="date" name="date_portions_ten" value="<?php echo $value_date_ten; ?>" ></td>
             </tr>
         </tbody>
     </table>
