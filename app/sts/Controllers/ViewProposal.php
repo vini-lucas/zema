@@ -19,8 +19,8 @@ class ViewProposal
         if ($_SESSION['user_access_level'] != 'Cliente') {
             $searchDataPp = new \Sts\Models\StsViewProposal();
             $searchDataPp->searchDataPp($id);
-            if ($searchDataPp->getResultDb()) {
-                $this->data['form'] = $searchDataPp->getResultDb();
+            if ($searchDataPp->getResult()) {
+                $this->data['portion'] = $searchDataPp->getResultDb();
                 $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                 if (!empty($this->dataForm['SendProposal'])) {
                     unset($this->dataForm['SendProposal']);
@@ -54,12 +54,48 @@ class ViewProposal
                                             unset($this->dataForm[$key]);
                                         }
                                     }
+                                    $this->dataForm['observation'];
+                                    $valores_parcelas = array_values($this->dataForm);
+
+                                    $parcelas = [];
+                                    for ($i = 0; $i < count($valores_parcelas); $i += 2) {
+                                        // segurança: verifica se existe a data no índice seguinte
+                                        if (isset($valores_parcelas[$i]) && isset($valores_parcelas[$i + 1])) {
+                                            $numeroParcela = ($i / 2) + 1; // gera 1, 2, 3...
+                                            $parcelas["{$numeroParcela}_portion"] = [
+                                                "label" => "{$numeroParcela}ª",
+                                                "value" => $valores_parcelas[$i],
+                                                "date"  => $valores_parcelas[$i + 1]
+                                            ];
+                                        }
+                                    }
+
+                                    // Transforma em JSON
+                                    $jsonParcelas = json_encode($parcelas, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+                                    var_dump($jsonParcelas);
+
+                                    /*$valores_parcelas = array_values($this->dataForm);
+                                    var_dump($valores_parcelas);
+                                     {
+                                    //$this->dataForm['modified'] = date("Y-m-d H:i:s");
+                                    //$this->dataForm['possession'] = 0;
+                                    //$this->dataForm['internship_proposal'] = 2;
+                                    /*$upPp = new \Sts\Models\StsViewProposal();
+                                    $upPp->editProposal($id, $this->dataForm);
+                                    if ($upPp->getResult()) {
+                                        header("Location: " . "fgts/index");
+                                        exit;
+                                    } else {
+                                        header("Location: " . "fgts/index");
+                                        exit;
+                                    }*/
                                 }
                             }
                         }
                     }
                 } else {
-                    $this->data = [];
+                    $this->data['form'] = $searchDataPp->getResultDb();
                 }
             } else {
                 header("Location: " . URL . "page-err/index");

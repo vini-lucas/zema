@@ -30,9 +30,9 @@ if ((isset($_SESSION['msg-helper']))) {
     </thead>
     <tbody>
         <tr>
-            <td>1234</td>
-            <td>Lucas Vinicius</td>
-            <td>06/02/2006</td>
+            <td><?php echo $this->data['portion'][0]['cpf']; ?></td>
+            <td><?php echo $this->data['portion'][0]['name']; ?></td>
+            <td><?php echo $this->data['portion'][0]['date_birth']; ?></td>
         </tr>
     </tbody>
 </table>
