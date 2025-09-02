@@ -19,7 +19,7 @@ class ConfigController extends Config
     private string $url; // -> Recebe a URL informada pelo usuário.
     private string $urlController; // -> Recebe a URL da CONTROLLER informada.
     private string $urlMethod; // -> Recebe a URL do método informado.
-    private string $urlParameter; // -> Recebe a URL do parâmetro do método.
+    private string|int $urlParameter; // -> Recebe a URL do parâmetro do método.
     private array $urlArray; // -> Recebe o array da URL.
     private string $urlSlugController; // -> Recebe a URL da CONTROLLER limpa.
     private array $format;
@@ -123,7 +123,8 @@ class ConfigController extends Config
         if (class_exists($classLoad)) { // -> Se a classe existir então:
             if (method_exists($classLoad, $this->urlMethod)) { // -> Verifica se o método existe.
                 $classPage = new $classLoad(); // -> Depois, instancia a classe dessa controller.
-                $classPage->{$this->urlMethod}($this->urlParameter); // -> Depois, chama o método desta classe/controller junto do parâmetro.
+                $parameter = $this->urlParameter ? (int)$this->urlParameter : null;
+                $classPage->{$this->urlMethod}($parameter); // -> Depois, chama o método desta classe/controller junto do parâmetro.
             } else { // -> Se não existar, retorna este die:
                 $_SESSION['msg-helper'] = MSG_ERR_PAGE_NOT_FOUND_639;
                 header("Location: " . URL . "page-err/index");

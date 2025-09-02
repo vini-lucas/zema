@@ -50,7 +50,7 @@ foreach ($this->data['form'] as $pp) {
                 ?>
                 <td><?php echo $value_name; ?></td>
                 <?php
-                    if ($_SESSION['user_access_level'] == 'Cliente') {
+                    if (($_SESSION['user_access_level'] == 'Cliente') or ($_SESSION['user_access_level'] == 'Vendedor')) {
                         $address = "view-proposal-customer/index/"; 
                     } else {
                         $address = "view-proposal/index/";

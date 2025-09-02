@@ -218,3 +218,5 @@ if ((isset($_SESSION['msg-helper']))) {
 
     <a href="<?php echo URL; ?>fgts/index">Voltar</a>
 </form>
+<?php
+var_dump($this->data['internship']);

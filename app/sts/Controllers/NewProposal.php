@@ -31,6 +31,7 @@ class NewProposal
                     if ($valBirth->getResult()) {
                         $this->dataForm['possession'] = 1;
                         $this->dataForm['internship_proposal'] = 1;
+                        $this->dataForm['seller_cpf'] = $_SESSION['user_cpf'];
                         $newPpSeller = new \Sts\Models\StsNewProposal();
                         $newPpSeller->sendProposalSeller($this->dataForm);
                         if ($newPpSeller->getResult()) {
@@ -56,7 +57,8 @@ class NewProposal
                 'name' => implode(' ', $_SESSION['user_name']),
                 'created' => date("Y-m-d H:i:s"),
                 'possession' => 1,
-                'internship_proposal' => 1
+                'internship_proposal' => 1,
+                'seller_cpf' => 'VENDA PRÓPRIA'
             ];
             $newPpCustomer = new \Sts\Models\StsNewProposal();
             $newPpCustomer->sendProposalCustomer($dataForm[0]);

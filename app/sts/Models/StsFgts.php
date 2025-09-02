@@ -14,7 +14,6 @@ if (!defined('L4bar3tTA!')) {
  */
 class StsFgts
 {
-    private array|null $dataForm; // -> Recebe os dados que que a controller enviou.
     private bool $result; // -> Recebe o resultado da QUERY solicitada em 'login()'. 
     private array|null $resultDb;
 
@@ -40,7 +39,19 @@ class StsFgts
         }
     }
 
-    public function searchProposalsAll()
+    public function searchProposalsSeller(string $name)
+    {
+        $searchProposals = new \Sts\Models\helper\StsRead();
+        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE seller=:seller AND possession=:possession", "seller={$name}&possession=0");
+        if ($searchProposals->getResultDb() != null){
+            $this->resultDb = $searchProposals->getResultDb();
+            $this->result = true;
+        } else {
+            $this->result = false;
+        }
+    }
+
+    public function searchProposalsTable()
     {
         $searchProposalsAll = new \Sts\Models\helper\StsRead();
         $searchProposalsAll->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE possession=:possession", "possession=1");
@@ -52,15 +63,14 @@ class StsFgts
         }
     }
 
-    public function upLevelAccess(array $dataForm)
+    public function searchProposalsAll()
     {
-        $upLevel = new \Sts\Models\helper\StsUpdade();
-        $upLevel->exeUpdate("sts_access_new_user", $dataForm);
-        if ($upLevel->getResult()) {
-            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+        $searchProposalsAll = new \Sts\Models\helper\StsRead();
+        $searchProposalsAll->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts");
+        if ($searchProposalsAll->getResultDb() != null){
+            $this->resultDb = $searchProposalsAll->getResultDb();
             $this->result = true;
         } else {
-            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
             $this->result = false;
         }
     }

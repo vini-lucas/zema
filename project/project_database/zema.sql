@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 02/09/2025 às 14:31
+-- Tempo de geração: 02/09/2025 às 20:44
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.3.6
 
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `cpf` int NOT NULL,
   `enterprise` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `branch` int DEFAULT NULL,
-  `seller` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seller_cpf` varchar(220) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(110) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_birth` date NOT NULL,
   `gender` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -379,15 +379,14 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_proposal_fgts`
 --
 
-INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
-(1, 1234, NULL, NULL, NULL, 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'null', NULL, NULL, 1, '2025-09-01 16:21:19', NULL),
-(2, 1234, NULL, NULL, NULL, 'teste', '2006-09-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '{\"one_portion\": {\"label\": \"1ª\", \"value\": \"R$100,00\"}, \"six_portion\": {\"label\": \"6ª\", \"value\": \"R$100,00\"}, \"ten_portion\": {\"label\": \"10ª\", \"value\": \"R$100,00\"}, \"two_portion\": {\"label\": \"2ª\", \"value\": \"R$100,00\"}, \"five_portion\": {\"label\": \"5ª\", \"value\": \"R$100,00\"}, \"four_portion\": {\"label\": \"4ª\", \"value\": \"R$100,00\"}, \"nine_portion\": {\"label\": \"9ª\", \"value\": \"R$100,00\"}, \"eight_portion\": {\"label\": \"8ª\", \"value\": \"R$100,00\"}, \"seven_portion\": {\"label\": \"7ª\", \"value\": \"R$100,00\"}, \"three_portion\": {\"label\": \"3ª\", \"value\": \"R$100,00\"}}', NULL, NULL, 1, '2025-09-01 17:05:12', NULL);
+INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller_cpf`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
+(1, 1234, NULL, NULL, 'VENDA PRÓPRIA', 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-01-01\", \"value\": \"R$200,00\"}}', NULL, 'FACTA.', 2, '2025-09-02 18:07:49', '2025-09-02 20:40:50');
 
 -- --------------------------------------------------------
 

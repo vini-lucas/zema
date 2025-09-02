@@ -12,13 +12,28 @@ if (!defined('L4bar3tTA!')) {
 class Fgts
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
-    private array|null $dataForm; // -> Recebe os dados que o usuário informou no formulário.
 
     public function index()
     {
         if ($_SESSION['user_access_level'] == 'Cliente') {
             $modelFgts = new \Sts\Models\StsFgts();
             $modelFgts->searchProposalsCustomer($_SESSION['user_cpf']);
+            if ($modelFgts->getResult()) {
+                $this->data['form'] = $modelFgts->getResultDb();
+            } else {
+                $this->data['form'] = [];
+            }
+        } else if ($_SESSION['user_access_level'] == 'Vendedor') {
+            $modelFgts = new \Sts\Models\StsFgts();
+            $modelFgts->searchProposalsSeller($_SESSION['user_cpf']);
+            if ($modelFgts->getResult()) {
+                $this->data['form'] = $modelFgts->getResultDb();
+            } else {
+                $this->data['form'] = [];
+            }
+        } else if ($_SESSION['user_access_level'] == 'Administrador') {
+            $modelFgts = new \Sts\Models\StsFgts();
+            $modelFgts->searchProposalsTable();
             if ($modelFgts->getResult()) {
                 $this->data['form'] = $modelFgts->getResultDb();
             } else {
