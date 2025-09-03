@@ -89,7 +89,6 @@ class ViewProposal
                                     $this->dataForm['possession'] = 0;
                                     $this->dataForm['internship_proposal'] = 2;
                                     $this->dataForm['portions'] = $jsonParcelas;
-                                    $this->dataForm['value_released'] =
                                         $upPp = new \Sts\Models\StsViewProposal();
                                     $upPp->editProposal($this->id, $this->dataForm); // -> Depois sobe toda as alterações.
                                     if ($upPp->getResult()) { // -> E redireciona, independentemente se deu certo ou não.

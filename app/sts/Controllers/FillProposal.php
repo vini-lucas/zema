@@ -16,7 +16,8 @@ class FillProposal
 
     public function index()
     {
-        $this->data = [];
+        $id = filter_input(INPUT_GET, 'id', FILTER_DEFAULT);
+        $this->data['id'] = $id;
         $this->loadView();
     }
 

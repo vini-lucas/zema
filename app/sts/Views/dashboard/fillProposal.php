@@ -60,6 +60,6 @@ if ((isset($_SESSION['msg-helper']))) {
     <label>Número da CONTA:</label>
     <input type="text" name="account" placeholder="Ex.: 1234-5"><br><br>
 
-    <input type="submit" name="SendDataPp" value="Enviar PROPOSTA"> <a href="<?php echo URL; ?>view-proposal-customer/index/">Voltar</a>
+    <input type="submit" name="SendDataPp" value="Enviar PROPOSTA"> <a href="<?php echo URL; ?>view-proposal-customer/index/<?php echo $this->data['id']; ?>">Voltar</a>
 
 </form>

@@ -61,6 +61,7 @@ class StsUpdade extends StsConn
                 $_SESSION['msg-helper'] = MSG_VIOLATION_1062;
                 $this->result = false;
             }
+            echo $err->getMessage();
             $this->result = false;
         }
     }

@@ -66,7 +66,7 @@ class StsFgts
     public function searchProposalsAll()
     {
         $searchProposalsAll = new \Sts\Models\helper\StsRead();
-        $searchProposalsAll->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts");
+        $searchProposalsAll->fullRead("SELECT id, cpf, name, possession FROM sts_proposal_fgts");
         if ($searchProposalsAll->getResultDb() != null){
             $this->resultDb = $searchProposalsAll->getResultDb();
             $this->result = true;
