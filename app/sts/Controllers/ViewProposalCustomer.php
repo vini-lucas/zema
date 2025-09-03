@@ -13,10 +13,17 @@ class ViewProposalCustomer
 {
     private array|null $data; // -> Recebe os dados que serão enviados para a view.
     private array|null $dataForm; // -> Recebe os dados que o usuário informou no formulário.
+    private int|null $id; // -> Recebe o ID da proposta.
 
-    public function index()
+    public function index(int|null $id)
     {
-        $this->data = [];
+        $this->id = $id; // -> Recebe o ID da proposta.
+        $viewPp = new \Sts\Models\StsViewProposalCustomer();
+        $viewPp->searchDataPp($this->id);
+        if ($viewPp->getResult()) {
+            $this->data['form'] = $viewPp->getResultDb();
+            $this->data['portions'] = json_decode($viewPp->getResultDb()[0]['portions'], true);
+        }
         $this->loadView();
     }
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 02/09/2025 às 20:44
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 03/09/2025 às 11:10
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -370,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `bank` int DEFAULT NULL,
   `agency` int DEFAULT NULL,
   `account` int DEFAULT NULL,
-  `possession` tinyint(1) NOT NULL COMMENT '1 = com a mesa, 0 = com o cliente/vendedor, 2 = cancelada.',
+  `possession` tinyint(1) NOT NULL COMMENT '0 -> Operação com o CLIENTE.\r\n1 -> Operação com a MESA.\r\n2 ->Operação CANCELADA ou PAGA.',
   `value_released` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `portions` json NOT NULL,
   `date_portions` date DEFAULT NULL,
@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
 --
 
 INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller_cpf`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
-(1, 1234, NULL, NULL, 'VENDA PRÓPRIA', 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-01-01\", \"value\": \"R$200,00\"}}', NULL, 'FACTA.', 2, '2025-09-02 18:07:49', '2025-09-02 20:40:50');
+(1, 1234, NULL, NULL, 'VENDA PRÓPRIA', 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-01-01\", \"value\": \"R$200,00\"}}', NULL, 'FACTA.', 2, '2025-09-02 18:07:49', '2025-09-03 02:29:06');
 
 -- --------------------------------------------------------
 

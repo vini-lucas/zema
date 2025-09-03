@@ -30,9 +30,9 @@ if ((isset($_SESSION['msg-helper']))) {
     </thead>
     <tbody>
         <tr>
-            <td><?php echo $this->data['portion'][0]['cpf']; ?></td>
-            <td><?php echo $this->data['portion'][0]['name']; ?></td>
-            <td><?php echo $this->data['portion'][0]['date_birth']; ?></td>
+            <td><?php echo $this->data['portion'][0]; ?></td>
+            <td><?php echo $this->data['portion'][1]; ?></td>
+            <td><?php echo $this->data['portion'][2]; ?></td>
         </tr>
     </tbody>
 </table>
@@ -219,4 +219,23 @@ if ((isset($_SESSION['msg-helper']))) {
     <a href="<?php echo URL; ?>fgts/index">Voltar</a>
 </form>
 <?php
-var_dump($this->data['internship']);
+echo "<hr>";
+if ($this->data['form'][0]['internship_proposal'] === 1) {
+    echo "Estágio 1: Mesa recebe a OPERAÇÃO com o CPF, NOME e DN preenchidos pelo USUÁRIO!";
+} else if ($this->data['form'][0]['internship_proposal'] === 2) {
+    echo "Estágio 2: Beneficiário recebe a OPERAÇÃO com o valor LIBERADO, pendência REGISTRADA ou CANCELAMENTO!";
+} else if ($this->data['form'][0]['internship_proposal'] === 3) {
+    echo "Estágio 3: Mesa recebe a OPERAÇÃO com o valor ESCOLHIDO ou pendência CORRIGIDA!";
+} else if ($this->data['form'][0]['internship_proposal'] === 4) {
+    echo "Estágio 4: Benenfiário recebe a OPERAÇÃO com a proposta DIGITADA e o link de FORMALIZAÇÃO disponível na OBSERVAÇÃO (cliente não atua mais na proposta)!";
+} else if ($this->data['form'][0]['internship_proposal'] === 5) {
+    echo "Estágio 5: Mesa atualiza a operação para PAGA ou CANCELADA.";
+}
+echo "<hr>";
+if ($this->data['form'][0]['possession'] === 0) {
+    echo "Operação com o CLIENTE!";
+} else if ($this->data['form'][0]['possession'] === 1) {
+    echo "Operação com a MESA!";
+} else if ($this->data['form'][0]['possession'] === 2) {
+    echo "Operação CANCELADA ou PAGA.";
+}
