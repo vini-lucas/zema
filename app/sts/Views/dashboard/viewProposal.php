@@ -78,7 +78,7 @@ if ((isset($_SESSION['msg-helper']))) {
                 }
                 ?>
                 <td><input type="text" name="portions_two" value="<?php echo $value_two; ?>" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_two" value="<?php echo $value_date_two; ?>" ></td>
+                <td><input type="date" name="date_portions_two" value="<?php echo $value_date_two; ?>"></td>
             </tr>
             <tr>
                 <td>3ª</td>
@@ -93,7 +93,7 @@ if ((isset($_SESSION['msg-helper']))) {
                 }
                 ?>
                 <td><input type="text" name="portions_three" value="<?php echo $value_three; ?>" placeholder="R$ XXX,XX"></td>
-                <td><input type="date" name="date_portions_three" value="<?php echo $value_date_three; ?>" ></td>
+                <td><input type="date" name="date_portions_three" value="<?php echo $value_date_three; ?>"></td>
             </tr>
             <tr>
                 <td>4ª</td>
@@ -107,8 +107,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_four = $date_portions_four;
                 }
                 ?>
-                <td><input type="text" name="portions_four" placeholder="R$ XXX,XX" value="<?php echo $value_four; ?>" ></td>
-                <td><input type="date" name="date_portions_four" value="<?php echo $value_date_four; ?>" ></td>
+                <td><input type="text" name="portions_four" placeholder="R$ XXX,XX" value="<?php echo $value_four; ?>"></td>
+                <td><input type="date" name="date_portions_four" value="<?php echo $value_date_four; ?>"></td>
             </tr>
             <tr>
                 <td>5ª</td>
@@ -122,8 +122,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_five = $date_portions_five;
                 }
                 ?>
-                <td><input type="text" name="portions_five" placeholder="R$ XXX,XX" value="<?php echo $value_five; ?>" ></td>
-                <td><input type="date" name="date_portions_five" value="<?php echo $value_date_five; ?>" ></td>
+                <td><input type="text" name="portions_five" placeholder="R$ XXX,XX" value="<?php echo $value_five; ?>"></td>
+                <td><input type="date" name="date_portions_five" value="<?php echo $value_date_five; ?>"></td>
             </tr>
             <tr>
                 <td>6ª</td>
@@ -137,8 +137,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_six = $date_portions_six;
                 }
                 ?>
-                <td><input type="text" name="portions_six" placeholder="R$ XXX,XX" value="<?php echo $value_six; ?>" ></td>
-                <td><input type="date" name="date_portions_six" value="<?php echo $value_date_six; ?>" ></td>
+                <td><input type="text" name="portions_six" placeholder="R$ XXX,XX" value="<?php echo $value_six; ?>"></td>
+                <td><input type="date" name="date_portions_six" value="<?php echo $value_date_six; ?>"></td>
             </tr>
             <tr>
                 <td>7ª</td>
@@ -152,8 +152,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_seven = $date_portions_seven;
                 }
                 ?>
-                <td><input type="text" name="portions_seven" placeholder="R$ XXX,XX" value="<?php echo $value_seven; ?>" ></td>
-                <td><input type="date" name="date_portions_seven" value="<?php echo $value_date_seven; ?>" ></td>
+                <td><input type="text" name="portions_seven" placeholder="R$ XXX,XX" value="<?php echo $value_seven; ?>"></td>
+                <td><input type="date" name="date_portions_seven" value="<?php echo $value_date_seven; ?>"></td>
             </tr>
             <tr>
                 <td>8ª</td>
@@ -167,8 +167,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_eight = $date_portions_eight;
                 }
                 ?>
-                <td><input type="text" name="portions_eight" placeholder="R$ XXX,XX" value="<?php echo $value_eight; ?>" ></td>
-                <td><input type="date" name="date_portions_eight" value="<?php echo $value_date_eight; ?>" ></td>
+                <td><input type="text" name="portions_eight" placeholder="R$ XXX,XX" value="<?php echo $value_eight; ?>"></td>
+                <td><input type="date" name="date_portions_eight" value="<?php echo $value_date_eight; ?>"></td>
             </tr>
             <tr>
                 <td>9ª</td>
@@ -182,8 +182,8 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_nine = $date_portions_nine;
                 }
                 ?>
-                <td><input type="text" name="portions_nine" placeholder="R$ XXX,XX" value="<?php echo $value_nine; ?>" ></td>
-                <td><input type="date" name="date_portions_nine" value="<?php echo $value_date_nine; ?>" ></td>
+                <td><input type="text" name="portions_nine" placeholder="R$ XXX,XX" value="<?php echo $value_nine; ?>"></td>
+                <td><input type="date" name="date_portions_nine" value="<?php echo $value_date_nine; ?>"></td>
             </tr>
             <tr>
                 <td>10ª</td>
@@ -197,8 +197,18 @@ if ((isset($_SESSION['msg-helper']))) {
                     $value_date_ten = $date_portions_ten;
                 }
                 ?>
-                <td><input type="text" name="portions_ten" placeholder="R$ XXX,XX" value="<?php echo $value_ten; ?>" ></td>
-                <td><input type="date" name="date_portions_ten" value="<?php echo $value_date_ten; ?>" ></td>
+                <td><input type="text" name="portions_ten" placeholder="R$ XXX,XX" value="<?php echo $value_ten; ?>"></td>
+                <td><input type="date" name="date_portions_ten" value="<?php echo $value_date_ten; ?>"></td>
+            </tr>
+            <tr>
+                <td>Informe o VALOR LIBERADO.</td>
+                <?php
+                $value_value_released = "";
+                if (!empty($value_released)) {
+                    $value_value_released = $value_released;
+                }
+                ?>
+                <td><input type="text" name="value_released" value="<?php echo $value_value_released; ?>" placeholder="Ex.: R$ XXX,XX"></td>
             </tr>
         </tbody>
     </table>

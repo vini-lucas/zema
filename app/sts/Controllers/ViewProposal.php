@@ -67,32 +67,38 @@ class ViewProposal
                                 $this->data['form'] = $this->dataForm; // -> Se não preencheu nada na OBS mantém os dados no formulário e mostra essa MSG.
                                 $_SESSION['msg'] = "<p style='color: red;'>Informe a OBSERVAÇÃO antes de enviar a SIMULAÇÃO!</p>";
                             } else { // -> Se preencheu a OBS, então:
-                                $parcelas = [];
-                                for ($i = 1; $i <= 10; $i++) {
-                                    $suf = $suffixes[$i];
-                                    $valor = $this->dataForm["portions_{$suf}"] ?? '';
-                                    $data  = $this->dataForm["date_portions_{$suf}"] ?? ''; // -> Aqui e acima percorre todas as parcelas para verificar se o valor e data foram preenchidos.
-                                    if ($valor !== '' && $data !== '') { // -> As que foram preenchidas viram esse json.
-                                        $parcelas["{$i}_portion"] = [
-                                            "value" => $valor,
-                                            "date"  => $data
-                                        ];
-                                    }
-                                    unset($this->dataForm["portions_{$suf}"], $this->dataForm["date_portions_{$suf}"]); // -> As que não foram são deletadas.
-                                }
-                                $jsonParcelas = json_encode($parcelas, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); // Depois, as transorma num json para encaminhar ao banco de dados.
-                                $this->dataForm['modified'] = date("Y-m-d H:i:s");
-                                $this->dataForm['possession'] = 0;
-                                $this->dataForm['internship_proposal'] = 2;
-                                $this->dataForm['portions'] = $jsonParcelas;
-                                $upPp = new \Sts\Models\StsViewProposal();
-                                $upPp->editProposal($this->id, $this->dataForm); // -> Depois sobe toda as alterações.
-                                if ($upPp->getResult()) { // -> E redireciona, independentemente se deu certo ou não.
-                                    header("Location: " . URL . "fgts/index");
-                                    exit;
+                                if ($this->dataForm['value_released'] == '') {
+                                    $this->data['form'] = $this->dataForm; // -> Se não preencheu nada no VALOR LIBERADO, mantém os dados no formulário e mostra essa MSG.
+                                    $_SESSION['msg'] = "<p style='color: red;'>Informe o VALOR LIBERADO antes de enviar a SIMULAÇÃO!</p>";
                                 } else {
-                                    header("Location: " . URL . "fgts/index");
-                                    exit;
+                                    $parcelas = [];
+                                    for ($i = 1; $i <= 10; $i++) {
+                                        $suf = $suffixes[$i];
+                                        $valor = $this->dataForm["portions_{$suf}"] ?? '';
+                                        $data  = $this->dataForm["date_portions_{$suf}"] ?? ''; // -> Aqui e acima percorre todas as parcelas para verificar se o valor e data foram preenchidos.
+                                        if ($valor !== '' && $data !== '') { // -> As que foram preenchidas viram esse json.
+                                            $parcelas["{$i}_portion"] = [
+                                                "value" => $valor,
+                                                "date"  => $data
+                                            ];
+                                        }
+                                        unset($this->dataForm["portions_{$suf}"], $this->dataForm["date_portions_{$suf}"]); // -> As que não foram são deletadas.
+                                    }
+                                    $jsonParcelas = json_encode($parcelas, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); // Depois, as transorma num json para encaminhar ao banco de dados.
+                                    $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                                    $this->dataForm['possession'] = 0;
+                                    $this->dataForm['internship_proposal'] = 2;
+                                    $this->dataForm['portions'] = $jsonParcelas;
+                                    $this->dataForm['value_released'] =
+                                        $upPp = new \Sts\Models\StsViewProposal();
+                                    $upPp->editProposal($this->id, $this->dataForm); // -> Depois sobe toda as alterações.
+                                    if ($upPp->getResult()) { // -> E redireciona, independentemente se deu certo ou não.
+                                        header("Location: " . URL . "fgts/index");
+                                        exit;
+                                    } else {
+                                        header("Location: " . URL . "fgts/index");
+                                        exit;
+                                    }
                                 }
                             }
                         }

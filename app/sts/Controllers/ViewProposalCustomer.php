@@ -19,10 +19,14 @@ class ViewProposalCustomer
     {
         $this->id = $id; // -> Recebe o ID da proposta.
         $viewPp = new \Sts\Models\StsViewProposalCustomer();
-        $viewPp->searchDataPp($this->id);
-        if ($viewPp->getResult()) {
+        $viewPp->searchDataPp($this->id); // -> Busca no BD os dados da proposta com este ID.
+        if ($viewPp->getResult()) { // -> E os encaminha para a VIEW.
             $this->data['form'] = $viewPp->getResultDb();
             $this->data['portions'] = json_decode($viewPp->getResultDb()[0]['portions'], true);
+            $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            if (!empty($this->dataForm['accept_value'])) {
+                var_dump($this->dataForm);
+            }
         }
         $this->loadView();
     }

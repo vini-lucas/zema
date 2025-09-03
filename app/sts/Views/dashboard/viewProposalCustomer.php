@@ -42,6 +42,7 @@ if ((isset($_SESSION['msg-helper']))) {
 </table>
 <hr>
 <h2>Valores LIBERADOS:</h2>
+<p>Valor LIBERADO: <?php echo $this->data['form'][0]['value_released']; ?>.</p>
 <table>
     <thead>
         <tr>
@@ -55,92 +56,142 @@ if ((isset($_SESSION['msg-helper']))) {
         <tr>
             <td>1ª</td>
             <?php
-            $one_portion = $this->data['portions']['1_portion'] ? $this->data['portions']['1_portion']['value'] : "";
-            $one_portion_date = $this->data['portions']['1_portion'] ? $this->data['portions']['1_portion']['date'] : "";
+            $one_portion = "";
+            $one_portion_date = "";
+            if ((isset($this->data['portions']['1_portion']['value'])) and (isset($this->data['portions']['1_portion']['date']))) {
+                $one_portion = $this->data['portions']['1_portion']['value'];
+                $one_portion_date = $this->data['portions']['1_portion']['date'];
+            }
             ?>
             <td><?php echo $one_portion; ?></td>
             <td><?php echo $one_portion_date; ?></td>
+            <td><input type="radio" name="one"></td>
         </tr>
         <tr>
             <td>2ª</td>
             <?php
-            $two_portion = $this->data['portions']['2_portion'] ? $this->data['portions']['2_portion']['value'] : "";
-            $two_portion_date = $this->data['portions']['2_portion'] ? $this->data['portions']['2_portion']['date'] : "";
+            $two_portion = "";
+            $two_portion_date = "";
+            if ((isset($this->data['portions']['2_portion']['value'])) and (isset($this->data['portions']['2_portion']['date']))) {
+                $two_portion = $this->data['portions']['2_portion']['value'];
+                $two_portion_date = $this->data['portions']['2_portion']['date'];
+            }
             ?>
             <td><?php echo $two_portion; ?></td>
             <td><?php echo $two_portion_date; ?></td>
+            <td><input type="radio" name="two"></td>
         </tr>
         <tr>
             <td>3ª</td>
             <?php
-            $three_portion = $this->data['portions']['3_portion'] ? $this->data['portions']['3_portion']['value'] : "";
-            $three_portion_date = $this->data['portions']['3_portion'] ? $this->data['portions']['3_portion']['date'] : "";
+            $three_portion = "";
+            $three_portion_date = "";
+            if ((isset($this->data['portions']['3_portion']['value'])) and (isset($this->data['portions']['3_portion']['date']))) {
+                $three_portion = $this->data['portions']['3_portion']['value'];
+                $three_portion_date = $this->data['portions']['3_portion']['date'];
+            }
             ?>
             <td><?php echo $three_portion; ?></td>
             <td><?php echo $three_portion_date; ?></td>
+            <td><input type="radio" name="three"></td>
         </tr>
         <tr>
             <td>4ª</td>
             <?php
-            $four_portion = $this->data['portions']['4_portion'] ? $this->data['portions']['4_portion']['value'] : "";
-            $four_portion_date = $this->data['portions']['4_portion'] ? $this->data['portions']['4_portion']['date'] : "";
+            $four_portion = "";
+            $four_portion_date = "";
+            if ((isset($this->data['portions']['4_portion']['value'])) and (isset($this->data['portions']['4_portion']['date']))) {
+                $four_portion = $this->data['portions']['4_portion']['value'];
+                $four_portion_date = $this->data['portions']['4_portion']['date'];
+            }
             ?>
             <td><?php echo $four_portion; ?></td>
             <td><?php echo $four_portion_date; ?></td>
+            <td><input type="radio" name="four"></td>
         </tr>
         <tr>
             <td>5ª</td>
             <?php
-            $five_portion = $this->data['portions']['5_portion'] ? $this->data['portions']['5_portion']['value'] : "";
-            $five_portion_date = $this->data['portions']['5_portion'] ? $this->data['portions']['5_portion']['date'] : "";
+            $five_portion = "";
+            $five_portion_date = "";
+            if ((isset($this->data['portions']['5_portion']['value'])) and (isset($this->data['portions']['5_portion']['date']))) {
+                $five_portion = $this->data['portions']['5_portion']['value'];
+                $five_portion_date = $this->data['portions']['5_portion']['date'];
+            }
             ?>
             <td><?php echo $five_portion; ?></td>
             <td><?php echo $five_portion_date; ?></td>
+            <td><input type="radio" name="five"></td>
         </tr>
         <tr>
             <td>6ª</td>
             <?php
-            $six_portion = $this->data['portions']['6_portion'] ? $this->data['portions']['6_portion']['value'] : "";
-            $six_portion_date = $this->data['portions']['6_portion'] ? $this->data['portions']['6_portion']['date'] : "";
+            $six_portion = "";
+            $six_portion_date = "";
+            if ((isset($this->data['portions']['6_portion']['value'])) and (isset($this->data['portions']['6_portion']['date']))) {
+                $six_portion = $this->data['portions']['6_portion']['value'];
+                $six_portion_date = $this->data['portions']['6_portion']['date'];
+            }
             ?>
             <td><?php echo $six_portion; ?></td>
             <td><?php echo $six_portion_date; ?></td>
+            <td><input type="radio" name="six"></td>
         </tr>
         <tr>
             <td>7ª</td>
             <?php
-            $seven_portion = $this->data['portions']['7_portion'] ? $this->data['portions']['7_portion']['value'] : "";
-            $seven_portion_date = $this->data['portions']['7_portion'] ? $this->data['portions']['7_portion']['date'] : "";
+            $seven_portion = "";
+            $seven_portion_date = "";
+            if ((isset($this->data['portions']['7_portion']['value'])) and (isset($this->data['portions']['7_portion']['date']))) {
+                $seven_portion = $this->data['portions']['7_portion']['value'];
+                $seven_portion_date = $this->data['portions']['7_portion']['date'];
+            }
             ?>
             <td><?php echo $seven_portion; ?></td>
             <td><?php echo $seven_portion_date; ?></td>
+            <td><input type="radio" name="seven"></td>
         </tr>
         <tr>
             <td>8ª</td>
             <?php
-            $eight_portion = $this->data['portions']['8_portion'] ? $this->data['portions']['8_portion']['value'] : "";
-            $eight_portion_date = $this->data['portions']['8_portion'] ? $this->data['portions']['8_portion']['date'] : "";
+            $eight_portion = "";
+            $eight_portion_date = "";
+            if ((isset($this->data['portions']['8_portion']['value'])) and (isset($this->data['portions']['8_portion']['date']))) {
+                $eight_portion = $this->data['portions']['8_portion']['value'];
+                $eight_portion_date = $this->data['portions']['8_portion']['date'];
+            }
             ?>
             <td><?php echo $eight_portion; ?></td>
             <td><?php echo $eight_portion_date; ?></td>
+            <td><input type="radio" name="eight"></td>
         </tr>
         <tr>
             <td>9ª</td>
             <?php
-            $nine_portion = $this->data['portions']['9_portion'] ? $this->data['portions']['9_portion']['value'] : "";
-            $nine_portion_date = $this->data['portions']['9_portion'] ? $this->data['portions']['9_portion']['date'] : "";
+            $nine_portion = "";
+            $nine_portion_date = "";
+            if ((isset($this->data['portions']['9_portion']['value'])) and (isset($this->data['portions']['9_portion']['date']))) {
+                $nine_portion = $this->data['portions']['9_portion']['value'];
+                $nine_portion_date = $this->data['portions']['9_portion']['date'];
+            }
             ?>
             <td><?php echo $nine_portion; ?></td>
             <td><?php echo $nine_portion_date; ?></td>
+            <td><input type="radio" name="nine"></td>
         </tr>
         <tr>
             <td>10ª</td>
             <?php
-            $ten_portion = $this->data['portions']['10_portion'] ? $this->data['portions']['10_portion']['value'] : "";
-            $ten_portion_date = $this->data['portions']['10_portion'] ? $this->data['portions']['10_portion']['date'] : "";
+            $ten_portion = "";
+            $ten_portion_date = "";
+            if ((isset($this->data['portions']['10_portion']['value'])) and (isset($this->data['portions']['10_portion']['date']))) {
+                $ten_portion = $this->data['portions']['10_portion']['value'];
+                $ten_portion_date = $this->data['portions']['10_portion']['date'];
+            }
             ?>
             <td><?php echo $ten_portion; ?></td>
             <td><?php echo $ten_portion_date; ?></td>
+            <td><input type="radio" name="ten"></td>
         </tr>
     </tbody>
 </table>
