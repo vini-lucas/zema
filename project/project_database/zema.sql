@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04/09/2025 às 11:28
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Tempo de geração: 04/09/2025 às 20:52
+-- Versão do servidor: 8.3.0
+-- Versão do PHP: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -350,6 +350,34 @@ INSERT INTO `sts_pages` (`id`, `controller`, `public`, `created`, `modified`) VA
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `sts_proposal_bank`
+--
+
+DROP TABLE IF EXISTS `sts_proposal_bank`;
+CREATE TABLE IF NOT EXISTS `sts_proposal_bank` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cpf` int NOT NULL,
+  `name` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_birth` date NOT NULL,
+  `gender` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_mother` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_father` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` int NOT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cep` int NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bank` int NOT NULL,
+  `agency` int NOT NULL,
+  `account` int NOT NULL,
+  `value_proposal` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `portions` json NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `sts_proposal_fgts`
 --
 
@@ -375,20 +403,20 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `possession` tinyint(1) NOT NULL COMMENT '0 -> Operação com o CLIENTE.\r\n1 -> Operação com a MESA.\r\n2 -> Operação CANCELADA.\r\n3 -> Operação PAGA.',
   `value_released` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `portions` json NOT NULL,
-  `date_portions` date DEFAULT NULL,
   `observation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `internship_proposal` int NOT NULL COMMENT '0 -> Vendedor (ou superior) está cadastrando o nome, CPF e data/nascimento para encaminhar operação;\r\n1 -> Mesa recebe a operação com estes dados preenchidos;\r\n2 -> Beneficiário recebe a operação com o valor liberado, pendência registrada ou cancelamento;\r\n3 -> Mesa recebe a operação com o valor escolhido ou pendência corrigida;\r\n4 -> Cliente recebe operação com a operação digitada e o link de formalização disponível (cliente não atua mais na proposta);\r\n5 -> Mesa atualiza a operação para paga ou cancelada.',
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_proposal_fgts`
 --
 
-INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller_cpf`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
-(1, 111, NULL, NULL, '12428432990', 'VENDEDOR', '2001-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'R$500,00', '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-02-02\", \"value\": \"R$200,00\"}}', NULL, 'FACTA.', 2, '0000-00-00 00:00:00', '2025-09-04 02:57:41');
+INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller_cpf`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
+(1, 111, NULL, NULL, '12428432990', 'VENDEDOR', '2001-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'R$700,00', '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-02-02\", \"value\": \"R$200,00\"}}', 'MERCANTIL.', 2, '0000-00-00 00:00:00', '2025-09-04 12:00:31'),
+(3, 1234, NULL, NULL, 'VENDA PRÓPRIA', 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '3333', '{\"1_portion\": {\"date\": \"1111-11-11\", \"value\": \"1111\"}, \"2_portion\": {\"date\": \"2222-02-22\", \"value\": \"2222\"}}', 'MERCANTIL', 2, '2025-09-04 12:00:42', '2025-09-04 12:19:50');
 
 -- --------------------------------------------------------
 

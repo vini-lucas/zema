@@ -53,13 +53,13 @@ foreach ($this->data['form'] as $pp) {
 
                 <td>
                     <?php
-                    if ($this->data['form'][0]['possession'] == 0) {
+                    if ($possession == 0) {
                         echo "Com o CLIENTE/VENDEDOR.";
-                    } else if ($this->data['form'][0]['possession'] == 1) {
+                    } else if ($possession == 1) {
                         echo "Com a MESA.";
-                    } else if ($this->data['form'][0]['possession'] == 2) {
+                    } else if ($possession == 2) {
                         echo "Cancelada.";
-                    }else if ($this->data['form'][0]['possession'] == 3) {
+                    }else if ($possession == 3) {
                         echo "Paga.";
                     }
                     ?>

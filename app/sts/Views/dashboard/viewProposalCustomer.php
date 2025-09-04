@@ -220,11 +220,16 @@ if ((isset($_SESSION['msg-helper']))) {
 <hr>
 
 <form method="POST" action="">
-    <textarea name="obs" placeholder="Envie uma MENSAGEM para a MESA."></textarea><br><br>
+    <?php
+    if (!empty($this->data['form'][0]['observation'])) {
+        $value_observation = $this->data['form'][0]['observation'];
+    }
+    ?>
+    <textarea name="obs" placeholder="Envie uma MENSAGEM para a MESA."><?php echo $value_observation; ?></textarea><br><br>
     <input type="submit" name="del_pp" value="Cancelar OPERAÇÃO.">
     <input type="submit" name="only_obs" value="Devolver somente informando a OBSERVAÇÃO."><br><br>
 </form>
-
+<a href="<?php echo URL; ?>fgts/index">Voltar</a>
 <?php
 echo "<hr>";
 if ($this->data['form'][0]['internship_proposal'] === 1) {
