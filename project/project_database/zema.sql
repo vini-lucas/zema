@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 03/09/2025 às 20:45
--- Versão do servidor: 8.3.0
--- Versão do PHP: 8.3.6
+-- Tempo de geração: 04/09/2025 às 11:28
+-- Versão do servidor: 9.1.0
+-- Versão do PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -381,14 +381,14 @@ CREATE TABLE IF NOT EXISTS `sts_proposal_fgts` (
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `sts_proposal_fgts`
 --
 
 INSERT INTO `sts_proposal_fgts` (`id`, `cpf`, `enterprise`, `branch`, `seller_cpf`, `name`, `date_birth`, `gender`, `name_mother`, `name_father`, `telephone`, `email`, `cep`, `address`, `bank`, `agency`, `account`, `possession`, `value_released`, `portions`, `date_portions`, `observation`, `internship_proposal`, `created`, `modified`) VALUES
-(4, 1234, NULL, NULL, 'VENDA PRÓPRIA', 'Elias Miguel', '2020-08-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'null', NULL, NULL, 1, '2025-09-03 19:36:06', NULL);
+(1, 111, NULL, NULL, '12428432990', 'VENDEDOR', '2001-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'R$500,00', '{\"1_portion\": {\"date\": \"2001-01-01\", \"value\": \"R$100,00\"}, \"2_portion\": {\"date\": \"2002-02-02\", \"value\": \"R$200,00\"}}', NULL, 'FACTA.', 2, '0000-00-00 00:00:00', '2025-09-04 02:57:41');
 
 -- --------------------------------------------------------
 
