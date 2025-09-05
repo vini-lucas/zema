@@ -1,3 +1,7 @@
+// Retirar ERRO ao RECARREGAR FORMULÁRIO: --------------------------------------------------------------------
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
 // Formulários:-----------------------------------------------------------------------------------------------
 const formRegister = document.getElementById("form-register");
 const formEditPass = document.getElementById("form-edit-pass");
