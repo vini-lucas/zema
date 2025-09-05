@@ -30,9 +30,23 @@ class ViewProposalCustomer
                     $upDataPp = $_SESSION['data-form'];
                     $upDataPp['modified'] = date("Y-m-d H:i:s");
                     $upDataPp['possession'] = 1;
-                    var_dump($upDataPp);
-                    var_dump($this->data['form']);
+                    $upDataPp['value_released'] = $this->data['form'][0]['value_released'];
+                    $upDataPp['portions'] = $this->data['form'][0]['portions'];
+                    $upDataPp['observation'] = "Simulação ACEITA pelo USUÁRIO!";
+                    $upDataPp['internship_proposal'] = 3;
                     $upPp = new \Sts\Models\helper\StsUpdade();
+                    $upPp->exeUpdate("sts_proposal_fgts", $upDataPp, "WHERE id=:id", "id={$this->id}");
+                    if ($upPp->getResult()) {
+                        unset($_SESSION['data-form']);
+                        $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                        header("Location: " . URL . "fgts/index");
+                        exit;
+                    } else {
+                        unset($_SESSION['data-form']);
+                        $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                        header("Location: " . URL . "fgts/index");
+                        exit;
+                    }
                 } else {
                     $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
                     if (!empty($this->dataForm['accept_value'])) { // -> Se o usuário clicar no botão "ACEITAR VALOR LIBERADO", então:
@@ -83,16 +97,35 @@ class ViewProposalCustomer
                         }
                     } else if (!empty($this->dataForm['only_obs'])) {
                         unset($this->dataForm['only_obs']);
-                        if ($this->dataForm['obs'] == '') {
+                        if ($this->dataForm['observation'] == '') {
                             $_SESSION['msg'] = "<p style='color: red;'>Informe a OBSERVAÇÃO antes de realizar a devolução da OPERAÇÃO!</p>";
                             $this->data['form'] = $viewPp->getResultDb();
                             $this->loadViewTwo(); // -> Carrega a VIEW específica para este estágio.
+                        } else {
+                            $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                            $this->dataForm['possession'] = 1;
+                            $this->dataForm['internship_proposal'] = 2;
+                            $upPp = new \Sts\Models\helper\StsUpdade();
+                            $upPp->exeUpdate("sts_proposal_fgts", $this->dataForm, "WHERE id=:id", "id={$this->id}");
+                            if ($upPp->getResult()) {
+                                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                                header("Location: " . URL . "fgts/index");
+                                exit;
+                            } else {
+                                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                                header("Location: " . URL . "fgts/index");
+                                exit;
+                            }
                         }
                     } else {
                         $this->loadViewTwo(); // -> Carrega a VIEW específica para este estágio.
                         //var_dump($fillPp->resultController());
                     }
                 }
+                // ESTÁGIO 4 ------------------------------------------------------------------------------------
+            } else if (($viewPp->getResultDb()[0]['internship_proposal'] === 4) or ($viewPp->getResultDb()[0]['internship_proposal'] === 5)) {
+                $this->data['form'] = $viewPp->getResultDb()[0];
+                $this->loadViewThree();
             }
         } else {
             $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND;
@@ -105,5 +138,11 @@ class ViewProposalCustomer
     {
         $loadView = new \Core\ConfigView();
         $loadView->loadView("app/sts/Views/dashboard/proposalCustomerTwo", $this->data);
+    }
+
+    public function loadViewThree()
+    {
+        $loadView = new \Core\ConfigView();
+        $loadView->loadView("app/sts/Views/dashboard/proposalCustomerThree", $this->data);
     }
 }

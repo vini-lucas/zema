@@ -61,6 +61,8 @@ foreach ($this->data['form'] as $pp) {
                         echo "Cancelada.";
                     }else if ($possession == 3) {
                         echo "Paga.";
+                    } else if ($possession == 4) {
+                        echo "Aguardando FORMALIZAÇÃO DIGITAL.";
                     }
                     ?>
                 </td>

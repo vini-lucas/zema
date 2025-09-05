@@ -30,7 +30,7 @@ class StsFgts
     public function searchProposalsCustomer(string $cpf)
     {
         $searchProposals = new \Sts\Models\helper\StsRead();
-        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE cpf=:cpf AND possession=:possession", "cpf={$cpf}&possession=0");
+        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE cpf=:cpf AND (possession=:possession OR possession=:possession_other OR possession=:possession_other_two OR possession=:possession_other_three)", "cpf={$cpf}&possession=0&possession_other=2&possession_other_two=3&possession_other_three=4");
         if ($searchProposals->getResultDb() != null){
             $this->resultDb = $searchProposals->getResultDb();
             $this->result = true;
@@ -42,7 +42,7 @@ class StsFgts
     public function searchProposalsSeller(string $name)
     {
         $searchProposals = new \Sts\Models\helper\StsRead();
-        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE seller=:seller AND possession=:possession", "seller={$name}&possession=0");
+        $searchProposals->fullRead("SELECT id, cpf, name FROM sts_proposal_fgts WHERE seller=:seller AND (possession=:possession OR possession=:possession_other OR possession=:possession_other_two OR possession=:possession_other_three)", "seller={$name}&possession=0&possession_other=2&possession_other_two=3&possession_other_three=4");
         if ($searchProposals->getResultDb() != null){
             $this->resultDb = $searchProposals->getResultDb();
             $this->result = true;

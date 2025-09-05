@@ -264,8 +264,8 @@ if ((isset($_SESSION['msg-helper']))) {
 
     <h2>Ações</h2>
     <input type="submit" name="SendProposal" value="Enviar SIMULAÇÃO"> -
-    <button>Devolver somente com OBSERVAÇÃO</button> -
-    <button name="DelProposal">Cancelar PROPOSTA</button>
+    <input type="submit" name="OnlyObs" value="Devolver somente com OBSERVAÇÃO"> -
+    <input type="submit" name="DelProposal" value="Cancelar PROPOSTA">
 
     <br><br>
 
