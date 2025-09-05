@@ -269,8 +269,8 @@ if ((isset($_SESSION['msg-helper']))) {
 
     <br><br>
 
-    <button name="PendingAllowBanks">PENDÊNCIA - Autorizar BANCOS</button> -
-    <button name="PendingAllowBirh">PENDÊNCIA - Aderir SAQUE-ANIVERSÁRIO</button><br><br>
+    <input type="submit" name="PendingAllowBanks" value="PENDÊNCIA - Autorizar BANCOS"> -
+    <input type="submit" name="PendingAllowBirh" value="PENDÊNCIA - Aderir SAQUE-ANIVERSÁRIO"><br><br>
 
     <a href="<?php echo URL; ?>fgts/index">Voltar</a>
 </form>

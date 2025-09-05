@@ -71,7 +71,7 @@ class ViewProposalCustomer
                             }
                             $this->dataForm['modified'] = date("Y-m-d H:i:s");
                             $this->dataForm['possession'] = 1;
-                            $this->dataForm['internship_proposal'] = 3;
+                            $this->dataForm['internship_proposal'] = 2;
                             $upPp = new \Sts\Models\helper\StsUpdade();
                             $upPp->exeUpdate("sts_proposal_fgts", $this->dataForm, "WHERE id=:id", "id={$this->id}");
                             if ($upPp->getResult()) {
@@ -90,10 +90,25 @@ class ViewProposalCustomer
                         }
                     } else if (!empty($this->dataForm['del_pp'])) {
                         unset($this->dataForm['del_pp']);
-                        if ($this->dataForm['obs'] == '') {
+                        if ($this->dataForm['observation'] == '') {
                             $_SESSION['msg'] = "<p style='color: red;'>Informe o MOTIVO do CANCELAMENTO na OBSERVAÇÃO!</p>";
                             $this->data['form'] = $viewPp->getResultDb();
                             $this->loadViewTwo(); // -> Carrega a VIEW específica para este estágio.
+                        } else {
+                            $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                            $this->dataForm['possession'] = 2;
+                            $this->dataForm['internship_proposal'] = 5;
+                            $upPp = new \Sts\Models\helper\StsUpdade();
+                            $upPp->exeUpdate("sts_proposal_fgts", $this->dataForm, "WHERE id=:id", "id={$this->id}");
+                            if ($upPp->getResult()) {
+                                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                                header("Location: " . URL . "fgts/index");
+                                exit;
+                            } else {
+                                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                                header("Location: " . URL . "fgts/index");
+                                exit;
+                            }
                         }
                     } else if (!empty($this->dataForm['only_obs'])) {
                         unset($this->dataForm['only_obs']);
