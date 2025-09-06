@@ -16,13 +16,28 @@ class ListUsers
 
     public function index()
     {
-        $listUsers = new \Sts\Models\StsListUsers();
-        $listUsers->usersDatabase();
-        if ($listUsers->getResult()) {
-            $this->data['form'] = $listUsers->getResultDb();
+        $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if (!empty($this->dataForm['sendSearch'])) {
+            unset($this->dataForm['sendSearch']);
+            $listUsers = new \Sts\Models\StsListUsers();
+            if ((empty($this->dataForm['searchUserName'])) and (empty($this->dataForm['searchUserEmail']))) {
+                $_SESSION['msg'] = "<p style='color: red;'>Informe o NOME ou E-MAIL!</p>";
+            } else if ((!empty($this->dataForm['searchUserName'])) and (empty($this->dataForm['searchUserEmail']))) {
+                $listUsers->usersNameDatabase($this->dataForm['searchUserName']);
+            } else if ((empty($this->dataForm['searchUserName'])) and (!empty($this->dataForm['searchUserEmail']))) {
+                $listUsers->usersEmailDatabase($this->dataForm['searchUserEmail']);
+            } else {
+                $listUsers->usersDatabase($this->dataForm['searchUserName'], $this->dataForm['searchUserEmail']);
+            }
+
+            if ($listUsers->getResult()) {
+                $this->data['form'] = $listUsers->getResultDb();
+            } else {
+                $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND;
+                $this->data['form'] = [];
+            }
         } else {
-            $_SESSION['msg'] = MSG_REGISTER_NOT_FOUND;
-            $this->data['form'] = $this->dataForm;
+            $this->data['form'] = [];
         }
         $this->loadView();
     }

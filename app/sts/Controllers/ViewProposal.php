@@ -160,42 +160,42 @@ class ViewProposal
                     } else if (!empty($this->dataForm['PendingAllowBanks'])) {
                         unset($this->dataForm['PendingAllowBanks']);
                         $upPp = new \Sts\Models\helper\StsUpdade();
-                            $upProposal['observation'] = "Atenção, LOJISTA!";
-                            $upProposal['observation'] .= "A fim de darmos prosseguimento na OPERAÇÃO, faz-se necessário a AUTORIZAÇÃO dos seguintes BANCOS:";
-                            $upProposal['observation'] .= " - FACTA FINANCEIRA";
-                            $upProposal['observation'] .= " - UY3 SOCIEDADE DE CRÉDITO";
-                            $upProposal['observation'] .= " - BMP SOCIEDADE DE CRÉDITO";
-                            $upProposal['internship_proposal'] = 2;
-                            $upProposal['possession'] = 0;
-                            $upProposal['modified'] = date("Y-m-d H:i:s");
-                            $upPp->exeUpdate("sts_proposal_fgts", $upProposal, "WHERE id=:id", "id={$searchDataPp->getResultDb()[0]['id']}");
-                            if ($upPp->getResult()) {
-                                header("Location: " . URL . "fgts/index");
-                                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
-                                exit;
-                            } else {
-                                header("Location: " . URL . "fgts/index");
-                                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
-                                exit;
-                            }
+                        $upProposal['observation'] = "Atenção, LOJISTA!";
+                        $upProposal['observation'] .= "A fim de darmos prosseguimento na OPERAÇÃO, faz-se necessário a AUTORIZAÇÃO dos seguintes BANCOS:";
+                        $upProposal['observation'] .= " - FACTA FINANCEIRA";
+                        $upProposal['observation'] .= " - UY3 SOCIEDADE DE CRÉDITO";
+                        $upProposal['observation'] .= " - BMP SOCIEDADE DE CRÉDITO";
+                        $upProposal['internship_proposal'] = 2;
+                        $upProposal['possession'] = 0;
+                        $upProposal['modified'] = date("Y-m-d H:i:s");
+                        $upPp->exeUpdate("sts_proposal_fgts", $upProposal, "WHERE id=:id", "id={$searchDataPp->getResultDb()[0]['id']}");
+                        if ($upPp->getResult()) {
+                            header("Location: " . URL . "fgts/index");
+                            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                            exit;
+                        } else {
+                            header("Location: " . URL . "fgts/index");
+                            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                            exit;
+                        }
                     } else if (!empty($this->dataForm['PendingAllowBirh'])) {
                         unset($this->dataForm['PendingAllowBirh']);
                         $upPp = new \Sts\Models\helper\StsUpdade();
-                            $upProposal['observation'] = "Atenção, LOJISTA!";
-                            $upProposal['observation'] .= "A fim de darmos prosseguimento na OPERAÇÃO, faz-se necessário a ADERÊNCIA ao SAQUE-ANIVERSÁRIO por parte do BENEFICIÁRIO!";
-                            $upProposal['internship_proposal'] = 2;
-                            $upProposal['possession'] = 0;
-                            $upProposal['modified'] = date("Y-m-d H:i:s");
-                            $upPp->exeUpdate("sts_proposal_fgts", $upProposal, "WHERE id=:id", "id={$searchDataPp->getResultDb()[0]['id']}");
-                            if ($upPp->getResult()) {
-                                header("Location: " . URL . "fgts/index");
-                                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
-                                exit;
-                            } else {
-                                header("Location: " . URL . "fgts/index");
-                                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
-                                exit;
-                            }
+                        $upProposal['observation'] = "Atenção, LOJISTA!";
+                        $upProposal['observation'] .= "A fim de darmos prosseguimento na OPERAÇÃO, faz-se necessário a ADERÊNCIA ao SAQUE-ANIVERSÁRIO por parte do BENEFICIÁRIO!";
+                        $upProposal['internship_proposal'] = 2;
+                        $upProposal['possession'] = 0;
+                        $upProposal['modified'] = date("Y-m-d H:i:s");
+                        $upPp->exeUpdate("sts_proposal_fgts", $upProposal, "WHERE id=:id", "id={$searchDataPp->getResultDb()[0]['id']}");
+                        if ($upPp->getResult()) {
+                            header("Location: " . URL . "fgts/index");
+                            $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                            exit;
+                        } else {
+                            header("Location: " . URL . "fgts/index");
+                            $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                            exit;
+                        }
                     } else { // -> Se o usuário não clicar no botão para enviar a simulação, então:
                         $this->loadViewOne(); // -> Carrega a VIEW de estágio um.
                     }
@@ -316,7 +316,39 @@ class ViewProposal
                     }
                 } else if ($searchDataPp->getResultDb()[0]['internship_proposal'] == 5) {
                     $this->data['typing'] = $searchDataPp->getResultDb()[0];
-                    $this->loadViewFive();
+                    $this->dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+                    if (!empty($this->dataForm['sendPp'])) {
+                        unset($this->dataForm['sendPp']);
+                        if ($this->dataForm['internship_proposal'] == 'Selecione:') {
+                            $_SESSION['msg'] = "<p style='color: red;'>Insira o STATUS da OPERAÇÃO!
+                            </p>";
+                            $this->loadViewFive();
+                        } else {
+                            if ($this->dataForm['internship_proposal'] == 1) {
+                                $this->dataForm['possession'] = 1;
+                            } else if ($this->dataForm['internship_proposal'] == 2) {
+                                $this->dataForm['possession'] = 0;
+                            } else if ($this->dataForm['internship_proposal'] == 3) {
+                                $this->dataForm['possession'] = 1;
+                            } else if ($this->dataForm['internship_proposal'] == 4) {
+                                $this->dataForm['possession'] = 4;
+                            }
+                            $upPp = new \Sts\Models\helper\StsUpdade();
+                            $this->dataForm['modified'] = date("Y-m-d H:i:s");
+                            $upPp->exeUpdate("sts_proposal_fgts", $this->dataForm, "WHERE id=:id", "id={$searchDataPp->getResultDb()[0]['id']}");
+                            if ($upPp->getResult()) {
+                                header("Location: " . URL . "fgts/index");
+                                $_SESSION['msg'] = MSG_ALT_PERF_SUCCESS;
+                                exit;
+                            } else {
+                                header("Location: " . URL . "fgts/index");
+                                $_SESSION['msg'] = MSG_ALT_NOT_PERF_SUCCESS;
+                                exit;
+                            }
+                        }
+                    } else {
+                        $this->loadViewFive();
+                    }
                 }
             } else { // -> Se o usuário for cliente ou vendedor, então:
                 header("Location: " . URL . "page-err/index");

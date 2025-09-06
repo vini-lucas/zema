@@ -23,6 +23,13 @@ if ((isset($_SESSION['msg-helper']))) {
 <h2>Usuários</h2>
 
 <a href="<?php echo URL . "dashboard/index"; ?>">Dashboard</a> - <a href="<?php echo URL; ?>add-user/index">Novo Usuário</a><br><br>
+
+<form method="POST">
+    <input type="text" name="searchUserName" placeholder="Buscar por NOME"> - 
+    <input type="text" name="searchUserEmail" placeholder="Buscar por E-MAIL"> - 
+    <input type="submit" name="sendSearch" value="Pesquisar">
+</form><br>
+
 <table>
     <thead>
         <tr>

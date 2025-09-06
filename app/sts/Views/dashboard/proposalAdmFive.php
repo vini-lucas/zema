@@ -32,7 +32,9 @@ if ((isset($_SESSION['msg-helper']))) {
         $status = "Aguardando FORMALIZAÇÃO DIGITAL";
     }
     ?>
-    <li><h2>Status da OPERAÇÃO: <?php echo $status; ?></h2></li>
+    <li>
+        <h2>Status da OPERAÇÃO: <?php echo $status; ?></h2>
+    </li>
 
     <?php
     $obs = "";
@@ -70,4 +72,14 @@ if ((isset($_SESSION['msg-helper']))) {
     }
     ?>
 </ul>
-<a href="<?php echo URL; ?>fgts/index">Voltar</a>
+<form method="POST">
+    <label>Alterar STATUS da OPERAÇÃO</label>
+    <select name="internship_proposal">
+        <option value="Selecione:" selected>Selecione:</option>
+        <option value="1">Operação com a MESA para ENVIAR o valor da SIMULAÇÃO.</option>
+        <option value="2">Operação com o BENEFICIÁRIO com o valor da SIMULAÇÃO RECEBIDO.</option>
+        <option value="3">Operação com a MESA com o valor da SIMULAÇÃO ESCOLHIDO.</option>
+        <option value="4">Operação com a MESA e CLIENTE com o LINK de FORMALIZAÇÃO DISPONÍVEL.</option>
+    </select>
+    <input type="submit" name="sendPp" value="Alterar"> - <a href="<?php echo URL; ?>fgts/index">Voltar</a>
+</form>
