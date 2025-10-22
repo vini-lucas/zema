@@ -19,8 +19,8 @@ abstract class Config
         {
                 // Informações do BD: ------------------------------------------------------------------------
                 define('DB_NAME', "zema");
-                define('DB_PASS', "L4bar3tTA!"); // -> Usuário para executar apenas comandos do CRUD.
-                define('DB_USER', "zema"); // -> Usuário para executar apenas comandos do CRUD.
+                define('DB_PASS', "");
+                define('DB_USER', "root");
                 define('DB_PORT', 3306);
                 //--------------------------------------------------------------------------------------------
                 // URL do projeto:
