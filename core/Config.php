@@ -18,7 +18,7 @@ abstract class Config
         protected function config()
         {
                 // Informações do BD: ------------------------------------------------------------------------
-                define('DB_NAME', "zema");
+                define('DB_NAME', "zema-php");
                 define('DB_PASS', "");
                 define('DB_USER', "root");
                 define('DB_PORT', 3306);
